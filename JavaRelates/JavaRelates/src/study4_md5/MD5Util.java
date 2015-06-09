@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 public class MD5Util {
 	public final static String MD5(String s){
-		char hexDigits[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+		char hexDigits[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
 
 		try{
 			byte[] btInput = s.getBytes();
@@ -36,5 +36,7 @@ public class MD5Util {
 		System.out.println(MD5Util.MD5("kkndkknd00kkndkknd00kkndkknd00"));
 		System.out.println(MD5Util.MD5("kkndkknd00kkndkknd00kkndkknd01"));
 		System.out.println(MD5Util.MD5("加密"));
+		System.out.println(MD5Util.MD5("password"));
+		System.out.println(MD5Util.MD5("kkndkknd"));
 	}
 }
