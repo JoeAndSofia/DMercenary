@@ -1,4 +1,4 @@
-package study004_md5;
+package study004_hash;
 
 import java.security.MessageDigest;
 
@@ -31,11 +31,11 @@ public class MD5Util {
 	}
 	
 	public static void main(String[] args){
-		System.out.println(MD5Util.MD5("kkndkknd00kkndkknd00kkndkknd00"));
-		System.out.println(MD5Util.MD5(MD5Util.MD5("kkndkknd00kkndkknd00kkndkknd00")));
-		System.out.println(MD5Util.MD5("kkndkknd00kkndkknd00kkndkknd00"));
-		System.out.println(MD5Util.MD5("kkndkknd00kkndkknd00kkndkknd01"));
-		System.out.println(MD5Util.MD5("加密"));
-		System.out.println(MD5Util.MD5("812988018"));
+		System.out.println(MD5("kkndkknd00kkndkknd00kkndkknd00"));
+		System.out.println(MD5(MD5("kkndkknd00kkndkknd00kkndkknd00")));
+		System.out.println(MD5("kkndkknd00kkndkknd00kkndkknd00"));
+		System.out.println(MD5("kkndkknd00kkndkknd00kkndkknd01"));
+		System.out.println(MD5("加密"));
+		System.out.println(MD5("812988018"));
 	}
 }
