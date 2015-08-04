@@ -1,4 +1,4 @@
-package study006_type;
+package study006_DataType;
 
 public class TestDouble {
 	public static void main(String[] args){

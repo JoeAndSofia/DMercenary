@@ -1,0 +1,14 @@
+ssh -i {本地私钥文件:id_rsa} joe@{ip地址}
+dev : ssh -i sshkey joe@54.74.105.222
+staging : ssh -i sshkey joe@54.74.65.27
+live : ssh -i sshkey joe@54.74.173.121
+ 
+日志所在位置
+cd /mnt/tomcatservice+环境名/logs/catalina.out
+
+ 
+查询命令
+文件行数: wc -l catalina.out
+查询内容: grep -n "content" catalina.out
+查看内容: cat -n catalina.out | tail -n 'startLineNumber' | head -n 'lineAmount'
+查看末尾100行内容: tail -n 100 catalina.out

@@ -1,0 +1,10 @@
+Confluence:
+imaginato.dnsdojo.com:46666/display/SER/ServisHero+API+Developer+Documentation
+user:joe.wang
+password: kkndkknd00
+
+
+BitBucket:
+https://bitbucket.org/servishero/servisheroapi/commits/all
+user:imaginato_info
+password: imaginato@2301

@@ -1,0 +1,112 @@
+#data source
+dataSource.pooled = true
+dataSource.driverClassName = com.mysql.jdbc.Driver
+dataSource.username = root
+dataSource.password = qingdao
+dataSource.loggingSql = true
+
+dataSource_searchableds.pooled = true
+dataSource_searchableds.driverClassName = com.mysql.jdbc.Driver
+dataSource_searchableds.username = root
+dataSource_searchableds.password = qingdao
+dataSource_searchableds.loggingSql = true
+
+dataSource_journal.pooled = true
+dataSource_journal.driverClassName = com.mysql.jdbc.Driver
+dataSource_journal.username = root
+dataSource_journal.password = qingdao
+dataSource_journal.loggingSql = true
+#datasource envireoments
+
+environments.development.dataSource.url = jdbc:mysql://127.0.0.1:3306/foodco?useUnicode=true
+environments.development.dataSource.pooled = true
+environments.development.dataSource.properties.maxActive = -1
+environments.development.dataSource.properties.minEvictableIdleTimeMillis = 1800000
+environments.development.dataSource.properties.timeBetweenEvictionRunsMillis = 1800000
+environments.development.dataSource.properties.numTestsPerEvictionRun = 3
+environments.development.dataSource.properties.autoReconnect = true
+environments.development.dataSource.properties.testOnBorrow = true
+environments.development.dataSource.properties.testWhileIdle = true
+environments.development.dataSource.properties.testOnReturn = true
+environments.development.dataSource.properties.validationQuery = SELECT 1
+
+
+environments.development.dataSource_searchableds.url = jdbc:mysql://127.0.0.1:3306/foodcoquery?useUnicode=true
+environments.development.dataSource_searchableds.pooled = true
+environments.development.dataSource_searchableds.properties.maxActive = -1
+environments.development.dataSource_searchableds.properties.minEvictableIdleTimeMillis = 1800000
+environments.development.dataSource_searchableds.properties.timeBetweenEvictionRunsMillis = 1800000
+environments.development.dataSource_searchableds.properties.numTestsPerEvictionRun = 3
+environments.development.dataSource_searchableds.properties.autoReconnect = true
+environments.development.dataSource_searchableds.properties.testOnBorrow = true
+environments.development.dataSource_searchableds.properties.testWhileIdle = true
+environments.development.dataSource_searchableds.properties.testOnReturn = true
+environments.development.dataSource_searchableds.properties.validationQuery = SELECT 1
+
+environments.development.dataSource_journal.url = jdbc:mysql://127.0.0.1:3306/journal_dev?useUnicode=true
+environments.development.dataSource_journal.pooled = true
+environments.development.dataSource_journal.properties.maxActive = -1
+environments.development.dataSource_journal.properties.minEvictableIdleTimeMillis = 1800000
+environments.development.dataSource_journal.properties.timeBetweenEvictionRunsMillis = 1800000
+environments.development.dataSource_journal.properties.numTestsPerEvictionRun = 3
+environments.development.dataSource_journal.properties.autoReconnect = true
+environments.development.dataSource_journal.properties.testOnBorrow = true
+environments.development.dataSource_journal.properties.testWhileIdle = true
+environments.development.dataSource_journal.properties.testOnReturn = true
+environments.development.dataSource_journal.properties.validationQuery = SELECT 1
+
+environments.test.dataSource.url = jdbc:mysql://127.0.0.1:3306/foodco?useUnicode=true&characterEncoding=utf8mb4
+environments.test.dataSource.pooled = true
+environments.test.dataSource.properties.maxActive = -1
+environments.test.dataSource.properties.minEvictableIdleTimeMillis = 1800000
+environments.test.dataSource.properties.timeBetweenEvictionRunsMillis = 1800000
+environments.test.dataSource.properties.numTestsPerEvictionRun = 3
+environments.test.dataSource.properties.autoReconnect = true
+environments.test.dataSource.properties.testOnBorrow = true
+environments.test.dataSource.properties.testWhileIdle = true
+environments.test.dataSource.properties.testOnReturn = true
+environments.test.dataSource.properties.validationQuery = SELECT 1
+
+environments.test.dataSource_searchableds.url = jdbc:mysql://127.0.0.1:3306/foodcoquery?useUnicode=true&characterEncoding=utf8mb4
+environments.test.dataSource_searchableds.pooled = true
+environments.test.dataSource_searchableds.properties.maxActive = -1
+environments.test.dataSource_searchableds.properties.minEvictableIdleTimeMillis = 1800000
+environments.test.dataSource_searchableds.properties.timeBetweenEvictionRunsMillis = 1800000
+environments.test.dataSource_searchableds.properties.numTestsPerEvictionRun = 3
+environments.test.dataSource_searchableds.properties.autoReconnect = true
+environments.test.dataSource_searchableds.properties.testOnBorrow = true
+environments.test.dataSource_searchableds.properties.testWhileIdle = true
+environments.test.dataSource_searchableds.properties.testOnReturn = true
+environments.test.dataSource_searchableds.properties.validationQuery = SELECT 1
+
+environments.production.dataSource.url = jdbc:mysql://127.0.0.1:3306/foodco?useUnicode=true&characterEncoding=utf8mb4
+environments.production.dataSource.pooled = true
+environments.production.dataSource.properties.maxActive = -1
+environments.production.dataSource.properties.minEvictableIdleTimeMillis = 1800000
+environments.production.dataSource.properties.timeBetweenEvictionRunsMillis = 1800000
+environments.production.dataSource.properties.numTestsPerEvictionRun = 3
+environments.production.dataSource.properties.autoReconnect = true
+environments.production.dataSource.properties.testOnBorrow = true
+environments.production.dataSource.properties.testWhileIdle = true
+environments.production.dataSource.properties.testOnReturn = true
+environments.production.dataSource.properties.validationQuery = SELECT 1
+
+environments.production.dataSource_searchableds.url = jdbc:mysql://127.0.0.1:3306/foodcoquery?useUnicode=true&characterEncoding=utf8mb4
+environments.production.dataSource_searchableds.pooled = true
+environments.production.dataSource_searchableds.properties.maxActive = -1
+environments.production.dataSource_searchableds.properties.minEvictableIdleTimeMillis = 1800000
+environments.production.dataSource_searchableds.properties.timeBetweenEvictionRunsMillis = 1800000
+environments.production.dataSource_searchableds.properties.numTestsPerEvictionRun = 3
+environments.production.dataSource_searchableds.properties.autoReconnect = true
+environments.production.dataSource_searchableds.properties.testOnBorrow = true
+environments.production.dataSource_searchableds.properties.testWhileIdle = true
+environments.production.dataSource_searchableds.properties.testOnReturn = true
+environments.production.dataSource_searchableds.properties.validationQuery = SELECT 1
+
+#hibernate cache
+hibernate.cache.use_second_level_cache = true
+hibernate.cache.use_query_cache = true
+hibernate.cache.provider_class = com.googlecode.hibernate.memcached.MemcachedCacheProvider
+hibernate.connection.release_mode = after_statement
+hibernate.memcached.servers = 127.0.0.1:11211
+

@@ -3,5 +3,12 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_gson-2.3.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_jackson-2.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_flexjson-2.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_json-io-4.1.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_genson-0.97"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_jsonij-0.3.0-SNAPSHOT"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_json-lib-2.4-jdk15"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

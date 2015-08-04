@@ -24,16 +24,22 @@ public class SHA1Util {
 		}		
 	}
 	
+	public final static String qravedSha1(String salt, String password){
+		return SHA1(salt+SHA1(salt+SHA1(password)));
+	}
+	
 	public static void main(String[] args){
-		System.out.println(SHA1("1"));
-		System.out.println(SHA1("2"));
-		System.out.println(SHA1("3"));
-		System.out.println(SHA1("4"));
-		System.out.println(SHA1("5"));
-		System.out.println(SHA1("6"));
-		System.out.println(SHA1("7"));
-		System.out.println(SHA1("8"));
-		System.out.println(SHA1("9"));
-		System.out.println(SHA1("10"));
+//		System.out.println(SHA1("1"));
+		String st_dev = "24c3678f2";
+		String st_staging = "e05d07906";
+		String pw = "kkndkknd00";
+		String hs_dev = qravedSha1(st_dev,pw);
+		String hs_staging = qravedSha1(st_staging,pw);
+		System.out.println(hs_dev);
+		System.out.println(hs_staging);
+		
+		
+//		51e3f9b14f9524e4d84924a7363e54e820e69001
+//		51e3f9b14f9524e4d84924a7363e54e820e69001
 	}
 }

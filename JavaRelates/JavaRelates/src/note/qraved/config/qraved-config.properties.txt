@@ -1,0 +1,24 @@
+#redis
+grails.redis.port = 6379
+grails.redis.host = 127.0.0.1
+grails.redis.timeout = 2000
+grails.redis.password = redispassword
+ 
+#file upload path
+filepath.maleavatar = http://himg.bdimg.com/sys/portrait/item/250c6c6f766574616e673465766572fb0d.jpg
+filepath.femaleavatar = http://himg.bdimg.com/sys/portrait/item/250c6c6f766574616e673465766572fb0d.jpg
+filepath.secretavatar = http://himg.bdimg.com/sys/portrait/item/250c6c6f766574616e673465766572fb0d.jpg
+filepath.userimage = /srv/ftp/upload/images/user/
+filepath.postimage = /srv/ftp/upload/images/post/
+filepath.restaurantimage = /srv/ftp/upload/images/restaurant/
+ioscertificates.path = /mnt/srv/www/com/qraved/stagingservice/foodco/Certificates.p12
+ioscertificates.password = imaginato123
+jobswitcher.offerexpiresjobswitcher = 1
+notification.smsswitcher = 1
+email.mandrilprefix = Test -  
+system.domainprefix = jeff
+system.solrurl = http://localhost:10033/solr
+email.bookingQravedEmailAddress = test-bookings@qraved.com
+#php api key
+system.client_key = test
+filepath.crm.csvgeneratepath = /mnt/qraved_csv/

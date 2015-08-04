@@ -1,0 +1,29 @@
+ssh -i {本地私钥文件:id_rsa} joe@54.251.100.162
+ssh -i id_rsa joe@54.251.100.162
+ 
+staging日志所在位置
+cd /mnt/tomcatstagingservice/logs/catalina.out
+scp -r joe@54.251.100.162:/mnt/tomcatstagingservice/logs/catalina.out /home/imaginato/wyl/workspace_bugFixlog/20150804/
+//权限不够?
+
+dev日志所在位置
+cd /mnt/tomcatdevservice/logs/catalina.out
+
+取live日志
+staging上先sudo su，然后运行/disk3/logs/get_log.sh
+然后到/disk3/logs下找你们要的日志，
+
+复制远程文件到本地
+scp -r joe@54.251.100.162:/disk3/logs/cache01/catalina.out /home/imaginato/wyl/workspace_bugFixlog/20150804/
+scp -r joe@54.251.100.162:/disk3/logs/s001/catalina.out /home/imaginato/log/s001/
+scp -r joe@54.251.100.162:/disk3/logs/s002/catalina.out /home/imaginato/log/s002/
+scp -r joe@54.251.100.162:/disk3/logs/db01/catalina.out /home/imaginato/log/db01/
+
+服务器变更后尝试
+ssh-keygen -f "/home/imaginato/.ssh/known_hosts" -R 54.251.100.162
+
+查询命令
+文件行数: wc -l catalina.out
+查询内容: grep -n "content" catalina.out
+查看内容: cat -n catalina.out | tail -n 'startLineNumber' | head -n 'lineAmount'
+查看末尾100行内容: tail -n 100 catalina.out

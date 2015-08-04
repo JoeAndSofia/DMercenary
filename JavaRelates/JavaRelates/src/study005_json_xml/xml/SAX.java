@@ -1,4 +1,4 @@
-package study005_xml;
+package study005_json_xml.xml;
 import java.io.FileInputStream;   
 import java.io.FileNotFoundException;   
 import java.io.IOException;   
