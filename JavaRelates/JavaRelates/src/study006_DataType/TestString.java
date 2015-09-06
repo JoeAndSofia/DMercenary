@@ -3,6 +3,8 @@ package study006_DataType;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import org.apache.commons.lang.StringUtils;
+
 public class TestString {
 	public static String testTransferString(){
 		Scanner s = new Scanner(System.in);
@@ -22,7 +24,15 @@ public class TestString {
 		System.out.println(Arrays.toString(arr2));
 	}
 	
+	public static void testNullString(){
+		Long l = null;
+		System.out.println("abc"+"_"+l);
+	}
 	
+	public static void testStringUtils(String param){
+		String x = param.trim();
+		StringUtils.trim(param);
+	}
 	
 	public static void main(String[] args){
 		
@@ -30,6 +40,7 @@ public class TestString {
 //		System.out.println(testTransferString());
 //		System.out.println(testTransferString());
 //		System.out.println(testTransferString());
-		testStringArr();
+//		testStringArr();
+		testNullString();
 	}
 }
