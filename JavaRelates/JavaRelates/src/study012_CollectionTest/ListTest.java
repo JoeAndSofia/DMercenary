@@ -5,8 +5,8 @@ import java.util.List;
 
 public class ListTest {
 	public static void main(String[] args){
-//		listTest();
-		listToString();
+		listTest();
+//		listToString();
 	}
 	
 	
@@ -17,19 +17,23 @@ public class ListTest {
 		list.add("bb");
 		list.add("cc");
 		list.add("dd");
+		list.add(null);
+		list.add(null);
 		
-		for(String str:list){
-			str = "ee";
-		}
+		
+//		for(String str:list){
+//			str = "ee";
+//		}
 		
 		System.out.println(list);
 		
-		for(int i=0;i<list.size();i++){
-			String str = list.get(i);
-			if(str.length()>1){
-				list.set(i, str.substring(0,1));
-			}
-		}
+		System.out.println(null==list.get(5));
+//		for(int i=0;i<list.size();i++){
+//			String str = list.get(i);
+//			if(str.length()>1){
+//				list.set(i, str.substring(0,1));
+//			}
+//		}
 		
 		System.out.println(list);
 	}

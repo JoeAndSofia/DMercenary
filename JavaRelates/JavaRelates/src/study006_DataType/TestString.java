@@ -34,6 +34,18 @@ public class TestString {
 		StringUtils.trim(param);
 	}
 	
+	public static double testEquals(String param){
+		return param==""?0:Double.parseDouble(param);
+	}
+	
+	public static String[] testStringSplitLimit(String param){
+		return param.split(",");
+	}
+	
+	public static String[] testStringSplitAll(String param){
+		return param.split(",",-1);
+	}
+	
 	public static void main(String[] args){
 		
 //		System.out.println(testTransferString());
@@ -41,6 +53,13 @@ public class TestString {
 //		System.out.println(testTransferString());
 //		System.out.println(testTransferString());
 //		testStringArr();
-		testNullString();
+//		testNullString();
+//		System.out.println(testEquals("a"));
+		System.out.println(testStringSplitAll("faef,felrkf,fER,,").length);
+		System.out.println(Arrays.toString(testStringSplitAll("faef,felrkf,fER,,")));
+		System.out.println(testStringSplitAll("faef,felrkf,fER,,")[4].length());
+		System.out.println("".equals(testStringSplitAll("faef,felrkf,fER,,")[3]));
+		System.out.println(testStringSplitLimit("faef,felrkf,fER,,").length);
+		System.out.println(Arrays.toString(testStringSplitLimit("faef,felrkf,fER,,")));
 	}
 }
