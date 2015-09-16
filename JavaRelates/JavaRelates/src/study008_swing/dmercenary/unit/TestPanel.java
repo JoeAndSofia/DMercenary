@@ -1,6 +1,7 @@
-package study008_swing.dmercenary;
+package study008_swing.dmercenary.unit;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.Insets;
 
@@ -9,12 +10,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
 public class TestPanel{
 	public static void main(String[] args){
-		DMercenary dm = new DMercenary();
+		try {
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			DMercenary dm = new DMercenary();
+//			Farmer f = new Farmer();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 
@@ -22,13 +31,14 @@ class DMercenary extends JFrame{
 	private static final int LTX = 10;		//LEFT_TOP_X
 	private static final int LTY = 10;		//LEFT_TOP_Y
 	private static final int BT = 2;		//BORDER_THICKNESS
-	private static final int CSL = 12;		//CUBE_SIDE_LENGTH
-	private static final int CAPS = 50;		//CUBE_AMOUNT_PER_SIDE
+	private static final int CSL = 25;		//CUBE_SIDE_LENGTH
+	private static final int CAPV = 20;		//CUBE_AMOUNT_PER_VERTICLE
+	private static final int CAPH = 30;		//CUBE_AMOUNT_PER_HORIZONTAL
 	private static final int RG = 300;		//RIGHT_GAP
 	private static final int BG = 100;		//BOTTOM_GAP
 
 	private Font control_font = new Font("Arial",Font.BOLD+Font.ITALIC,12);
-	private Font sandbox_font = new Font("Arial",Font.PLAIN,5);
+	private Font sandbox_font = new Font("Arial",Font.PLAIN,8);	
 	
 	private Insets control_inset = new Insets(2,2,2,2);
 	private Insets sandbox_inset = new Insets(0,0,0,0);
@@ -53,7 +63,7 @@ class DMercenary extends JFrame{
 	
 	private void init(){
 		this.setLayout(null);
-		this.setBounds(50, 50, CAPS*CSL+BT*12+RG+1, CAPS*CSL+BT*12+BG+1);
+		this.setBounds(50, 50, CAPH*CSL+BT*12+RG+1, CAPV*CSL+BT*12+BG+1);
 		this.setResizable(false);
 		this.add(this.sandbox);
 		this.add(this.control);
@@ -72,15 +82,15 @@ class DMercenary extends JFrame{
 		
 		private void init(){
 			this.main.setLayout(null);
-			this.main.setBounds(LTX+BT,LTY+BT,CAPS*CSL,CAPS*CSL);
-			this.main.setBorder(new LineBorder(Color.GRAY, BT));
+			this.main.setBounds(LTX+BT,LTY+BT,CAPH*CSL,CAPV*CSL);
+			this.main.setBorder(new LineBorder(Color.GRAY, 1));
 			this.main.setFocusable(true);
 			
 			this.setLayout(null);
-			this.setBounds(0, 0, CAPS*CSL+BT*2+LTX*2, CAPS*CSL+BT*2+LTY*2);
+			this.setBounds(0, 0, CAPH*CSL+BT*2+LTX*2, CAPV*CSL+BT*2+LTY*2);
 			this.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.GRAY));
-			for(int i=0;i<CAPS;i++){
-				this.main.add(new Cube(0,i*CSL,i+1+""));				
+			for(int i=0;i<CAPV;i++){
+				this.main.add(new Cube(2,i*CSL+2,i+1+""));				
 			}
 			
 			this.add(this.main);
@@ -96,7 +106,8 @@ class DMercenary extends JFrame{
 			this.setText(name==null?"":name);
 			this.setMargin(sandbox_inset);
 			this.setFont(sandbox_font);
-			this.setBounds(x, y, CSL, CSL);
+			this.setBounds(x, y, CSL-4, CSL-4);
+			
 		}
 	}
 	
@@ -126,7 +137,7 @@ class DMercenary extends JFrame{
 			this.locate.setFont(control_font);
 			
 			this.setLayout(null);
-			this.setBounds(CAPS*CSL+BT*2+LTX*2, 0, 300, CAPS*CSL+BT*2+LTY*2);
+			this.setBounds(CAPH*CSL+BT*2+LTX*2, 0, 300, CAPV*CSL+BT*2+LTY*2);
 			this.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.GRAY));
 			this.add(next);
 			this.add(locate);
@@ -139,7 +150,7 @@ class DMercenary extends JFrame{
 		}
 		
 		private void init(){
-			this.setBounds(0,CAPS*CSL+BT*2+LTY*2,CAPS*CSL+BT*2+LTX*2,100);
+			this.setBounds(0,CAPV*CSL+BT*2+LTY*2,CAPH*CSL+BT*2+LTX*2,100);
 			this.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.GRAY));
 		}
 	}
@@ -150,7 +161,7 @@ class DMercenary extends JFrame{
 		}
 		
 		private void init(){
-			this.setBounds(CAPS*CSL+BT*2+LTX*2,CAPS*CSL+BT*2+LTY*2,300,100);
+			this.setBounds(CAPH*CSL+BT*2+LTX*2,CAPV*CSL+BT*2+LTY*2,300,100);
 			this.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.GRAY));
 		}
 	}

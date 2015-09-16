@@ -36,7 +36,7 @@ public class InstructGenerator {
 
 //			ig.Filename("stacktrace.log");
 			ig.Filename("catalina.out");
-			ig.SourceAndTarget(InstructGenerator.STAGING);
+			ig.SourceAndTarget(InstructGenerator.DEV);
 
 			String cmd = ig.logScp(ig.SourceAndTarget()[0], ig.SourceAndTarget()[1], ig.Filename());
 			if(cmd!=null || cmd!=""){

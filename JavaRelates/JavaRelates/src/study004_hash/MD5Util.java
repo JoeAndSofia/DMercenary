@@ -36,6 +36,6 @@ public class MD5Util {
 		System.out.println(MD5("kkndkknd00kkndkknd00kkndkknd00"));
 		System.out.println(MD5("kkndkknd00kkndkknd00kkndkknd01"));
 		System.out.println(MD5("加密"));
-		System.out.println(MD5("kkndkknd00"));
+		System.out.println(MD5("46071"));
 	}
 }
