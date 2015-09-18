@@ -1,3 +1,0 @@
-启动solr
-cd /home/imaginato/wyl/workspace_solr/solr-4.7.0/example/
-java -jar start.jar

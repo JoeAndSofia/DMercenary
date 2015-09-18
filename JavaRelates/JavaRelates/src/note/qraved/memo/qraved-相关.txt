@@ -1,9 +1,0 @@
-54.251.100.162  phpmyadmin.stagingqraved.com
-joe
-joe@2015511
-
-
-redis密码修改
-redis-cli
-auth redispassword
-config set requirepass jeff123jeff123jeff123
