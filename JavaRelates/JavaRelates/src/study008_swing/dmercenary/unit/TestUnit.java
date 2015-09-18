@@ -70,7 +70,8 @@ class Being extends Unit implements BeBeing, CanWork, CanFight, CanGrow{
 	}
 	
 	public Being(int x, int y){
-		
+		this.x = x;
+		this.y = y;
 	}
 
 	/**
@@ -79,9 +80,8 @@ class Being extends Unit implements BeBeing, CanWork, CanFight, CanGrow{
 	 * @param ty
 	 */
 	public void move(int tx, int ty) {
-		double dx = tx-x;
-		double dy = ty-y;
-		double distance = Math.pow((Math.pow(dx,2)+Math.pow(dy, 2)),0.5);
+		double distance = Math.pow((Math.pow(tx-x,2)+Math.pow(ty-y, 2)),0.5);
+		System.out.println(distance);
 	}
 	
 	public void act() {
