@@ -1,0 +1,13 @@
+{
+	csl:12,
+	unit:[
+		{
+			type:cube,
+			x:1,
+			y:1,
+			zr:12,
+			text:test,
+			iconUrl:""
+		}
+	]
+}

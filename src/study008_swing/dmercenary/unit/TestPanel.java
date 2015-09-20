@@ -4,10 +4,16 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -15,13 +21,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
+import javax.xml.soap.SAAJResult;
+
+import study008_swing.dmercenary.unit.DMercenary.SaveAndLoadSandBox;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 
 public class TestPanel{
 	public static void main(String[] args){
 		try {
 //			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			DMercenary dm = new DMercenary();
-//			Farmer f = new Farmer();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,10 +67,8 @@ class DMercenary extends JFrame{
 	}
 
 	private Font control_font = new Font("Arial",Font.BOLD+Font.ITALIC,12);
-	private Font sandbox_font = new Font("Arial",Font.PLAIN,8);	
 	
 	private Insets control_inset = new Insets(2,2,2,2);
-	private Insets sandbox_inset = new Insets(0,0,0,0);
 	
 	
 	private JPanel sandbox = new SandBox();
@@ -82,6 +93,46 @@ class DMercenary extends JFrame{
 		this.setVisible(true);
 	}
 	
+	public JPanel getSandbox() {
+		return sandbox;
+	}
+
+	public void setSandbox(JPanel sandbox) {
+		this.remove(this.sandbox);
+		this.sandbox = sandbox;
+		this.add(this.sandbox);
+	}
+
+	public JPanel getControl() {
+		return control;
+	}
+
+	public void setControl(JPanel control) {
+		this.remove(this.control);
+		this.control = control;
+		this.add(this.control);
+	}
+
+	public JPanel getData_group() {
+		return data_group;
+	}
+
+	public void setData_group(JPanel data_group) {
+		this.remove(this.data_group);
+		this.data_group = data_group;
+		this.add(this.data_group);
+	}
+
+	public JPanel getData_privy() {
+		return data_privy;
+	}
+
+	public void setData_privy(JPanel data_privy) {
+		this.remove(this.data_privy);
+		this.data_privy = data_privy;
+		this.add(this.data_privy);
+	}
+
 	private void init(){
 		this.setLayout(null);
 		this.setBounds(20, 20, sandbox.getWidth()+control.getWidth()+6, sandbox.getHeight()+data_group.getHeight()+28);
@@ -95,64 +146,148 @@ class DMercenary extends JFrame{
 	}
 	
 	class SandBox extends JPanel{
-		private JPanel main = new JPanel(true);
+		private JPanel battlefield = new JPanel(true);
 		
 		public SandBox(){
 			init();
 		}
 		
-		private void init(){
-			this.main.setLayout(null);
-			this.main.setBounds(LTX+BT,LTY+BT,MAIN_PANEL_WIDTH,MAIN_PANEL_HEIGHT);
-			this.main.setBorder(new LineBorder(Color.GRAY, 1));
-			this.main.setFocusable(true);
-			this.main.addMouseWheelListener(new MouseWheelListener() {
-				
+		public JPanel getBattleField() {
+			return battlefield;
+		}
+		
+		public void setBattleField(JPanel main) {
+			this.remove(this.battlefield);
+			this.battlefield = main;
+			initMain();
+			this.add(battlefield);
+		}
+		
+		private void initMain(){
+			this.battlefield.setLayout(null);
+			this.battlefield.setBounds(LTX+BT,LTY+BT,MAIN_PANEL_WIDTH,MAIN_PANEL_HEIGHT);
+			this.battlefield.setBorder(new LineBorder(Color.GRAY, 1));
+			this.battlefield.setFocusable(true);
+			this.battlefield.addMouseWheelListener(new MouseWheelListener() {
 				@Override
 				public void mouseWheelMoved(MouseWheelEvent e) {
 					if(CANZOOM){
 						int a = -(int)e.getPreciseWheelRotation();
-						Component[] carr = ((JPanel)e.getComponent()).getComponents();
-						for(Component c: carr){
+						Component[] cArr = ((JPanel)e.getComponent()).getComponents();
+						for(Component c: cArr){
 							Cube cube = (Cube)c;
 							cube.zoom(a);
 						}
 					}
-					
 				}
 			});
-			
+		}
+		
+		private void init(){	
 			this.setLayout(null);
 			this.setBounds(0, 0,MAIN_PANEL_WIDTH+BT*2+LTX*2, MAIN_PANEL_HEIGHT+BT*2+LTY*2);
 			this.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.GRAY));
-			for(int i=0;i<(MAIN_PANEL_HEIGHT/CSL);i++){
-				Cube c = new Cube(0,i,i+1+"");
-				
-				this.main.add(c);		
-			}
 			
-			this.add(this.main);
+			initMain();
+			this.add(this.battlefield);
 		}
+	}
+	
+	class SandBoxJson{
+		private int csl;
+		private UnitJson[] unit;
+		public int getCsl() {
+			return csl;
+		}
+		public void setCsl(int csl) {
+			this.csl = csl;
+		}
+		public UnitJson[] getUnit() {
+			return unit;
+		}
+		public void setUnit(UnitJson[] unit) {
+			this.unit = unit;
+		}
+		public SandBox parseSandBox(){
+			SandBox sb = new SandBox();
+			for(UnitJson uj : unit){
+				switch (uj.type)
+				{
+					case "cube":{
+						sb.battlefield.add(new Cube(uj.x,uj.y,uj.zr,uj.text,uj.iconUrl));
+					}
+				}
+			}
+			return sb;
+		}
+	}
+	
+	class UnitJson{
+		private String type;
+		private int x;
+		private int y;
+		private int zr;
+		private String text;
+		private String iconUrl;
+		public String getType() {
+			return type;
+		}
+		public void setType(String type) {
+			this.type = type;
+		}
+		public int getX() {
+			return x;
+		}
+		public void setX(int x) {
+			this.x = x;
+		}
+		public int getY() {
+			return y;
+		}
+		public void setY(int y) {
+			this.y = y;
+		}
+		public int getZr() {
+			return zr;
+		}
+		public void setZr(int zr) {
+			this.zr = zr;
+		}
+		public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+		public String getIconUrl() {
+			return iconUrl;
+		}
+		public void setIconUrl(String iconUrl) {
+			this.iconUrl = iconUrl;
+		}		
 	}
 	
 	class Cube extends JButton{
 		private int zr;	//zoom_rate
 		private int x;
 		private int y;
+		private String iconUrl;
 		public Cube(){
-			this(0,0,null);
+			this(0,0,CSL,null,null);
 		}
 		
-		public Cube(int x, int y, String name){
+		public Cube(int x, int y, int zr, String name, String iconUrl){
 			this.x = x;
 			this.y = y;
-			this.zr = CSL;
+			this.zr = zr;
+			this.iconUrl = iconUrl;
 			this.setText(name==null?"":name);
-			this.setMargin(sandbox_inset);
-			this.setFont(sandbox_font);
+			this.setMargin(new Insets(0,0,0,0));
+			this.setFont(new Font("Arial",Font.PLAIN,8));
 			this.setBounds(x*zr, y*zr, zr, zr);
 			
 		}
+		
 		public void zoom(int a){
 			if((zr+a>CSL/2-1)&&(zr+a)<=CSL){
 				this.zr+=a;
@@ -161,7 +296,7 @@ class DMercenary extends JFrame{
 		}
 	}
 	
-	class Control extends JPanel{
+	class Control extends JPanel implements ActionListener{
 		private static final int DBW = 100;		//DEFAULT_BUTTON_WIDTH
 		private static final int DBH = 25;		//DEFAULT_BUTTON_HEIGHT
 		
@@ -186,11 +321,33 @@ class DMercenary extends JFrame{
 			this.locate.setMargin(control_inset);
 			this.locate.setFont(control_font);
 			
+			JButton jb1 = new JButton();
+			jb1.setBounds(LTX*4, LTY*4+DBW/2, DBW, DBH);
+			jb1.setText("Test");
+			jb1.setMargin(control_inset);
+			jb1.setFont(control_font);
+			jb1.addActionListener(this);
+			
+//			dm.update(dm.getGraphics());
+			
 			this.setLayout(null);
 			this.setBounds(x,y,width,height);
 			this.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.GRAY));
 			this.add(next);
 			this.add(locate);
+			this.add(jb1);
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			JButton jb = (JButton)ae.getSource();
+			if("test".equalsIgnoreCase(jb.getText())){
+				SaveAndLoadSandBox sl = new SaveAndLoadSandBox();
+				setSandbox(sl.loadSandBox("joe"));
+			}
+
+			
+			this.getParent().update(this.getParent().getGraphics());
 		}
 	}
 	
@@ -217,8 +374,43 @@ class DMercenary extends JFrame{
 	}
 	
 	
-	
-	
+	class SaveAndLoadSandBox{
+		public SandBox loadSandBox(String name){
+			try{
+				String jsonStr = readSaveFile(name).toString();
+				SandBox sandbox = new SandBox();
+				Gson gson = new Gson();
+				JsonObject jo = null;
+				JsonElement je = null;
+				
+				SandBoxJson sbj = gson.fromJson(jsonStr, SandBoxJson.class);
+				return sbj.parseSandBox();
+			}catch(Exception e){
+				e.printStackTrace();
+				return null;
+			}
+		}
+		
+		private StringBuffer readSaveFile(String fileName) throws IOException{
+
+			InputStream is = new FileInputStream("./save/scene/"+fileName+".json");
+			byte[] content = new byte[300];
+			int length = 0;
+			StringBuffer sb = new StringBuffer();
+			while(true){
+				length = is.read(content);
+				if(length<=0){
+					break;
+				}
+				String line = new String(content).trim();
+				String modified = line.replaceAll("\r|\n|\t", "");
+				sb.append(modified);
+			}
+			return sb;
+		}
+		
+		
+	}
 	
 	
 	
