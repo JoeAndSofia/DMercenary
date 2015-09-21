@@ -248,7 +248,7 @@ class DMercenary extends JFrame{
 			this.setMargin(new Insets(0,0,0,0));
 			this.setFont(new Font("Arial",Font.PLAIN,8));
 			this.setBorder(null);
-//			this.setIcon(arg0);
+//			this.setIcon(arg0); 
 			this.setBounds(x*zr, y*zr, w*zr, h*zr);
 			
 		}
