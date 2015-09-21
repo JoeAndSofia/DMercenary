@@ -408,27 +408,5 @@ class DMercenary extends JFrame{
 			}
 			return sb;
 		}
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
