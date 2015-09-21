@@ -145,7 +145,7 @@ class DMercenary extends JFrame{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	class SandBox extends JPanel{
+	class SandBox extends JPanel implements MouseWheelListener{
 		private JPanel battlefield = new JPanel(true);
 		
 		public SandBox(){
@@ -168,19 +168,7 @@ class DMercenary extends JFrame{
 			this.battlefield.setBounds(LTX+BT,LTY+BT,MAIN_PANEL_WIDTH,MAIN_PANEL_HEIGHT);
 			this.battlefield.setBorder(new LineBorder(Color.GRAY, 1));
 			this.battlefield.setFocusable(true);
-			this.battlefield.addMouseWheelListener(new MouseWheelListener() {
-				@Override
-				public void mouseWheelMoved(MouseWheelEvent e) {
-					if(CANZOOM){
-						int a = -(int)e.getPreciseWheelRotation();
-						Component[] cArr = ((JPanel)e.getComponent()).getComponents();
-						for(Component c: cArr){
-							Cube cube = (Cube)c;
-							cube.zoom(a);
-						}
-					}
-				}
-			});
+			this.battlefield.addMouseWheelListener(this);
 		}
 		
 		private void init(){	
@@ -191,30 +179,44 @@ class DMercenary extends JFrame{
 			initMain();
 			this.add(this.battlefield);
 		}
+
+		@Override
+		public void mouseWheelMoved(MouseWheelEvent e) {
+			if(CANZOOM){
+				int a = -(int)e.getPreciseWheelRotation();
+				Component[] cs = ((JPanel)e.getComponent()).getComponents();
+				for(Component c: cs){
+					if(c instanceof BeingCube){
+						BeingCube beingCube = (BeingCube)c;
+						beingCube.zoom(a*beingCube.mr/4);	
+					}
+				}
+			}
+		}
 	}
 	
 	class SandBoxJson{
 		private int csl;
-		private UnitJson[] unit;
+		private BeingCubeJson[] unit;
 		public int getCsl() {
 			return csl;
 		}
 		public void setCsl(int csl) {
 			this.csl = csl;
 		}
-		public UnitJson[] getUnit() {
+		public BeingCubeJson[] getUnit() {
 			return unit;
 		}
-		public void setUnit(UnitJson[] unit) {
+		public void setUnit(BeingCubeJson[] unit) {
 			this.unit = unit;
 		}
 		public SandBox parseSandBox(){
 			SandBox sb = new SandBox();
-			for(UnitJson uj : unit){
-				switch (uj.type)
+			for(BeingCubeJson bcj : unit){
+				switch (bcj.type)
 				{
-					case "cube":{
-						sb.battlefield.add(new Cube(uj.x,uj.y,uj.zr,uj.text,uj.iconUrl));
+					case "being":{
+						sb.battlefield.add(new BeingCube(bcj.x,bcj.y,bcj.w,bcj.h,bcj.zr,bcj.text,bcj.iconUrl));
 					}
 				}
 			}
@@ -222,10 +224,12 @@ class DMercenary extends JFrame{
 		}
 	}
 	
-	class UnitJson{
+	class BeingCubeJson{
 		private String type;
 		private int x;
 		private int y;
+		private int w;
+		private int h;
 		private int zr;
 		private String text;
 		private String iconUrl;
@@ -247,6 +251,18 @@ class DMercenary extends JFrame{
 		public void setY(int y) {
 			this.y = y;
 		}
+		public int getW() {
+			return w;
+		}
+		public int getH() {
+			return h;
+		}
+		public void setW(int w) {
+			this.w = w;
+		}
+		public void setH(int h) {
+			this.h = h;
+		}
 		public int getZr() {
 			return zr;
 		}
@@ -267,31 +283,37 @@ class DMercenary extends JFrame{
 		}		
 	}
 	
-	class Cube extends JButton{
+	class BeingCube extends JButton{
 		private int zr;	//zoom_rate
+		private int mr;	//max_rate
 		private int x;
 		private int y;
+		private int w;
+		private int h;
 		private String iconUrl;
-		public Cube(){
-			this(0,0,CSL,null,null);
+		public BeingCube(){
+			this(0,0,CSL,CSL,CSL,null,null);
 		}
 		
-		public Cube(int x, int y, int zr, String name, String iconUrl){
+		public BeingCube(int x, int y, int w, int h, int zr, String tooltip, String iconUrl){
 			this.x = x;
 			this.y = y;
+			this.w = w;
+			this.h = h;
+			this.mr = zr;
 			this.zr = zr;
 			this.iconUrl = iconUrl;
-			this.setText(name==null?"":name);
+			this.setToolTipText(tooltip==null?"":tooltip);
 			this.setMargin(new Insets(0,0,0,0));
 			this.setFont(new Font("Arial",Font.PLAIN,8));
-			this.setBounds(x*zr, y*zr, zr, zr);
+			this.setBounds(x*zr, y*zr, w*zr, h*zr);
 			
 		}
 		
 		public void zoom(int a){
-			if((zr+a>CSL/2-1)&&(zr+a)<=CSL){
+			if((zr+a>mr/2-1)&&(zr+a)<=mr){
 				this.zr+=a;
-				this.setBounds(x*zr, y*zr, this.zr, this.zr);
+				this.setBounds(x*zr, y*zr, w*zr, h*zr);
 			}
 		}
 	}
