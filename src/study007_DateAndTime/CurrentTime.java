@@ -4,10 +4,12 @@ import java.util.Date;
 
 public class CurrentTime {
 	public static void main(String[] args){
-		System.out.println(convertToDate(1436938558111l));	//85721 : Wed Jul 15 13:35:58 CST 2015
-		System.out.println(convertToDate(1436939493094l));	//85724 : Wed Jul 15 13:51:33 CST 2015
-		System.out.println(convertToDate(1431459375000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
-		System.out.println(convertToDate(1431081641713l));	//85543 : Wed Jul 15 01:10:45 CST 2015
+//		System.out.println(convertToDate(1436938558111l));	//85721 : Wed Jul 15 13:35:58 CST 2015
+//		System.out.println(convertToDate(1436939493094l));	//85724 : Wed Jul 15 13:51:33 CST 2015
+//		System.out.println(convertToDate(1431459375000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
+		System.out.println(convertToDate(1378227600000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
+		ctds(39600000);
+		ctds(81000000);
 	}
 
 	
@@ -35,4 +37,20 @@ public class CurrentTime {
 		
 		return new Date(milliseconds);
 	}
+	
+	public static String ctds(Long m){
+		Date d = new Date();
+		long residual = d.getTime() - (d.getTime()%7200000);
+		d.setTime(residual+m);
+		System.out.println(d.toString());
+		return d.toString();
+	}
+	
+	public static String ctds(int m){
+		Date d = new Date();
+		long residual = d.getTime() - (d.getTime()%7200000);
+		d.setTime(residual+m);
+		System.out.println(d.toString());
+		return d.toString();
+	} 
 }
