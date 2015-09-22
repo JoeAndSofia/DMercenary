@@ -10,6 +10,7 @@ public class CurrentTime {
 		System.out.println(convertToDate(1378227600000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
 		ctds(39600000);
 		ctds(81000000);
+		longtime(0);
 	}
 
 	
@@ -39,18 +40,20 @@ public class CurrentTime {
 	}
 	
 	public static String ctds(Long m){
-		Date d = new Date();
-		long residual = d.getTime() - (d.getTime()%7200000);
-		d.setTime(residual+m);
-		System.out.println(d.toString());
-		return d.toString();
+		double x=0;
+		System.out.println(x=((double)m/3600000));
+		return x+"";
 	}
 	
 	public static String ctds(int m){
-		Date d = new Date();
-		long residual = d.getTime() - (d.getTime()%7200000);
-		d.setTime(residual+m);
-		System.out.println(d.toString());
-		return d.toString();
+		double x=0;
+		System.out.println(x=((double)m/3600000));
+		return x+"";
 	} 
+	
+	public static void longtime(long ms){
+		Date d = new Date();
+		d.setTime(ms);
+		System.out.println(d.toString());
+	}
 }

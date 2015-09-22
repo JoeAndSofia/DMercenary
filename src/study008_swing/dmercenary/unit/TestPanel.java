@@ -53,6 +53,8 @@ class DMercenary extends JFrame{
 	private static final int RG = 300;		//RIGHT_GAP
 	private static final int BG = 100;		//BOTTOM_GAP
 	private static boolean CANZOOM = true;
+	
+	public static final Insets BEING_CUBE_INSETS = new Insets(0,0,0,0);
 	static{
 		try{
 			Properties p = new Properties();
@@ -98,9 +100,13 @@ class DMercenary extends JFrame{
 	}
 
 	public void setSandbox(JPanel sandbox) {
-		this.remove(this.sandbox);
-		this.sandbox = sandbox;
-		this.add(this.sandbox);
+		if(sandbox instanceof SandBox){
+			this.remove(this.sandbox);
+			this.sandbox = sandbox;
+			this.add(this.sandbox);	
+		}else{
+			throw new RuntimeException("sandbox is not an instance of SandBox.");
+		}
 	}
 
 	public JPanel getControl() {
@@ -108,9 +114,13 @@ class DMercenary extends JFrame{
 	}
 
 	public void setControl(JPanel control) {
-		this.remove(this.control);
-		this.control = control;
-		this.add(this.control);
+		if(control instanceof Control){
+			this.remove(this.control);
+			this.control = control;
+			this.add(this.control);
+		}else{
+			throw new RuntimeException("control is not an instance of Control.");
+		}
 	}
 
 	public JPanel getData_group() {
@@ -118,9 +128,13 @@ class DMercenary extends JFrame{
 	}
 
 	public void setData_group(JPanel data_group) {
-		this.remove(this.data_group);
-		this.data_group = data_group;
-		this.add(this.data_group);
+		if(data_group instanceof DataGroup){
+			this.remove(this.data_group);
+			this.data_group = data_group;
+			this.add(this.data_group);			
+		}else{
+			throw new RuntimeException("data_group is not an instance of DataGroup.");
+		}
 	}
 
 	public JPanel getData_privy() {
@@ -128,9 +142,13 @@ class DMercenary extends JFrame{
 	}
 
 	public void setData_privy(JPanel data_privy) {
-		this.remove(this.data_privy);
-		this.data_privy = data_privy;
-		this.add(this.data_privy);
+		if(data_privy instanceof DataPrivy){
+			this.remove(this.data_privy);
+			this.data_privy = data_privy;
+			this.add(this.data_privy);	
+		}else{
+			throw new RuntimeException("data_privy is not an instance of DataPrivy.");
+		}
 	}
 
 	private void init(){
@@ -216,7 +234,7 @@ class DMercenary extends JFrame{
 				switch (bcj.type)
 				{
 					case "being":{
-						sb.battlefield.add(new BeingCube(bcj.x,bcj.y,bcj.w,bcj.h,bcj.zr,bcj.text,bcj.iconUrl));
+						sb.battlefield.add(new BeingCube(bcj.x,bcj.y,bcj.w,bcj.h,bcj.zr,bcj.zr/2,bcj.text,bcj.iconUrl));
 					}
 				}
 			}
@@ -233,10 +251,10 @@ class DMercenary extends JFrame{
 		private int h;
 		private String iconUrl;
 		public BeingCube(){
-			this(0,0,CSL,CSL,CSL,null,null);
+			this(0,0,CSL,CSL,CSL,CSL/2,null,null);
 		}
 		
-		public BeingCube(int x, int y, int w, int h, int zr, String tooltip, String iconUrl){
+		public BeingCube(int x, int y, int w, int h, int zr, int fontsize, String tooltip, String iconUrl){
 			this.x = x;
 			this.y = y;
 			this.w = w;
@@ -244,9 +262,10 @@ class DMercenary extends JFrame{
 			this.mr = zr;
 			this.zr = zr;
 			this.iconUrl = iconUrl;
+			this.setText(tooltip==null?"":tooltip);
 			this.setToolTipText(tooltip==null?"":tooltip);
-			this.setMargin(new Insets(0,0,0,0));
-			this.setFont(new Font("Arial",Font.PLAIN,8));
+			this.setMargin(BEING_CUBE_INSETS);
+			this.setFont(new Font("Arial",Font.PLAIN,fontsize));
 			this.setBorder(null);
 //			this.setIcon(arg0); 
 			this.setBounds(x*zr, y*zr, w*zr, h*zr);

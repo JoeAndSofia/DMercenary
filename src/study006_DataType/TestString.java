@@ -46,6 +46,10 @@ public class TestString {
 		return param.split(",",-1);
 	}
 	
+	public static String testTrim(String param){
+		return param.trim();
+	}
+	
 	public static void main(String[] args){
 		
 //		System.out.println(testTransferString());
