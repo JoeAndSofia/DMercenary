@@ -224,6 +224,43 @@ class DMercenary extends JFrame{
 		}
 	}
 	
+	class BeingCube extends JButton{
+		private int zr;	//zoom_rate
+		private int mr;	//max_rate
+		private int x;
+		private int y;
+		private int w;
+		private int h;
+		private String iconUrl;
+		public BeingCube(){
+			this(0,0,CSL,CSL,CSL,null,null);
+		}
+		
+		public BeingCube(int x, int y, int w, int h, int zr, String tooltip, String iconUrl){
+			this.x = x;
+			this.y = y;
+			this.w = w;
+			this.h = h;
+			this.mr = zr;
+			this.zr = zr;
+			this.iconUrl = iconUrl;
+			this.setToolTipText(tooltip==null?"":tooltip);
+			this.setMargin(new Insets(0,0,0,0));
+			this.setFont(new Font("Arial",Font.PLAIN,8));
+			this.setBorder(null);
+//			this.setIcon(arg0); 
+			this.setBounds(x*zr, y*zr, w*zr, h*zr);
+			
+		}
+		
+		public void zoom(int a){
+			if((zr+a>mr/2-1)&&(zr+a)<=mr){
+				this.zr+=a;
+				this.setBounds(x*zr, y*zr, w*zr, h*zr);
+			}
+		}
+	}
+	
 	class BeingCubeJson{
 		private String type;
 		private int x;
@@ -281,41 +318,6 @@ class DMercenary extends JFrame{
 		public void setIconUrl(String iconUrl) {
 			this.iconUrl = iconUrl;
 		}		
-	}
-	
-	class BeingCube extends JButton{
-		private int zr;	//zoom_rate
-		private int mr;	//max_rate
-		private int x;
-		private int y;
-		private int w;
-		private int h;
-		private String iconUrl;
-		public BeingCube(){
-			this(0,0,CSL,CSL,CSL,null,null);
-		}
-		
-		public BeingCube(int x, int y, int w, int h, int zr, String tooltip, String iconUrl){
-			this.x = x;
-			this.y = y;
-			this.w = w;
-			this.h = h;
-			this.mr = zr;
-			this.zr = zr;
-			this.iconUrl = iconUrl;
-			this.setToolTipText(tooltip==null?"":tooltip);
-			this.setMargin(new Insets(0,0,0,0));
-			this.setFont(new Font("Arial",Font.PLAIN,8));
-			this.setBounds(x*zr, y*zr, w*zr, h*zr);
-			
-		}
-		
-		public void zoom(int a){
-			if((zr+a>mr/2-1)&&(zr+a)<=mr){
-				this.zr+=a;
-				this.setBounds(x*zr, y*zr, w*zr, h*zr);
-			}
-		}
 	}
 	
 	class Control extends JPanel implements ActionListener{
