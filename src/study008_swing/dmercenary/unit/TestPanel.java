@@ -103,7 +103,7 @@ class DMercenary extends JFrame{
 		if(sandbox instanceof SandBox){
 			this.remove(this.sandbox);
 			this.sandbox = sandbox;
-			this.add(this.sandbox);	
+			this.add(this.sandbox);
 		}else{
 			throw new RuntimeException("sandbox is not an instance of SandBox.");
 		}
