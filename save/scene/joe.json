@@ -1,7 +1,7 @@
 {
 	csl:12,
 	unit:[{
-		type:being,
+		type:square,
 		x:1,
 		y:1,
 		w:1,
@@ -10,7 +10,7 @@
 		text:test,
 		iconUrl:""
 	},{
-		type:being,
+		type:square,
 		x:2,
 		y:2,
 		w:1,
@@ -19,7 +19,7 @@
 		text:test,
 		iconUrl:""
 	},{
-		type:being,
+		type:square,
 		x:4,
 		y:3,
 		w:2,

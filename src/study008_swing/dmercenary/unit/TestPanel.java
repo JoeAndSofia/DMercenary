@@ -52,9 +52,10 @@ class DMercenary extends JFrame{
 	private static final int MAIN_PANEL_HEIGHT = 480;
 	private static final int RG = 300;		//RIGHT_GAP
 	private static final int BG = 100;		//BOTTOM_GAP
+	private static final Insets CONTROL_INSETS = new Insets(2,2,2,2);
+	public static final Insets BEING_CUBE_INSETS = new Insets(0,0,0,0);
 	private static boolean CANZOOM = true;
 	
-	public static final Insets BEING_CUBE_INSETS = new Insets(0,0,0,0);
 	static{
 		try{
 			Properties p = new Properties();
@@ -70,8 +71,7 @@ class DMercenary extends JFrame{
 
 	private Font control_font = new Font("Arial",Font.BOLD+Font.ITALIC,12);
 	
-	private Insets control_inset = new Insets(2,2,2,2);
-	
+
 	
 	private JPanel sandbox = new SandBox();
 	private JPanel control = new Control(sandbox.getWidth(),0,RG+BT*2,sandbox.getHeight());
@@ -204,8 +204,8 @@ class DMercenary extends JFrame{
 				int a = -(int)e.getPreciseWheelRotation();
 				Component[] cs = ((JPanel)e.getComponent()).getComponents();
 				for(Component c: cs){
-					if(c instanceof BeingCube){
-						BeingCube beingCube = (BeingCube)c;
+					if(c instanceof Square){
+						Square beingCube = (Square)c;
 						beingCube.zoom(a*beingCube.mr/4);	
 					}
 				}
@@ -233,8 +233,8 @@ class DMercenary extends JFrame{
 			for(BeingCubeJson bcj : unit){
 				switch (bcj.type)
 				{
-					case "being":{
-						sb.battlefield.add(new BeingCube(bcj.x,bcj.y,bcj.w,bcj.h,bcj.zr,bcj.zr/2,bcj.text,bcj.iconUrl));
+					case "square":{
+						sb.battlefield.add(new Square(bcj.x,bcj.y,bcj.w,bcj.h,bcj.zr,bcj.zr/2,bcj.text,bcj.iconUrl));
 					}
 				}
 			}
@@ -242,7 +242,7 @@ class DMercenary extends JFrame{
 		}
 	}
 	
-	class BeingCube extends JButton{
+	class Square extends JButton{
 		private int zr;	//zoom_rate
 		private int mr;	//max_rate
 		private int x;
@@ -250,11 +250,11 @@ class DMercenary extends JFrame{
 		private int w;
 		private int h;
 		private String iconUrl;
-		public BeingCube(){
+		public Square(){
 			this(0,0,CSL,CSL,CSL,CSL/2,null,null);
 		}
 		
-		public BeingCube(int x, int y, int w, int h, int zr, int fontsize, String tooltip, String iconUrl){
+		public Square(int x, int y, int w, int h, int zr, int fontsize, String tooltip, String iconUrl){
 			this.x = x;
 			this.y = y;
 			this.w = w;
@@ -355,19 +355,19 @@ class DMercenary extends JFrame{
 			this.next.setBounds(LTX*4, LTY*4, DBW, DBH);
 			this.next.setText("Next Round");
 			this.next.setToolTipText("Give up the rest moves and enter into next Round");
-			this.next.setMargin(control_inset);
+			this.next.setMargin(CONTROL_INSETS);
 			this.next.setFont(control_font);
 			
 			this.locate.setBounds(LTX*6+DBW, LTY*4, DBW, DBH);
 			this.locate.setText("Locate");
 			this.locate.setToolTipText("Locate current unit on the map");
-			this.locate.setMargin(control_inset);
+			this.locate.setMargin(CONTROL_INSETS);
 			this.locate.setFont(control_font);
 			
 			JButton jb1 = new JButton();
 			jb1.setBounds(LTX*4, LTY*4+DBW/2, DBW, DBH);
 			jb1.setText("Test");
-			jb1.setMargin(control_inset);
+			jb1.setMargin(CONTROL_INSETS);
 			jb1.setFont(control_font);
 			jb1.addActionListener(this);
 			
@@ -421,10 +421,7 @@ class DMercenary extends JFrame{
 		public SandBox loadSandBox(String name){
 			try{
 				String jsonStr = readSaveFile(name).toString();
-				SandBox sandbox = new SandBox();
 				Gson gson = new Gson();
-				JsonObject jo = null;
-				JsonElement je = null;
 				
 				SandBoxJson sbj = gson.fromJson(jsonStr, SandBoxJson.class);
 				return sbj.parseSandBox();

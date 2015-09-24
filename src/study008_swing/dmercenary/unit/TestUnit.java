@@ -43,6 +43,18 @@ class Thing extends Unit implements BeThing{
 	}
 }
 
+class Skill extends Unit implements BeSkill{
+	
+	public Skill(){
+		this(null,null);
+	}
+	
+	public Skill(String name, Icon image){
+		this.name = name;
+		this.avatar = image;
+	}
+}
+
 class Equipment extends Thing implements BeEquipment{
 	private int duration_max;
 	private int duration_now;
@@ -51,7 +63,8 @@ class Equipment extends Thing implements BeEquipment{
 }
 
 class Being extends Unit implements BeBeing, CanWork, CanFight, CanGrow{
-	private Map<Integer,Thing> pack = new HashMap<Integer, Thing>();
+	private Map<Integer,Thing> packSet = new HashMap<Integer, Thing>();
+	private Map<Integer,Skill> skillSet = new HashMap<Integer, Skill>();
 	
 	private int strength = 0;
 	private int agility = 0;
@@ -137,11 +150,6 @@ class Being extends Unit implements BeBeing, CanWork, CanFight, CanGrow{
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void skill() {
-		// TODO Auto-generated method stub
-		
-	}	
 }
 
 interface BeThing{
@@ -184,8 +192,6 @@ interface CanFight{
 
 interface CanGrow{
 	public void levelup();
-	
-	public void skill();
 }
 
 
