@@ -14,11 +14,17 @@ public class TestInteger {
 		return x;
 	}
 	
+	public static String concat(){
+		Integer i = Integer.valueOf(5);
+		return "flaefale"+i;
+	}
+	
 	public static void main(String[] args){
 		DecimalFormat format = new DecimalFormat("#,###");
 		String x = format.format(test01());
 		String y = format.format(test02());
 		System.out.println(x);
 		System.out.println(y);
+		System.out.println(concat());
 	}
 }

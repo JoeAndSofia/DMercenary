@@ -7,10 +7,11 @@ public class CurrentTime {
 //		System.out.println(convertToDate(1436938558111l));	//85721 : Wed Jul 15 13:35:58 CST 2015
 //		System.out.println(convertToDate(1436939493094l));	//85724 : Wed Jul 15 13:51:33 CST 2015
 //		System.out.println(convertToDate(1431459375000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
-		System.out.println(convertToDate(1378227600000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
+		System.out.println(convertToDate(1373821200000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
 		ctds(39600000);
 		ctds(81000000);
 		longtime(0);
+		System.out.println(new Date().getTime());
 	}
 
 	
