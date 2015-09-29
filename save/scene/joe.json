@@ -27,5 +27,14 @@
 		zr:28,
 		text:Castle,
 		iconUrl:""
+	},{
+		type:square,
+		x:8,
+		y:8,
+		w:2,
+		h:1,
+		zr:30,
+		text:Capital,
+		iconUrl:"capital"
 	}]
 }

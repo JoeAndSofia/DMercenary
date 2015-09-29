@@ -1,7 +1,10 @@
 package study008_swing.dmercenary.unit;
 
-import org.sqlite.JDBC;
+
 
 public class TestSqlite3 {
-	
+	public static void main(){
+//		1201410768157695
+		
+	}
 }

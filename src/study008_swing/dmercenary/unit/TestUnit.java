@@ -160,6 +160,10 @@ interface BeThing{
 	public void inspect();
 }
 
+interface BeSkill{
+	
+}
+
 interface BeBeing{
 	public void move(int x, int y);
 	

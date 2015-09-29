@@ -11,6 +11,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_json-lib-2.4-jdk15"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_jsonij-0.3.0-SNAPSHOT"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gson"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/sqliteJDBC"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/sqlite-jdbc-3.8.7.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/sqlite-jdbc4-3.8.2-SNAPSHOT"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

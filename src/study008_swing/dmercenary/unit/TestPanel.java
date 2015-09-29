@@ -10,25 +10,17 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.util.Properties;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
-import javax.xml.soap.SAAJResult;
-
-import study008_swing.dmercenary.unit.DMercenary.SaveAndLoadSandBox;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
 
 public class TestPanel{
 	public static void main(String[] args){
@@ -47,13 +39,13 @@ class DMercenary extends JFrame{
 	private static final int LTX = 10;		//LEFT_TOP_X
 	private static final int LTY = 10;		//LEFT_TOP_Y
 	private static final int BT = 2;		//BORDER_THICKNESS
-	private static final int CSL = 16;		//CUBE_SIDE_LENGTH
+	private static final int SSL = 16;		//SQUARE_SIDE_LENGTH
 	private static final int MAIN_PANEL_WIDTH = 720;
 	private static final int MAIN_PANEL_HEIGHT = 480;
 	private static final int RG = 300;		//RIGHT_GAP
 	private static final int BG = 100;		//BOTTOM_GAP
 	private static final Insets CONTROL_INSETS = new Insets(2,2,2,2);
-	public static final Insets BEING_CUBE_INSETS = new Insets(0,0,0,0);
+	public static final Insets BEING_SQUARE_INSETS = new Insets(0,0,0,0);
 	private static boolean CANZOOM = true;
 	
 	static{
@@ -205,8 +197,8 @@ class DMercenary extends JFrame{
 				Component[] cs = ((JPanel)e.getComponent()).getComponents();
 				for(Component c: cs){
 					if(c instanceof Square){
-						Square beingCube = (Square)c;
-						beingCube.zoom(a*beingCube.mr/4);	
+						Square beingSquare = (Square)c;
+						beingSquare.zoom(a*beingSquare.mr/4);	
 					}
 				}
 			}
@@ -215,26 +207,26 @@ class DMercenary extends JFrame{
 	
 	class SandBoxJson{
 		private int csl;
-		private BeingCubeJson[] unit;
+		private BeingSquareJson[] unit;
 		public int getCsl() {
 			return csl;
 		}
 		public void setCsl(int csl) {
 			this.csl = csl;
 		}
-		public BeingCubeJson[] getUnit() {
+		public BeingSquareJson[] getUnit() {
 			return unit;
 		}
-		public void setUnit(BeingCubeJson[] unit) {
+		public void setUnit(BeingSquareJson[] unit) {
 			this.unit = unit;
 		}
 		public SandBox parseSandBox(){
 			SandBox sb = new SandBox();
-			for(BeingCubeJson bcj : unit){
+			for(BeingSquareJson bcj : unit){
 				switch (bcj.type)
 				{
 					case "square":{
-						sb.battlefield.add(new Square(bcj.x,bcj.y,bcj.w,bcj.h,bcj.zr,bcj.zr/2,bcj.text,bcj.iconUrl));
+						sb.battlefield.add(new Square(bcj.x,bcj.y,bcj.w,bcj.h,bcj.zr,bcj.text,bcj.iconUrl));
 					}
 				}
 			}
@@ -251,10 +243,10 @@ class DMercenary extends JFrame{
 		private int h;
 		private String iconUrl;
 		public Square(){
-			this(0,0,CSL,CSL,CSL,CSL/2,null,null);
+			this(0,0,SSL,SSL,SSL,null,null);
 		}
 		
-		public Square(int x, int y, int w, int h, int zr, int fontsize, String tooltip, String iconUrl){
+		public Square(int x, int y, int w, int h, int zr, String tooltip, String iconUrl){
 			this.x = x;
 			this.y = y;
 			this.w = w;
@@ -262,10 +254,14 @@ class DMercenary extends JFrame{
 			this.mr = zr;
 			this.zr = zr;
 			this.iconUrl = iconUrl;
-			this.setText(tooltip==null?"":tooltip);
+			if(this.iconUrl==null || "".equals(this.iconUrl.trim())){
+				this.setText(tooltip==null?"":tooltip);	
+			}else{
+				this.setIcon(new ImageIcon());
+			}
 			this.setToolTipText(tooltip==null?"":tooltip);
-			this.setMargin(BEING_CUBE_INSETS);
-			this.setFont(new Font("Arial",Font.PLAIN,fontsize));
+			this.setMargin(BEING_SQUARE_INSETS);
+//			this.setFont(new Font("Arial",Font.PLAIN,fontsize));
 			this.setBorder(null);
 //			this.setIcon(arg0); 
 			this.setBounds(x*zr, y*zr, w*zr, h*zr);
@@ -280,7 +276,7 @@ class DMercenary extends JFrame{
 		}
 	}
 	
-	class BeingCubeJson{
+	class BeingSquareJson{
 		private String type;
 		private int x;
 		private int y;
@@ -420,7 +416,7 @@ class DMercenary extends JFrame{
 	class SaveAndLoadSandBox{
 		public SandBox loadSandBox(String name){
 			try{
-				String jsonStr = readSaveFile(name).toString();
+				String jsonStr = readSaveFile(name);
 				Gson gson = new Gson();
 				
 				SandBoxJson sbj = gson.fromJson(jsonStr, SandBoxJson.class);
@@ -431,22 +427,15 @@ class DMercenary extends JFrame{
 			}
 		}
 		
-		private StringBuffer readSaveFile(String fileName) throws IOException{
-
-			InputStream is = new FileInputStream("./save/scene/"+fileName+".json");
-			byte[] content = new byte[300];
-			int length = 0;
-			StringBuffer sb = new StringBuffer();
-			while(true){
-				length = is.read(content);
-				if(length<=0){
-					break;
-				}
-				String line = new String(content).trim();
-				String modified = line.replaceAll("\r|\n|\t", "");
-				sb.append(modified);
-			}
-			return sb;
+		private String readSaveFile(String fileName) throws IOException{
+			File scene = new File("."+File.separator+"save"+File.separator+"scene"+File.separator+fileName+".json");
+			InputStream is = new FileInputStream(scene);
+			byte[] content = new byte[(int)scene.length()];
+			is.read(content);
+			is.close();
+			String line = new String(content).trim();
+			String modified = line.replaceAll("\r|\n|\t", "");
+			return modified;
 		}
 	}
 }

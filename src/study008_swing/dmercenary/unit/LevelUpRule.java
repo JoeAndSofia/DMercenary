@@ -13,8 +13,7 @@ class LevelUpRule {
     public static final LevelUpRule CHARACTER_LEVEL_RULE = new LevelUpRule(15, 1.121, 17, true, 100);
     
     public LevelUpRule(int firstLevel, double coefficient, int regulate, boolean regulateRelateToLevel, int maxLevel){
-        if (firstLevel <= 0 || coefficient < 0 || maxLevel < 1)
-        {
+        if (firstLevel <= 0 || coefficient < 0 || maxLevel < 1){
             throw new RuntimeException("Unacceptable argument.");
         }
         this.firstLevel = firstLevel;
@@ -27,8 +26,7 @@ class LevelUpRule {
 
     private void fillLevelArr(){           //构建等级经验值
         this.levelArr[0] = firstLevel;
-        for (int i = 1; i < levelArr.length; i++)
-        {
+        for (int i = 1; i < levelArr.length; i++){
             this.levelArr[i] = (int)(this.levelArr[i - 1] * coefficient + regulate * (regulateRelateToLevel ? i : 1));
         }
     }
@@ -49,12 +47,10 @@ class LevelUpRule {
     /// <param name="level">specified level</param>
     /// <returns>the maximum of experience in the specified level</returns>
     public int LevelExperience(int level){
-        if (level < 0 || level > levelArr.length)
-        {
+        if (level < 0 || level > levelArr.length){
             throw new RuntimeException("Unacceptable Argument: level out of range.");
         }
-        if (level == levelArr.length)
-        {
+        if (level == levelArr.length){
             return 0;
         }
         return this.levelArr[level];
