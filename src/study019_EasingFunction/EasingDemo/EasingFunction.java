@@ -1,4 +1,4 @@
-package study019_EasingFunction;
+package study019_EasingFunction.EasingDemo;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,6 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -16,6 +23,19 @@ import javax.swing.JRadioButton;
 
 public class EasingFunction extends JFrame{
 	private static final Insets BUTTON_INSETS= new Insets(0,0,0,0);
+	private static final int X_INTERVAL = 25;	
+	
+	private static long LINEAR_TIME_INTERVAL = 0;
+	private static long QUADRATIC_TIME_INTERVAL = 0;
+	private static long CUBIC_TIME_INTERVAL = 0;
+	private static long QUARTIC_TIME_INTERVAL = 0;
+	private static long QUINTIC_TIME_INTERVAL = 0;
+	private static long SINUSOIDAL_TIME_INTERVAL = 0;
+	private static long EXPONENTIAL_TIME_INTERVAL = 0;
+	private static long CIRCULAR_TIME_INTERVAL = 0;
+	private static long ELASTIC_TIME_INTERVAL = 0;
+	private static long BACK_TIME_INTERVAL = 0;
+	private static long BOUNCE_TIME_INTERVAL = 0;
 	
 	private JPanel animationBoard = new JPanel(true);
 	private JPanel controlBoard = new JPanel();
@@ -26,6 +46,8 @@ public class EasingFunction extends JFrame{
 	private JRadioButton[] easeWayRadioButtonArr = new JRadioButton[3];
 	private int type = 0;
 	private int way = 0;
+	private Thread t = null;
+	private ThreadDraw td = new ThreadDraw();
 	
 	private JRadioButton linear = new JRadioButton();
 	private JRadioButton quadratic = new JRadioButton();
@@ -44,6 +66,8 @@ public class EasingFunction extends JFrame{
 	private JRadioButton easeOut = new JRadioButton();
 	private JRadioButton easeInOut = new JRadioButton();
 	
+	private JButton show = new JButton();
+	private JButton reload = new JButton();
 	
 	public EasingFunction(){
 		init();
@@ -57,21 +81,35 @@ public class EasingFunction extends JFrame{
 		this.controlBoard.setBounds(600,0,280,600);
 		this.controlBoard.setLayout(null);
 		
+		ShowButtonActionListener sal = new ShowButtonActionListener();
+		
+		show.setBounds(10, 450, 100, 25);
+		show.setText("Show");
+		show.setMargin(BUTTON_INSETS);
+		show.addActionListener(sal);
+		reload.setBounds(130, 450, 100, 25);
+		reload.setText("Reload");
+		reload.setMargin(BUTTON_INSETS);
+		reload.addActionListener(sal);
+		
+		this.controlBoard.add(show);
+		this.controlBoard.add(reload);
+		
 		WayRadioButtonActionListener wal = new WayRadioButtonActionListener();
 		
 		easeWayRadioButtonArr[0]=easeIn;
 		easeWayRadioButtonArr[1]=easeOut;
 		easeWayRadioButtonArr[2]=easeInOut;
 		
-		this.easeIn.setBounds(10,550,80,25);
+		this.easeIn.setBounds(10,400,80,25);
 		this.easeIn.setText("EaseIn");
 		this.easeIn.addItemListener(wal);
 		wayBg.add(easeIn);
-		this.easeOut.setBounds(100,550,80,25);
+		this.easeOut.setBounds(100,400,80,25);
 		this.easeOut.setText("EaseOut");
 		this.easeOut.addItemListener(wal);
 		wayBg.add(easeOut);
-		this.easeInOut.setBounds(190,550,80,25);
+		this.easeInOut.setBounds(190,400,80,25);
 		this.easeInOut.setText("EaseInOut");
 		this.easeInOut.addItemListener(wal);
 		wayBg.add(easeInOut);
@@ -155,17 +193,36 @@ public class EasingFunction extends JFrame{
 		
 	}
 	
-	private class WayRadioButtonActionListener implements ItemListener{
+	class ShowButtonActionListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton btn = (JButton)e.getSource();
+			String which = btn.getText();
+			switch (which){
+				case "Show":{
+					if(t!=null){
+						t.stop();
+					}			
+					t = new Thread(td);
+					t.start();
+					break;
+				}
+				case "Reload":{
+					loadProperties();
+				}
+			}
+		}
+	}
+	
+	class WayRadioButtonActionListener implements ItemListener{
 		@Override
 		public void itemStateChanged(ItemEvent e) {
 			for(int j=0;j<easeWayRadioButtonArr.length;j++){
 				if(easeWayRadioButtonArr[j].isSelected()){
 					way=j;
-					caseDraw(type,way);
 					break;
 				}
 			}
-			
 		}
 	}
 	
@@ -175,74 +232,139 @@ public class EasingFunction extends JFrame{
 			for(int i=0;i<easeTypeRadioButtonArr.length;i++){
 				if(easeTypeRadioButtonArr[i].isSelected()){
 					type=i;
-					caseDraw(type,way);
 					break;
 				}
 			}
 		}
 	}
 	
+	class ThreadDraw implements Runnable{
+		@Override
+		public void run() {
+			 caseDraw(type,way);
+		}
+	}
+	
 	public void init(){
 		this.setBounds(20, 20, 880, 600);
 		this.setLayout(null);
+		this.setResizable(false);
 		initAnimationBoard();
 		initControlBoard();
 		this.add(animationBoard);
 		this.add(controlBoard);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);	
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		loadProperties();
+	}
+	
+	private void loadProperties(){
+		try{
+			Properties p = new Properties();
+			
+			String path = this.getClass().getClassLoader().getResource("config.properties").getPath();
+			InputStream is = new FileInputStream(path);
+			p.load(is);
+			is.close();
+			
+			
+//			URL url =this.getClass().getResource("config.properties");
+//			FileInputStream in = new FileInputStream(url.getFile());
+//			p.load(in);
+//			in.close();
+
+			
+			LINEAR_TIME_INTERVAL = Long.parseLong(p.getProperty("LINEAR_TIME_INTERVAL"));
+			QUADRATIC_TIME_INTERVAL = Long.parseLong(p.getProperty("QUADRATIC_TIME_INTERVAL"));
+			CUBIC_TIME_INTERVAL = Long.parseLong(p.getProperty("CUBIC_TIME_INTERVAL"));
+			QUARTIC_TIME_INTERVAL = Long.parseLong(p.getProperty("QUARTIC_TIME_INTERVAL"));
+			QUINTIC_TIME_INTERVAL = Long.parseLong(p.getProperty("QUINTIC_TIME_INTERVAL"));
+			SINUSOIDAL_TIME_INTERVAL = Long.parseLong(p.getProperty("SINUSOIDAL_TIME_INTERVAL"));
+			EXPONENTIAL_TIME_INTERVAL = Long.parseLong(p.getProperty("EXPONENTIAL_TIME_INTERVAL"));
+			CIRCULAR_TIME_INTERVAL = Long.parseLong(p.getProperty("CIRCULAR_TIME_INTERVAL"));
+			ELASTIC_TIME_INTERVAL = Long.parseLong(p.getProperty("ELASTIC_TIME_INTERVAL"));
+			BACK_TIME_INTERVAL = Long.parseLong(p.getProperty("BACK_TIME_INTERVAL"));
+			BOUNCE_TIME_INTERVAL = Long.parseLong(p.getProperty("BOUNCE_TIME_INTERVAL"));
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 	}
 	
 	public void caseDraw(int type, int way){
 		System.out.println(type+","+way);
-		DrawPanel dp = new DrawPanel(type,way);
-		
-		switch (type){
-		case 0:{
-//			this.animationBoard;
-//			t.
-			break;
+		Graphics g = animationBoard.getGraphics();
+		if(g!=null){
+			g.clearRect(0, 0, 600, 600);
+			int x = 0;
+			int y = 600;
+			g.setColor(Color.red);
+			switch (type){
+			case 0:{
+				try{
+					while( x<600&&y>0){
+						g.drawLine(x++, y--, x, y);
+						Thread.sleep(5);
+					}	
+				}catch(Exception e){
+					System.out.println("case-0");
+					e.printStackTrace();
+				}
+				break;
+			}
+			case 1:{
+				try{
+					while(x<600 && y>0){
+						int dy = 600-(int)Math.pow((x+X_INTERVAL)/X_INTERVAL,2);
+						g.drawLine(x,y,x+=X_INTERVAL,dy);
+						y = dy;
+						Thread.sleep(50);
+					}
+				}catch(Exception e){
+					System.out.println("case-1");
+					e.printStackTrace();
+				}
+				break;
+			}
+			case 2:{
+
+				break;
+			}
+			case 3:{
+
+				break;
+			}
+			case 4:{
+
+				break;
+			}
+			case 5:{
+
+				break;
+			}
+			case 6:{
+
+				break;
+			}
+			case 7:{
+
+				break;
+			}
+			case 8:{
+
+				break;
+			}
+			case 9:{
+
+				break;
+			}
+			case 10:{
+
+				break;
+			}
+			default:if(t!=null){
+				t.stop();
+			};
+			}
 		}
-		case 1:{
-			
-			break;
-		}
-		case 2:{
-			
-			break;
-		}
-		case 3:{
-			
-			break;
-		}
-		case 4:{
-			
-			break;
-		}
-		case 5:{
-			
-			break;
-		}
-		case 6:{
-			
-			break;
-		}
-		case 7:{
-			
-			break;
-		}
-		case 8:{
-			
-			break;
-		}
-		case 9:{
-			
-			break;
-		}
-		case 10:{
-			
-			break;
-		}
-	}
 	}
 	
 	
@@ -250,25 +372,6 @@ public class EasingFunction extends JFrame{
 	public static void main(String[] args){
 		EasingFunction ef = new EasingFunction();
 		ef.setVisible(true);
-	}
-	
-	class DrawPanel implements Runnable{
-		
-		private int type = 0;
-		private int way = 0;
-		
-		public DrawPanel(int type, int way){
-			this.type = type;
-			this.way = way;
-		}
-		
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		
 	}
 	
 }
