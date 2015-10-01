@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.io.File;
@@ -20,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
+
 import com.google.gson.Gson;
 
 public class TestPanel{
@@ -65,10 +68,10 @@ class DMercenary extends JFrame{
 	
 
 	
-	private JPanel sandbox = new SandBox();
-	private JPanel control = new Control(sandbox.getWidth(),0,RG+BT*2,sandbox.getHeight());
-	private JPanel data_group = new DataGroup(0,sandbox.getHeight(),sandbox.getWidth(),BG+BT*2);
-	private JPanel data_privy = new DataPrivy(sandbox.getWidth(),sandbox.getHeight(),control.getWidth(),data_group.getHeight());
+	private SandBox sandbox = new SandBox();
+	private Control control = new Control(sandbox.getWidth(),0,RG+BT*2,sandbox.getHeight());
+	private DataGroup data_group = new DataGroup(0,sandbox.getHeight(),sandbox.getWidth(),BG+BT*2);
+	private DataPrivy data_privy = new DataPrivy(sandbox.getWidth(),sandbox.getHeight(),control.getWidth(),data_group.getHeight());
 	
 	private String name;
 	
@@ -91,11 +94,12 @@ class DMercenary extends JFrame{
 		return sandbox;
 	}
 
-	public void setSandbox(JPanel sandbox) {
+	public void setSandbox(SandBox sandbox) {
 		if(sandbox instanceof SandBox){
 			this.remove(this.sandbox);
 			this.sandbox = sandbox;
 			this.add(this.sandbox);
+			this.sandbox.battlefield.requestFocusInWindow();
 		}else{
 			throw new RuntimeException("sandbox is not an instance of SandBox.");
 		}
@@ -105,7 +109,7 @@ class DMercenary extends JFrame{
 		return control;
 	}
 
-	public void setControl(JPanel control) {
+	public void setControl(Control control) {
 		if(control instanceof Control){
 			this.remove(this.control);
 			this.control = control;
@@ -119,7 +123,7 @@ class DMercenary extends JFrame{
 		return data_group;
 	}
 
-	public void setData_group(JPanel data_group) {
+	public void setData_group(DataGroup data_group) {
 		if(data_group instanceof DataGroup){
 			this.remove(this.data_group);
 			this.data_group = data_group;
@@ -133,7 +137,7 @@ class DMercenary extends JFrame{
 		return data_privy;
 	}
 
-	public void setData_privy(JPanel data_privy) {
+	public void setData_privy(DataPrivy data_privy) {
 		if(data_privy instanceof DataPrivy){
 			this.remove(this.data_privy);
 			this.data_privy = data_privy;
@@ -155,8 +159,9 @@ class DMercenary extends JFrame{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	class SandBox extends JPanel implements MouseWheelListener{
+	class SandBox extends JPanel implements MouseWheelListener, KeyListener{
 		private JPanel battlefield = new JPanel(true);
+		private JButton activated = new JButton();
 		
 		public SandBox(){
 			init();
@@ -173,12 +178,21 @@ class DMercenary extends JFrame{
 			this.add(battlefield);
 		}
 		
+		public JButton getActivated() {
+			return activated;
+		}
+		
+		public void setActivated(JButton activated) {
+			this.activated = activated;
+		}
+		
 		private void initMain(){
 			this.battlefield.setLayout(null);
 			this.battlefield.setBounds(LTX+BT,LTY+BT,MAIN_PANEL_WIDTH,MAIN_PANEL_HEIGHT);
 			this.battlefield.setBorder(new LineBorder(Color.GRAY, 1));
 			this.battlefield.setFocusable(true);
 			this.battlefield.addMouseWheelListener(this);
+			this.battlefield.addKeyListener(this);
 		}
 		
 		private void init(){	
@@ -202,6 +216,25 @@ class DMercenary extends JFrame{
 					}
 				}
 			}
+		}
+
+		@Override
+		public void keyPressed(KeyEvent k) {
+			System.out.println(k.getExtendedKeyCode());
+			System.out.println(k.getKeyCode());
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	
@@ -234,7 +267,7 @@ class DMercenary extends JFrame{
 		}
 	}
 	
-	class Square extends JButton{
+	class Square extends JButton implements ActionListener{
 		private int zr;	//zoom_rate
 		private int mr;	//max_rate
 		private int x;
@@ -265,6 +298,7 @@ class DMercenary extends JFrame{
 			this.setBorder(null);
 //			this.setIcon(arg0); 
 			this.setBounds(x*zr, y*zr, w*zr, h*zr);
+			this.addActionListener(this);
 			
 		}
 		
@@ -273,6 +307,16 @@ class DMercenary extends JFrame{
 				this.zr+=a;
 				this.setBounds(x*zr, y*zr, w*zr, h*zr);
 			}
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Square square = (Square)e.getSource();
+			SandBox sandbox = (SandBox)square.getParent().getParent();
+			sandbox.battlefield.requestFocusInWindow();
+			sandbox.setActivated(square);
+//			((Square)e.getSource()).getParent().requestFocusInWindow();
+			
 		}
 	}
 	
@@ -420,7 +464,8 @@ class DMercenary extends JFrame{
 				Gson gson = new Gson();
 				
 				SandBoxJson sbj = gson.fromJson(jsonStr, SandBoxJson.class);
-				return sbj.parseSandBox();
+				SandBox sb = sbj.parseSandBox();
+				return sb;
 			}catch(Exception e){
 				e.printStackTrace();
 				return null;
