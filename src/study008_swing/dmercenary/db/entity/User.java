@@ -10,6 +10,7 @@ public class User {
 	String name = null;
 	String password = null;
 	String hint = null;
+	int playDuration = 0; 
 	
 	private static UserDao dao = new UserDao();
 	
@@ -19,7 +20,7 @@ public class User {
 	}
 	
 	public static void close(){
-		dao.util.dis();
+		dao.dbUtil.dis();
 	}
 	
 	public User(String name, String password, String hint){
@@ -37,8 +38,8 @@ public class User {
 //		return UserDao.
 	}
 	
-	public boolean save(){
-		return dao.save(this);
+	public boolean save(boolean insert){
+		return dao.save(this, insert);
 	}
 	
 	public int Id() {
@@ -71,7 +72,15 @@ public class User {
 
 	public void Hint(String hint) {
 		this.hint = hint;
-	} 
+	}
+	
+	public int PlayDuration(){
+		return playDuration;
+	}
+	
+	public void PlayDuration(int played){
+		this.playDuration += played;
+	}
 	
 	
 }
