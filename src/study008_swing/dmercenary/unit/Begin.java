@@ -23,7 +23,7 @@ import study008_swing.dmercenary.db.entity.User;
 import study008_swing.dmercenary.utils.UIUtil;
 
 public class Begin extends JFrame{
-	private static final Font FONT_FOR_ALL = new Font("ËÎÌו",Font.PLAIN,11);
+	private static final Font FONT_FOR_ALL = new Font("Times Roma New",Font.PLAIN,11);
 	private static final Insets INSETS_FOR_ALL = new Insets(0, 0, 0, 0);
 	
 	private static final int SHOW_X = 0;
@@ -176,7 +176,6 @@ public class Begin extends JFrame{
 			this.jt_username.setText(username);
 			this.jt_password.setText("");
 		}
-		
 	}
 	
 	class Create extends JPanel implements ActionListener{
@@ -190,7 +189,6 @@ public class Begin extends JFrame{
 		private JTextField jt_hint = new JTextField();
 		private JButton jb_back = new JButton("<- Back");
 		private JButton jb_create = new JButton("Create->");
-		
 		
 		public Create(){
 			initCreate();

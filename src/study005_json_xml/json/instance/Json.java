@@ -5,10 +5,29 @@ import java.util.List;
 
 public class Json{
 
+	//newly added for testing read from jsonstr
+	public int getTestInt() {
+		return testInt;
+	}
+
+	public String getTestString() {
+		return testString;
+	}
+
+	public void setTestInt(int testInt) {
+		this.testInt = testInt;
+	}
+
+	public void setTestString(String testString) {
+		this.testString = testString;
+	}
+
 	private int age = 52;
 	private String name = "Jim Carrey";
 	private JsonFirstObject jsnFO = new JsonFirstObject();
 	private List<String> messages;
+	private int testInt = 0;		//newly added
+	private String testString;		//newly added
 	
 	public Json(){
 		

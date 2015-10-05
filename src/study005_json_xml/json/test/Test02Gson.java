@@ -14,9 +14,9 @@ import study005_json_xml.json.instance.Json;
 public class Test02Gson{
 	public static void main(String[] args) {
 //		write();
-//		read();
+		read();
 //		write_disableHtmlEscaping();
-		read_disableHtmlEscaping();
+//		read_disableHtmlEscaping();
 	}
 
 	//文件中不存在任何类型解释
@@ -36,7 +36,8 @@ public class Test02Gson{
 
 	//读取正常,所以在构建对象时,根据setter的参数进行转换
 	public static void read(){
-		Json jsonObjEmpty = new Json();
+//		Json jsonObjEmpty = new Json();
+		Json jsonObjEmpty = null;
 		Gson gson = new Gson();
 
 		System.out.println("Read JSON from file, convert JSON string back to object");
