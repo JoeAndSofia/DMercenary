@@ -200,8 +200,9 @@ public class EasingFunction extends JFrame{
 			String which = btn.getText();
 			switch (which){
 				case "Show":{
+					btn.setText("Pause");
 					if(t!=null){
-						t.stop();
+//						t.();
 					}			
 					t = new Thread(td);
 					t.start();
@@ -209,6 +210,21 @@ public class EasingFunction extends JFrame{
 				}
 				case "Reload":{
 					loadProperties();
+					break;
+				}
+				case "Pause":{
+					btn.setText("Go on");
+					if(t!=null){
+						t.suspend();
+					}
+					break;
+				}
+				case "Go on":{
+					btn.setText("Pause");
+					if(t!=null){
+						t.resume();
+					}
+					break;
 				}
 			}
 		}
@@ -261,7 +277,7 @@ public class EasingFunction extends JFrame{
 		try{
 			Properties p = new Properties();
 			
-			String path = this.getClass().getClassLoader().getResource("config.properties").getPath();
+			String path = this.getClass().getClassLoader().getResource("study019_EasingFunction/EasingDemo/config.properties").getPath();
 			InputStream is = new FileInputStream(path);
 			p.load(is);
 			is.close();
@@ -284,6 +300,18 @@ public class EasingFunction extends JFrame{
 			ELASTIC_TIME_INTERVAL = Long.parseLong(p.getProperty("ELASTIC_TIME_INTERVAL"));
 			BACK_TIME_INTERVAL = Long.parseLong(p.getProperty("BACK_TIME_INTERVAL"));
 			BOUNCE_TIME_INTERVAL = Long.parseLong(p.getProperty("BOUNCE_TIME_INTERVAL"));
+			
+			System.out.println(LINEAR_TIME_INTERVAL);
+			System.out.println(QUADRATIC_TIME_INTERVAL);
+			System.out.println(CUBIC_TIME_INTERVAL);
+			System.out.println(QUARTIC_TIME_INTERVAL);
+			System.out.println(QUINTIC_TIME_INTERVAL);
+			System.out.println(SINUSOIDAL_TIME_INTERVAL);
+			System.out.println(EXPONENTIAL_TIME_INTERVAL);
+			System.out.println(CIRCULAR_TIME_INTERVAL);
+			System.out.println(ELASTIC_TIME_INTERVAL);
+			System.out.println(BACK_TIME_INTERVAL);
+			System.out.println(BOUNCE_TIME_INTERVAL);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -302,12 +330,13 @@ public class EasingFunction extends JFrame{
 				try{
 					while( x<600&&y>0){
 						g.drawLine(x++, y--, x, y);
-						Thread.sleep(5);
+						Thread.sleep(LINEAR_TIME_INTERVAL);
 					}	
 				}catch(Exception e){
 					System.out.println("case-0");
 					e.printStackTrace();
 				}
+				show.setText("Show");
 				break;
 			}
 			case 1:{
@@ -316,12 +345,13 @@ public class EasingFunction extends JFrame{
 						int dy = 600-(int)Math.pow((x+X_INTERVAL)/X_INTERVAL,2);
 						g.drawLine(x,y,x+=X_INTERVAL,dy);
 						y = dy;
-						Thread.sleep(50);
+						Thread.sleep(QUADRATIC_TIME_INTERVAL);
 					}
 				}catch(Exception e){
 					System.out.println("case-1");
 					e.printStackTrace();
 				}
+				show.setText("Show");
 				break;
 			}
 			case 2:{
@@ -357,12 +387,16 @@ public class EasingFunction extends JFrame{
 				break;
 			}
 			case 10:{
-
+				x = 0;
+				y = 0;
+				int ex = 600;
+				int ey = 600;
+				int dx = ex - x;
+				int dy = ey - y;
+				double dis = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 				break;
 			}
-			default:if(t!=null){
-				t.stop();
-			};
+			default:break;
 			}
 		}
 	}
