@@ -1,5 +1,7 @@
 package study008_swing.dmercenary.unit;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Point;
@@ -29,13 +31,15 @@ public class Begin extends JFrame{
 	private static final int SHOW_X = 0;
 	private static final int SHOW_Y = 0;
 	
-	private static final int FRAME_W = 207;
-	private static final int FRAME_H = 170;
+	private static final int FRAME_W = 800;
+	private static final int FRAME_H = 600;
+	private static final int FRAME_INNER_W = 207;
+	private static final int FRAME_INNER_H = 170;
 	
 	private JPanel choose = new Choose();
 	private JPanel login = new Login();
 	private JPanel create = new Create();
-	private JDialog userList = new UserList(this); 
+	private JPanel userList = new UserList(); 
 
 //	private JButton 
 	
@@ -62,6 +66,7 @@ public class Begin extends JFrame{
 		this.add(choose);
 		this.add(login);
 		this.add(create);
+		this.add(userList);
 	}
 	
 	class Choose extends JPanel implements ActionListener{
@@ -85,7 +90,7 @@ public class Begin extends JFrame{
 			
 			
 			this.setLayout(null);
-			this.setBounds(SHOW_X, SHOW_Y, FRAME_W, FRAME_H);
+			this.setBounds(SHOW_X, SHOW_Y, FRAME_INNER_W, FRAME_INNER_H);
 			this.add(jb_login);
 			this.add(jb_create);
 		}
@@ -98,8 +103,7 @@ public class Begin extends JFrame{
 				choose.setEnabled(false);
 				login.setLocation(0, 0);
 				login.setEnabled(true);
-				Point p = b.getLocation();
-				userList.setLocation((int)p.getX()-190,(int)p.getY());
+//				userList.setLocation(FRAME_INNER_W,0);
 				userList.setVisible(true);
 				System.out.println("choose_login");
 			}else if(jb==jb_create){
@@ -148,7 +152,7 @@ public class Begin extends JFrame{
 			jb_login.addActionListener(this);
 			
 			this.setLayout(null);
-			this.setBounds(-FRAME_W, -FRAME_H, FRAME_W, FRAME_H);
+			this.setBounds(-FRAME_W, -FRAME_H, FRAME_INNER_W, FRAME_INNER_H);
 			this.add(jl_username);
 			this.add(jl_password);
 			this.add(jt_username);
@@ -230,7 +234,7 @@ public class Begin extends JFrame{
 			jb_create.addActionListener(this);
 			
 			this.setLayout(null);
-			this.setBounds(-FRAME_W, -FRAME_H, FRAME_W, FRAME_H);
+			this.setBounds(-FRAME_W, -FRAME_H, FRAME_INNER_W, FRAME_INNER_H);
 			this.add(jl_username);
 			this.add(jl_password);
 			this.add(jl_confirm);
@@ -256,20 +260,51 @@ public class Begin extends JFrame{
 		}
 	}
 	
-	class UserList extends JDialog{
+//	class UserList extends JDialog{
+//		
+//		public UserList(JFrame owner){
+//			super(owner);
+//			initUserList(owner);
+//		}
+//		
+//		private void initUserList(JFrame owner){
+//			this.setTitle("User List");
+//			this.setLayout(null);
+//			this.setResizable(false);
+//			this.setAutoRequestFocus(true);
+////			this.setUndecorated(true);
+//			this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+//			
+//			UserDao dao = new UserDao();
+//			Map<Integer, User> usersMap = dao.getAll();
+//			if(usersMap!=null&&usersMap.size()>0){
+//				Set<Integer> ids = usersMap.keySet();
+//				int i=0;
+//				for(Integer id:ids){
+//					UserBlock userBlock = new UserBlock(usersMap.get(id));
+//					userBlock.setLocation(0, i*60);
+//					this.add(userBlock);
+//				}
+//				this.setBounds(new Rectangle(180, i+2*60));
+//			}
+//			dao.dis();
+//		}
+//	}
+	
+	class UserList extends JPanel{
 		
-		public UserList(JFrame owner){
-			super(owner);
-			initUserList(owner);
+		public UserList(){
+			initUserList();
 		}
 		
-		private void initUserList(JFrame owner){
-			this.setTitle("User List");
-			this.setLayout(null);
-			this.setResizable(false);
-			this.setAutoRequestFocus(true);
-//			this.setUndecorated(true);
-			this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		private void initUserList(){
+			this.setBounds(FRAME_INNER_W, 0, 570, 570);
+			FlowLayout fl = new FlowLayout(FlowLayout.LEFT,6,10);
+			this.setLayout(fl);
+			this.setPreferredSize(new Dimension(174,55));
+			this.setBorder(UIUtil.getRoundBorder());
+			
+			System.out.println(this.getLayout().toString());
 			
 			UserDao dao = new UserDao();
 			Map<Integer, User> usersMap = dao.getAll();
@@ -278,10 +313,11 @@ public class Begin extends JFrame{
 				int i=0;
 				for(Integer id:ids){
 					UserBlock userBlock = new UserBlock(usersMap.get(id));
-					userBlock.setLocation(0, i*60);
 					this.add(userBlock);
+//					JButton jb = new JButton("Test");
+//					String x = "";
+//					this.add(jb);
 				}
-				this.setBounds(new Rectangle(180, i+2*60));
 			}
 			dao.dis();
 		}
@@ -313,11 +349,12 @@ public class Begin extends JFrame{
 			this.jl_playduration.setBounds(10, 25, 174, 20);
 			
 			this.setLayout(null);
-			this.setBounds(new Rectangle(174, 55));
+//			this.setSize(new Dimension(174,55));
 			this.setBorder(UIUtil.getRoundBorder());
 			this.addMouseListener(this);
 			this.add(jl_username);
 			this.add(jl_playduration);
+			System.out.println(this.getBounds().toString());
 		}
 		
 		public String duration(int duration){
@@ -330,6 +367,7 @@ public class Begin extends JFrame{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("UserBlock: user clicked.");
+//			System.out.println()
 			((Login) login).setUserName(this.username);
 		}
 
@@ -340,9 +378,7 @@ public class Begin extends JFrame{
 		public void mouseReleased(MouseEvent e) {}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
+		public void mouseEntered(MouseEvent e) {}
 
 		@Override
 		public void mouseExited(MouseEvent e) {}
