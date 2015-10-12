@@ -301,7 +301,6 @@ public class Begin extends JFrame{
 			this.setBounds(FRAME_INNER_W, 0, 570, 570);
 			FlowLayout fl = new FlowLayout(FlowLayout.LEFT,6,10);
 			this.setLayout(fl);
-			this.setPreferredSize(new Dimension(174,55));
 			this.setBorder(UIUtil.getRoundBorder());
 			
 			System.out.println(this.getLayout().toString());
@@ -350,6 +349,7 @@ public class Begin extends JFrame{
 			
 			this.setLayout(null);
 //			this.setSize(new Dimension(174,55));
+			this.setPreferredSize(new Dimension(174,55));
 			this.setBorder(UIUtil.getRoundBorder());
 			this.addMouseListener(this);
 			this.add(jl_username);
