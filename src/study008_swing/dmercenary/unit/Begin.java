@@ -26,20 +26,32 @@ import study008_swing.dmercenary.utils.UIUtil;
 
 public class Begin extends JFrame{
 	private static final Font FONT_FOR_ALL = new Font("Times Roma New",Font.PLAIN,11);
+	private static final Font FONT_FOR_BEGIN = new Font("Dialog",Font.BOLD,11);
 	private static final Insets INSETS_FOR_ALL = new Insets(0, 0, 0, 0);
 	
 	private static final int SHOW_X = 0;
 	private static final int SHOW_Y = 0;
 	
-	private static final int FRAME_W = 800;
-	private static final int FRAME_H = 600;
+	private static final int FRAME_MAIN_W = 800;
+	private static final int FRAME_MAIN_H = 600;
 	private static final int FRAME_INNER_W = 207;
 	private static final int FRAME_INNER_H = 170;
+	private static final int USER_BLOCK_W = 175;
+	private static final int USER_BLOCK_H = 55;
+	private static final int STANDARD_INTERVAL = 15;
+	
+	private static final Point HIDE_POINT = new Point(-FRAME_INNER_W,-FRAME_INNER_H);
+	private static final Point SHOW_POINT = new Point(STANDARD_INTERVAL+SHOW_X, STANDARD_INTERVAL+SHOW_Y);
+//	private static final Dimension FRAME_MAIN_DIMENSION = new Dimension()
+	private static final Dimension FRAME_INNER_DIMENSION = new Dimension(FRAME_INNER_W,FRAME_INNER_H);
+	private static final Dimension USER_BLOCK_DIMENSION = new Dimension(USER_BLOCK_W, USER_BLOCK_H);
+	
+	
 	
 	private JPanel choose = new Choose();
 	private JPanel login = new Login();
 	private JPanel create = new Create();
-	private JPanel userList = new UserList(); 
+	private JPanel userList = new UserList(choose.getX(),0); 
 
 //	private JButton 
 	
@@ -56,17 +68,17 @@ public class Begin extends JFrame{
 		this.setVisible(true);
 	}
 	
-	private void init(){
-		this.setBounds(new Rectangle(FRAME_W,FRAME_H));
-		this.setResizable(false);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+	private void init(){		
 		this.setLayout(null);
 		this.add(choose);
 		this.add(login);
 		this.add(create);
 		this.add(userList);
+		
+		this.setBounds(new Rectangle(FRAME_INNER_W+userList.getWidth()+STANDARD_INTERVAL*2, FRAME_MAIN_H));
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 	class Choose extends JPanel implements ActionListener{
@@ -78,19 +90,21 @@ public class Begin extends JFrame{
 		}
 		
 		private void initBegin(){
-			jb_login.setBounds(50, 25, 100, 25);
+			jb_login.setBounds(40, 25, 127, 25);
 			jb_login.setBorder(UIUtil.getRoundBorder());
 			jb_login.setContentAreaFilled(false);
 			jb_login.addActionListener(this);
+			jb_login.setFont(FONT_FOR_BEGIN);
 
-			jb_create.setBounds(50, 75, 100,25);
+			jb_create.setBounds(40, 75, 127, 25);
 			jb_create.setBorder(UIUtil.getRoundBorder());
 			jb_create.setContentAreaFilled(false);
 			jb_create.addActionListener(this);
-			
+			jb_create.setFont(FONT_FOR_BEGIN);
 			
 			this.setLayout(null);
-			this.setBounds(SHOW_X, SHOW_Y, FRAME_INNER_W, FRAME_INNER_H);
+			this.setLocation(SHOW_POINT);
+			this.setSize(FRAME_INNER_DIMENSION);
 			this.add(jb_login);
 			this.add(jb_create);
 		}
@@ -99,17 +113,17 @@ public class Begin extends JFrame{
 			JButton jb = (JButton)e.getSource();
 			if(jb==jb_login){
 				JFrame b = (Begin)choose.getParent().getParent().getParent().getParent();
-				choose.setLocation(-FRAME_W, -FRAME_H);
+				choose.setLocation(HIDE_POINT);
 				choose.setEnabled(false);
-				login.setLocation(0, 0);
+				login.setLocation(SHOW_POINT);
 				login.setEnabled(true);
 //				userList.setLocation(FRAME_INNER_W,0);
 				userList.setVisible(true);
 				System.out.println("choose_login");
 			}else if(jb==jb_create){
-				choose.setLocation(-FRAME_W, -FRAME_H);
+				choose.setLocation(HIDE_POINT);
 				choose.setEnabled(false);
-				create.setLocation(0, 0);
+				create.setLocation(SHOW_POINT);
 				create.setEnabled(true);
 				System.out.println("choose_create");
 			}
@@ -152,7 +166,7 @@ public class Begin extends JFrame{
 			jb_login.addActionListener(this);
 			
 			this.setLayout(null);
-			this.setBounds(-FRAME_W, -FRAME_H, FRAME_INNER_W, FRAME_INNER_H);
+			this.setBounds(-FRAME_INNER_W, -FRAME_INNER_H, FRAME_INNER_W, FRAME_INNER_H);
 			this.add(jl_username);
 			this.add(jl_password);
 			this.add(jt_username);
@@ -165,9 +179,9 @@ public class Begin extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			JButton jb = (JButton)e.getSource();
 			if(jb==jb_back){
-				login.setLocation(-FRAME_W, -FRAME_H);
+				login.setLocation(HIDE_POINT);
 				userList.setVisible(false);
-				choose.setLocation(SHOW_X,SHOW_Y);
+				choose.setLocation(SHOW_POINT);
 				System.out.println("login_back");
 			}else if(jb==jb_login){
 				
@@ -234,7 +248,8 @@ public class Begin extends JFrame{
 			jb_create.addActionListener(this);
 			
 			this.setLayout(null);
-			this.setBounds(-FRAME_W, -FRAME_H, FRAME_INNER_W, FRAME_INNER_H);
+			this.setLocation(HIDE_POINT);
+			this.setSize(FRAME_INNER_DIMENSION);
 			this.add(jl_username);
 			this.add(jl_password);
 			this.add(jl_confirm);
@@ -251,8 +266,8 @@ public class Begin extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			JButton jb = (JButton)e.getSource();
 			if(jb==jb_back){
-				choose.setLocation(SHOW_X, SHOW_Y);
-				create.setLocation(-FRAME_W, -FRAME_H);
+				choose.setLocation(SHOW_POINT);
+				create.setLocation(HIDE_POINT);
 				System.out.println("create_back");
 			}else if(jb==jb_create){
 				System.out.println("create_create");
@@ -294,14 +309,19 @@ public class Begin extends JFrame{
 	class UserList extends JPanel{
 		
 		public UserList(){
-			initUserList();
+			initUserList(0, 0);
 		}
 		
-		private void initUserList(){
-			this.setBounds(FRAME_INNER_W, 0, 570, 570);
-			FlowLayout fl = new FlowLayout(FlowLayout.LEFT,6,10);
+		public UserList(int shift_x, int shift_y){
+			initUserList(shift_x, shift_y);
+		}
+		
+		private void initUserList(int shift_x, int shift_y){
+			this.setBounds(FRAME_INNER_W + shift_x, STANDARD_INTERVAL + shift_y, STANDARD_INTERVAL*4 + USER_BLOCK_W*3, FRAME_MAIN_H-2*STANDARD_INTERVAL);
+			FlowLayout fl = new FlowLayout(FlowLayout.LEFT,STANDARD_INTERVAL,STANDARD_INTERVAL);
 			this.setLayout(fl);
 			this.setBorder(UIUtil.getRoundBorder());
+			this.setVisible(false);
 			
 			System.out.println(this.getLayout().toString());
 			
@@ -341,15 +361,15 @@ public class Begin extends JFrame{
 			
 			this.jl_username = new JLabel(this.username);
 			this.jl_username.setFont(FONT_FOR_ALL);
-			this.jl_username.setBounds(10, 5, 174, 20);
+			this.jl_username.setBounds(10, 5, USER_BLOCK_W, 20);
 			
 			this.jl_playduration = new JLabel(duration(playduration));
 			this.jl_playduration.setFont(FONT_FOR_ALL);
-			this.jl_playduration.setBounds(10, 25, 174, 20);
+			this.jl_playduration.setBounds(10, 25, USER_BLOCK_W, 20);
 			
 			this.setLayout(null);
 //			this.setSize(new Dimension(174,55));
-			this.setPreferredSize(new Dimension(174,55));
+			this.setPreferredSize(USER_BLOCK_DIMENSION);
 			this.setBorder(UIUtil.getRoundBorder());
 			this.addMouseListener(this);
 			this.add(jl_username);
