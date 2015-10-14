@@ -55,6 +55,9 @@ public class User {
 	}
 
 	public void Name(String name) {
+		if(name==null && "".equals(name)){
+			throw new RuntimeException("User name cannot be null.");
+		}
 		this.name = name;
 	}
 
@@ -63,11 +66,14 @@ public class User {
 	}
 
 	public void Password(String password) {
+		if(password==null && "".equals(password)){
+			throw new RuntimeException("Password cannot be null.");
+		}
 		this.password = password;
 	}
 
 	public String Hint() {
-		return hint;
+		return hint==null?"":hint;
 	}
 
 	public void Hint(String hint) {

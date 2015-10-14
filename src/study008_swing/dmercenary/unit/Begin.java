@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 import java.util.Map;
 import java.util.Set;
 
+import javax.management.RuntimeErrorException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ import javax.swing.JTextField;
 
 import study008_swing.dmercenary.db.dao.UserDao;
 import study008_swing.dmercenary.db.entity.User;
+import study008_swing.dmercenary.utils.MD5Util;
 import study008_swing.dmercenary.utils.UIUtil;
 
 public class Begin extends JFrame{
@@ -270,6 +272,36 @@ public class Begin extends JFrame{
 				create.setLocation(HIDE_POINT);
 				System.out.println("create_back");
 			}else if(jb==jb_create){
+				String name = jl_username.getText();
+				if(name!=null){
+					name = name.trim();
+				}
+				String password = jl_password.getText();
+				if(password!=null){
+					password = password.trim();
+				}
+				String confirm = jl_confirm.getText();
+				if(confirm!=null){
+					confirm = confirm.trim();
+				}
+				String hint = jl_hint.getText();
+				if(hint!=null){
+					hint = hint.trim();
+				}
+				if(name!=null && name.length()>0 && password!=null && confirm!=null && password.length()>8 && password.equals(confirm)){
+					User user = new User();
+					user.Name(name);
+					user.Password(MD5Util.MD5(password));
+					user.Hint(hint);
+					try{
+						user.save(true);	
+					}catch(Exception ex){
+						throw new RuntimeException("Save user error.");
+					}
+				}else{
+					throw new RuntimeException("Name and password cannot be null, name cannot be empty, password cannot be less than 8 character and password should be the same as confirmed password.");
+				}
+				
 				System.out.println("create_create");
 			}
 		}

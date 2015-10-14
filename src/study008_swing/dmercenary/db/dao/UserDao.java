@@ -78,7 +78,7 @@ public class UserDao extends Dao {
 		try{
 			if(user!=null && user.Id()==0 && user.Name()!=null && insert){
 				Integer result = dbUtil.updateAndInsert(
-					"insert into user(name, password, hint, ) values('"+
+					"insert into user(name, password, hint) values('"+
 					user.Name()+"','"+
 					user.Password()+"','"+
 					user.Hint()+"')"
