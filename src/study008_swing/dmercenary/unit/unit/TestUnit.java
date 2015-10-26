@@ -1,4 +1,4 @@
-package study008_swing.dmercenary.unit;
+package study008_swing.dmercenary.unit.unit;
 
 import java.util.HashMap;
 import java.util.Map;

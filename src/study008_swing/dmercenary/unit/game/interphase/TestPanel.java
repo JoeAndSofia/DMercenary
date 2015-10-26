@@ -1,4 +1,4 @@
-package study008_swing.dmercenary.unit;
+package study008_swing.dmercenary.unit.game.interphase;
 
 import java.awt.Color;
 import java.awt.Component;

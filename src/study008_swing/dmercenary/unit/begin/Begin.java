@@ -1,4 +1,4 @@
-package study008_swing.dmercenary.unit;
+package study008_swing.dmercenary.unit.begin;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
