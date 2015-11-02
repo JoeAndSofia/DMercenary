@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,26 +35,33 @@ public class Begin extends JFrame{
 	private static final int SHOW_X = 0;
 	private static final int SHOW_Y = 0;
 	
-	private static final int FRAME_MAIN_W = 800;
-	private static final int FRAME_MAIN_H = 600;
+	private static final int STANDARD_INTERVAL = 15;
+	
+
 	private static final int FRAME_INNER_W = 207;
 	private static final int FRAME_INNER_H = 170;
 	private static final int USER_BLOCK_W = 175;
 	private static final int USER_BLOCK_H = 55;
-	private static final int STANDARD_INTERVAL = 15;
+	private static final int USER_LIST_W = USER_BLOCK_W*3+STANDARD_INTERVAL*4;
+	private static final int USER_LIST_H = 570;
+	private static final int FRAME_MAIN_W = FRAME_INNER_W+USER_LIST_W+STANDARD_INTERVAL*2;
+	private static final int FRAME_MAIN_H = USER_LIST_W+STANDARD_INTERVAL*2;
+
 	
 	private static final Point HIDE_POINT = new Point(-FRAME_INNER_W,-FRAME_INNER_H);
 	private static final Point SHOW_POINT = new Point(STANDARD_INTERVAL+SHOW_X, STANDARD_INTERVAL+SHOW_Y);
 //	private static final Dimension FRAME_MAIN_DIMENSION = new Dimension()
 	private static final Dimension FRAME_INNER_DIMENSION = new Dimension(FRAME_INNER_W,FRAME_INNER_H);
+	private static final Point USER_LIST_POINT = new Point(FRAME_INNER_W+STANDARD_INTERVAL,SHOW_Y+STANDARD_INTERVAL);
+	private static final Dimension USER_LIST_DIMENSION = new Dimension(USER_LIST_W,USER_LIST_H);
 	private static final Dimension USER_BLOCK_DIMENSION = new Dimension(USER_BLOCK_W, USER_BLOCK_H);
-	
+	private static final Dimension FRAME_MAIN_DIMENSION = new Dimension(FRAME_MAIN_W,FRAME_MAIN_H+6);
 	
 	
 	private JPanel choose = new Choose();
 	private JPanel login = new Login();
 	private JPanel create = new Create();
-	private JPanel userList = new UserList(choose.getX(),0); 
+	private JPanel userList = new UserList(); 
 
 //	private JButton 
 	
@@ -77,7 +85,8 @@ public class Begin extends JFrame{
 		this.add(create);
 		this.add(userList);
 		
-		this.setBounds(new Rectangle(FRAME_INNER_W+userList.getWidth()+STANDARD_INTERVAL*2, FRAME_MAIN_H));
+//		this.setBounds(new Rectangle(FRAME_INNER_W+userList.getWidth()+STANDARD_INTERVAL*2, FRAME_MAIN_H));
+		this.setSize(FRAME_MAIN_DIMENSION);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -341,15 +350,13 @@ public class Begin extends JFrame{
 	class UserList extends JPanel{
 		
 		public UserList(){
-			initUserList(0, 0);
+			initUserList();
 		}
 		
-		public UserList(int shift_x, int shift_y){
-			initUserList(shift_x, shift_y);
-		}
-		
-		private void initUserList(int shift_x, int shift_y){
-			this.setBounds(FRAME_INNER_W + shift_x, STANDARD_INTERVAL + shift_y, STANDARD_INTERVAL*4 + USER_BLOCK_W*3, FRAME_MAIN_H-2*STANDARD_INTERVAL);
+		private void initUserList(){
+			this.setLocation(USER_LIST_POINT);
+			this.setSize(USER_LIST_DIMENSION);
+//			this.setBounds(FRAME_INNER_W, STANDARD_INTERVAL, STANDARD_INTERVAL*4 + USER_BLOCK_W*3, FRAME_MAIN_H-2*STANDARD_INTERVAL);
 			FlowLayout fl = new FlowLayout(FlowLayout.LEFT,STANDARD_INTERVAL,STANDARD_INTERVAL);
 			this.setLayout(fl);
 			this.setBorder(UIUtil.getRoundBorder());
