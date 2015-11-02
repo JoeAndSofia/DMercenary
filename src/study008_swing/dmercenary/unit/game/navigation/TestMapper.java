@@ -1,4 +1,4 @@
-package study008_swing.dmercenary.unit;
+package study008_swing.dmercenary.unit.game.navigation;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

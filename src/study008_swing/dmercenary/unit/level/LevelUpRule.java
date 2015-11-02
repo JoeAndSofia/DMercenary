@@ -1,4 +1,4 @@
-package study008_swing.dmercenary.unit;
+package study008_swing.dmercenary.unit.level;
 
 class LevelUpRule {
 	
@@ -24,14 +24,14 @@ class LevelUpRule {
         fillLevelArr();
     }
 
-    private void fillLevelArr(){           //构建等级经验值
+    private void fillLevelArr(){           //锟斤拷锟斤拷锟饺硷拷锟斤拷锟斤拷值
         this.levelArr[0] = firstLevel;
         for (int i = 1; i < levelArr.length; i++){
             this.levelArr[i] = (int)(this.levelArr[i - 1] * coefficient + regulate * (regulateRelateToLevel ? i : 1));
         }
     }
 
-    public int maxLevel(){                    //最大等级获取/设定
+    public int maxLevel(){                    //锟斤拷锟饺硷拷锟斤拷取/锟借定
     	return this.levelArr.length; 
     }
     
