@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Set;
@@ -27,7 +29,9 @@ import study008_swing.dmercenary.db.entity.User;
 import study008_swing.dmercenary.utils.MD5Util;
 import study008_swing.dmercenary.utils.UIUtil;
 
-public class Begin extends JFrame{
+public class Begin extends JFrame implements WindowListener{
+	private UserDao dao = new UserDao();
+	
 	private static final Font FONT_FOR_ALL = new Font("Times Roma New",Font.PLAIN,11);
 	private static final Font FONT_FOR_BEGIN = new Font("Dialog",Font.BOLD,11);
 	private static final Insets INSETS_FOR_ALL = new Insets(0, 0, 0, 0);
@@ -90,6 +94,12 @@ public class Begin extends JFrame{
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+	
+	
+	
+	private void test(){
+		dao.dis();
 	}
 	
 	class Choose extends JPanel implements ActionListener{
@@ -281,29 +291,30 @@ public class Begin extends JFrame{
 				create.setLocation(HIDE_POINT);
 				System.out.println("create_back");
 			}else if(jb==jb_create){
-				String name = jl_username.getText();
+				String name = jt_username.getText();
 				if(name!=null){
 					name = name.trim();
 				}
-				String password = jl_password.getText();
+				String password = jt_password.getText();
 				if(password!=null){
 					password = password.trim();
 				}
-				String confirm = jl_confirm.getText();
+				String confirm = jt_confirm.getText();
 				if(confirm!=null){
 					confirm = confirm.trim();
 				}
-				String hint = jl_hint.getText();
+				String hint = jt_hint.getText();
 				if(hint!=null){
 					hint = hint.trim();
 				}
-				if(name!=null && name.length()>0 && password!=null && confirm!=null && password.length()>8 && password.equals(confirm)){
+				if(name!=null && name.length()>0 && password!=null && confirm!=null && password.length()>=8 && password.equals(confirm)){
 					User user = new User();
 					user.Name(name);
 					user.Password(MD5Util.MD5(password));
 					user.Hint(hint);
 					try{
-						user.save(true);	
+						boolean result = user.save(true);
+						System.out.println(result);
 					}catch(Exception ex){
 						throw new RuntimeException("Save user error.");
 					}
@@ -364,7 +375,7 @@ public class Begin extends JFrame{
 			
 			System.out.println(this.getLayout().toString());
 			
-			UserDao dao = new UserDao();
+			
 			Map<Integer, User> usersMap = dao.getAll();
 			if(usersMap!=null&&usersMap.size()>0){
 				Set<Integer> ids = usersMap.keySet();
@@ -377,7 +388,6 @@ public class Begin extends JFrame{
 //					this.add(jb);
 				}
 			}
-			dao.dis();
 		}
 	}
 	
@@ -441,5 +451,46 @@ public class Begin extends JFrame{
 
 		@Override
 		public void mouseExited(MouseEvent e) {}
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		this.dao.dis();
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
