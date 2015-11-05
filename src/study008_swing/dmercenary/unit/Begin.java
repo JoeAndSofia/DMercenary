@@ -25,6 +25,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import study008_swing.dmercenary.db.dao.UserDao;
 import study008_swing.dmercenary.db.entity.User;
@@ -175,12 +177,11 @@ public class Begin extends JFrame implements WindowListener{
 			jt_password.setFont(FONT_FOR_ALL);
 			jt_password.setEchoChar('*');
 			
-			jcb_show_password.addActionListener(new ActionListener() {
-				
+			jcb_show_password.setBounds(160, 53, 20, 15);
+			jcb_show_password.addChangeListener(new ChangeListener() {
 				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
+				public void stateChanged(ChangeEvent e) {
+					jt_password.setEchoChar(jcb_show_password.isSelected()?((char)0):'*');
 				}
 			});
 			
@@ -200,6 +201,7 @@ public class Begin extends JFrame implements WindowListener{
 			this.add(jl_password);
 			this.add(jt_username);
 			this.add(jt_password);
+			this.add(jcb_show_password);
 			this.add(jb_back);
 			this.add(jb_login);
 		}
