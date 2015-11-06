@@ -18,11 +18,15 @@ import java.util.Set;
 
 import javax.management.RuntimeErrorException;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import study008_swing.dmercenary.db.dao.UserDao;
 import study008_swing.dmercenary.db.entity.User;
@@ -97,11 +101,6 @@ public class Begin extends JFrame implements WindowListener{
 	}
 	
 	
-	
-	private void test(){
-		dao.dis();
-	}
-	
 	class Choose extends JPanel implements ActionListener{
 		private JButton jb_login = new JButton("Log In");
 		private JButton jb_create = new JButton("Create New Role");
@@ -155,7 +154,8 @@ public class Begin extends JFrame implements WindowListener{
 		private JLabel jl_username = new JLabel("User Name:");
 		private JLabel jl_password = new JLabel("Password :");
 		private JTextField jt_username = new JTextField();
-		private JTextField jt_password = new JTextField();
+		private JPasswordField jt_password = new JPasswordField();
+		private JCheckBox jcb_show_password = new JCheckBox();
 		private JButton jb_back = new JButton("<-Back");
 		private JButton jb_login = new JButton("Login->");
 		
@@ -164,17 +164,26 @@ public class Begin extends JFrame implements WindowListener{
 		}
 		
 		private void initLogin(){
-			jl_username.setBounds(10, 10, 80, 20);
+			jl_username.setBounds(10, 10, 70, 20);
 			jl_username.setFont(FONT_FOR_ALL);
 			
-			jl_password.setBounds(10, 50, 80, 20);
+			jl_password.setBounds(10, 50, 70, 20);
 			jl_password.setFont(FONT_FOR_ALL);
 			
-			jt_username.setBounds(110, 10, 80, 20);
+			jt_username.setBounds(80, 10, 100, 20);
 			jt_username.setFont(FONT_FOR_ALL);
 			
-			jt_password.setBounds(110, 50, 80, 20);
+			jt_password.setBounds(80, 50, 80, 20);
 			jt_password.setFont(FONT_FOR_ALL);
+			jt_password.setEchoChar('*');
+			
+			jcb_show_password.setBounds(160, 53, 20, 15);
+			jcb_show_password.addChangeListener(new ChangeListener() {
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					jt_password.setEchoChar(jcb_show_password.isSelected()?((char)0):'*');
+				}
+			});
 			
 			jb_back.setBounds(5, 90, 90, 20);
 			jb_back.setFont(FONT_FOR_ALL);
@@ -192,6 +201,7 @@ public class Begin extends JFrame implements WindowListener{
 			this.add(jl_password);
 			this.add(jt_username);
 			this.add(jt_password);
+			this.add(jcb_show_password);
 			this.add(jb_back);
 			this.add(jb_login);
 		}
