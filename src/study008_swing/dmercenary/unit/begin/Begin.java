@@ -15,10 +15,12 @@ import java.util.Set;
 
 import javax.management.RuntimeErrorException;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import study008_swing.dmercenary.db.dao.UserDao;
@@ -136,26 +138,31 @@ public class Begin extends JFrame{
 		private JLabel jl_username = new JLabel("User Name:");
 		private JLabel jl_password = new JLabel("Password :");
 		private JTextField jt_username = new JTextField();
-		private JTextField jt_password = new JTextField();
+		private JPasswordField jt_password = new JPasswordField();
 		private JButton jb_back = new JButton("<-Back");
 		private JButton jb_login = new JButton("Login->");
+		private JCheckBox jcb_showpassword = new JCheckBox();
 		
 		public Login(){
 			initLogin();
 		}
 		
 		private void initLogin(){
-			jl_username.setBounds(10, 10, 80, 20);
+			jl_username.setBounds(10, 10, 70, 20);
 			jl_username.setFont(FONT_FOR_ALL);
 			
-			jl_password.setBounds(10, 50, 80, 20);
+			jl_password.setBounds(10, 50, 70, 20);
 			jl_password.setFont(FONT_FOR_ALL);
 			
-			jt_username.setBounds(110, 10, 80, 20);
+			jt_username.setBounds(85, 10, 100, 20);
 			jt_username.setFont(FONT_FOR_ALL);
 			
-			jt_password.setBounds(110, 50, 80, 20);
+			jt_password.setBounds(85, 50, 80, 20);
 			jt_password.setFont(FONT_FOR_ALL);
+			jt_password.setEchoChar('*');
+//			jt_password.setEchoChar((char)0);
+			
+			jcb_showpassword.setBounds(165, 53, 15, 15);
 			
 			jb_back.setBounds(5, 90, 90, 20);
 			jb_back.setFont(FONT_FOR_ALL);
@@ -173,6 +180,7 @@ public class Begin extends JFrame{
 			this.add(jl_password);
 			this.add(jt_username);
 			this.add(jt_password);
+			this.add(jcb_showpassword);
 			this.add(jb_back);
 			this.add(jb_login);
 		}

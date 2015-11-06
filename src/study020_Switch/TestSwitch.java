@@ -18,7 +18,7 @@ public class TestSwitch {
 		String orderingStr = "";
 		String defaultOrdering = " order by (case mr.moderate_status when 1 then 0 when 0 then 1 else 2 end) asc, mr.update_time desc ";
 		String order = " asc ";
-		switch (param){
+		switch ("userName"){
 		case "userName":
 		orderingStr = " order by concat(ud.first_name,' ',ud.last_name)"+order;break;
 		case "restaurantId":
@@ -37,6 +37,6 @@ public class TestSwitch {
 		default: 
 		orderingStr = defaultOrdering;
 		}
-		return param + ", " + orderingStr;
+		return orderingStr + "," + param;
 	}
 }
