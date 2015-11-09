@@ -290,7 +290,7 @@ class DMercenary extends JFrame{
 			if(this.iconUrl==null || "".equals(this.iconUrl.trim())){
 				this.setText(tooltip==null?"":tooltip);	
 			}else{
-				this.setIcon(new ImageIcon());
+				this.setIcon(new ImageIcon(this.iconUrl));
 			}
 			this.setToolTipText(tooltip==null?"":tooltip);
 			this.setMargin(BEING_SQUARE_INSETS);
@@ -299,7 +299,7 @@ class DMercenary extends JFrame{
 //			this.setIcon(arg0); 
 			this.setBounds(x*zr, y*zr, w*zr, h*zr);
 			this.addActionListener(this);
-			
+			this.setContentAreaFilled(false);
 		}
 		
 		public void zoom(int a){
@@ -315,6 +315,7 @@ class DMercenary extends JFrame{
 			SandBox sandbox = (SandBox)square.getParent().getParent();
 			sandbox.battlefield.requestFocusInWindow();
 			sandbox.setActivated(square);
+			System.out.println(square.getToolTipText());
 //			((Square)e.getSource()).getParent().requestFocusInWindow();
 			
 		}

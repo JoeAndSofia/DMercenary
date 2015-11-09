@@ -17,7 +17,7 @@
 		h:1,
 		zr:16,
 		text:test,
-		iconUrl:""
+		iconUrl:"img/enemy/Asura.png"
 	},{
 		type:square,
 		x:4,
@@ -32,9 +32,9 @@
 		x:8,
 		y:8,
 		w:2,
-		h:1,
+		h:2,
 		zr:30,
 		text:Capital,
-		iconUrl:"capital"
+		iconUrl:"img/enemy/Asura.png"
 	}]
 }

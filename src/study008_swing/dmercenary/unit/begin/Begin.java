@@ -163,6 +163,12 @@ public class Begin extends JFrame{
 //			jt_password.setEchoChar((char)0);
 			
 			jcb_showpassword.setBounds(165, 53, 20, 15);
+			jcb_showpassword.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					jt_password.setEchoChar(jcb_showpassword.isSelected()?(char)0:'*');
+				}
+			});
 			
 			jb_back.setBounds(5, 90, 90, 20);
 			jb_back.setFont(FONT_FOR_ALL);
