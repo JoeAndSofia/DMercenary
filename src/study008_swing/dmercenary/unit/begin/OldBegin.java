@@ -28,7 +28,7 @@ import study008_swing.dmercenary.db.entity.User;
 import study008_swing.dmercenary.utils.MD5Util;
 import study008_swing.dmercenary.utils.UIUtil;
 
-public class Begin extends JFrame{
+public class OldBegin extends JFrame{
 	private static final Font FONT_FOR_ALL = new Font("Times Roma New",Font.PLAIN,11);
 	private static final Font FONT_FOR_BEGIN = new Font("Dialog",Font.BOLD,11);
 	private static final Insets INSETS_FOR_ALL = new Insets(0, 0, 0, 0);
@@ -61,13 +61,13 @@ public class Begin extends JFrame{
 	
 	public static void main(String[] args){
 		try{
-			Begin b = new Begin();
+			OldBegin b = new OldBegin();
 		}catch(Exception e){
 			e.printStackTrace();
 		}	
 	}
 	
-	public Begin(){
+	public OldBegin(){
 		init();
 		this.setVisible(true);
 	}
@@ -116,7 +116,7 @@ public class Begin extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			JButton jb = (JButton)e.getSource();
 			if(jb==jb_login){
-				JFrame b = (Begin)choose.getParent().getParent().getParent().getParent();
+				JFrame b = (OldBegin)choose.getParent().getParent().getParent().getParent();
 				choose.setLocation(HIDE_POINT);
 				choose.setEnabled(false);
 				login.setLocation(SHOW_POINT);
