@@ -30,4 +30,26 @@ public class UIUtil {
 			return false;
 		}
 	}
+	
+	static class SelectedBorder implements Border{
+
+		@Override
+		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+			g.setColor(Color.ORANGE);
+//			g.draw
+		}
+
+		@Override
+		public Insets getBorderInsets(Component c) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public boolean isBorderOpaque() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		
+	}
 }
