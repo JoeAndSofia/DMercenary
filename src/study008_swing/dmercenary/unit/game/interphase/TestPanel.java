@@ -3,11 +3,17 @@ package study008_swing.dmercenary.unit.game.interphase;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.io.File;
@@ -16,11 +22,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import com.google.gson.Gson;
@@ -159,9 +167,13 @@ class DMercenary extends JFrame{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	class SandBox extends JPanel implements MouseWheelListener, KeyListener{
+	class SandBox extends JPanel implements 
+		MouseWheelListener, 
+		KeyListener, 
+		MouseMotionListener, 
+		MouseListener{
 		private JPanel battlefield = new JPanel(true);
-		private JButton activated = new JButton();
+		private JButton activated = null;
 		
 		public SandBox(){
 			init();
@@ -183,7 +195,11 @@ class DMercenary extends JFrame{
 		}
 		
 		public void setActivated(JButton activated) {
+			if(this.activated!=null && this.activated != activated && activated instanceof Square){
+				this.activated.setBorder(null);
+			}
 			this.activated = activated;
+			this.activated.setBorder(BorderFactory.createLineBorder(Color.ORANGE,1));
 		}
 		
 		private void initMain(){
@@ -193,6 +209,8 @@ class DMercenary extends JFrame{
 			this.battlefield.setFocusable(true);
 			this.battlefield.addMouseWheelListener(this);
 			this.battlefield.addKeyListener(this);
+			this.battlefield.addMouseMotionListener(this);
+			this.battlefield.addMouseListener(this);
 		}
 		
 		private void init(){	
@@ -226,16 +244,63 @@ class DMercenary extends JFrame{
 		}
 
 		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
+		public void keyReleased(KeyEvent e) {}
+
+		@Override
+		public void keyTyped(KeyEvent e) {}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			if(this.activated!=null){
+				this.repaint();
+				Point p = e.getPoint();
+				Rectangle r = this.activated.getBounds();
+				int ltX = p.x-r.width/2;
+				int ltY = p.y-r.height/2;
+				int rbX = p.x+r.width/2;
+				int rbY = p.y+r.height/2;
+				
+				int bW = this.battlefield.getWidth();
+				int bH = this.battlefield.getHeight();
+				if(ltX>0 && rbX<bW && ltY>0 && rbY<bH){
+					Graphics g = this.battlefield.getGraphics();
+					g.setColor(Color.BLUE);
+					g.drawRect(4*(ltX/4), 4*(ltY/4), r.width, r.height);
+				}
+////					this.repaint();
+//				double rhW = r.getWidth()/2;
+//				double rhH = r.getHeight()/2;
+
+//				double eX = e.getPoint().getX();
+//				double eY = e.getPoint().getY();
+				
+//				double dX = eX<rhW?rhW:(eX>(bW-rhW)?(bW-rhW):eX);
+//				double dY = eY<rhH?rhH:(eY>(bH-rhH)?(bH-rhH):eY);
+				
+//				System.out.println(eX+", "+eY+"; "+bW+", "+bH+"; "+dX+", "+dY);
+//				Graphics g = this.battlefield.getGraphics();
+//				g.setColor(Color.ORANGE);
+//				g.drawRect((int)dX, (int)dY, (int)(2*rhW), (int)(2*rhH));	
+			}
 		}
 
 		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void mouseClicked(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+
+		@Override
+		public void mouseExited(MouseEvent e) {}
 	}
 	
 	class SandBoxJson{
@@ -313,8 +378,10 @@ class DMercenary extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			Square square = (Square)e.getSource();
 			SandBox sandbox = (SandBox)square.getParent().getParent();
-			sandbox.battlefield.requestFocusInWindow();
+			
 			sandbox.setActivated(square);
+			
+			sandbox.battlefield.requestFocusInWindow();
 			System.out.println(square.getToolTipText());
 //			((Square)e.getSource()).getParent().requestFocusInWindow();
 			
