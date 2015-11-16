@@ -6,7 +6,7 @@ public class CurrentTime {
 //	private static final  
 	
 	public static void main(String[] args){
-		System.out.println(convertToDate(1446283806898l));	//85721 : Wed Jul 15 13:35:58 CST 2015
+		System.out.println(convertToDate(1447162115421l));	//85721 : Wed Jul 15 13:35:58 CST 2015
 //		System.out.println(convertToDate(1436939493094l));	//85724 : Wed Jul 15 13:51:33 CST 2015
 //		System.out.println(convertToDate(1431459375000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
 		System.out.println(convertToDate(1373821200000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
