@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.event.MouseInputListener;
 
 import com.google.gson.Gson;
 
@@ -169,9 +170,8 @@ class DMercenary extends JFrame{
 	
 	class SandBox extends JPanel implements 
 		MouseWheelListener, 
-		KeyListener, 
-		MouseMotionListener, 
-		MouseListener{
+		KeyListener,
+		MouseInputListener{
 		private JPanel battlefield = new JPanel(true);
 		private JButton activated = null;
 		
@@ -255,7 +255,6 @@ class DMercenary extends JFrame{
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			if(this.activated!=null){
-				this.repaint();
 				Point p = e.getPoint();
 				Rectangle r = this.activated.getBounds();
 				int ltX = p.x-r.width/2;
@@ -265,25 +264,36 @@ class DMercenary extends JFrame{
 				
 				int bW = this.battlefield.getWidth();
 				int bH = this.battlefield.getHeight();
+				Graphics g = this.battlefield.getGraphics();
+				g.setColor(Color.BLUE);
 				if(ltX>0 && rbX<bW && ltY>0 && rbY<bH){
-					Graphics g = this.battlefield.getGraphics();
-					g.setColor(Color.BLUE);
 					g.drawRect(4*(ltX/4), 4*(ltY/4), r.width, r.height);
+				}else{
+					if(ltX < 0){
+						ltX = 0;
+					}
+					if(rbX > bW){
+						ltX = bW - r.width;
+					}
+					if(ltY < 0){
+						ltY = 0;
+					}
+					if(rbY > bH){
+						ltY = bH - r.height;
+					}
+					g.drawRect(ltX, ltY, r.width, r.height);
 				}
-////					this.repaint();
-//				double rhW = r.getWidth()/2;
-//				double rhH = r.getHeight()/2;
-
-//				double eX = e.getPoint().getX();
-//				double eY = e.getPoint().getY();
-				
-//				double dX = eX<rhW?rhW:(eX>(bW-rhW)?(bW-rhW):eX);
-//				double dY = eY<rhH?rhH:(eY>(bH-rhH)?(bH-rhH):eY);
-				
-//				System.out.println(eX+", "+eY+"; "+bW+", "+bH+"; "+dX+", "+dY);
-//				Graphics g = this.battlefield.getGraphics();
-//				g.setColor(Color.ORANGE);
-//				g.drawRect((int)dX, (int)dY, (int)(2*rhW), (int)(2*rhH));	
+				if(ltX == 0 && ltY == 0){
+					
+				}else if(ltX == 0 && ltY == bH - r.height){
+					
+				}else if(ltX == bW - r.width && ltY == 0){
+					
+				}else if(ltX == bW - r.width && ltY == bH - r.height){
+					
+				}else if(ltX%4==0 || ltY%4==0){
+					this.repaint();
+				}
 			}
 		}
 
