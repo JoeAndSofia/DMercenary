@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.swing.BorderFactory;
@@ -267,7 +268,9 @@ class DMercenary extends JFrame{
 				Graphics g = this.battlefield.getGraphics();
 				g.setColor(Color.BLUE);
 				if(ltX>0 && rbX<bW && ltY>0 && rbY<bH){
+					this.paintImmediately(this.battlefield.getBounds());
 					g.drawRect(4*(ltX/4), 4*(ltY/4), r.width, r.height);
+//					System.out.println("draw1 "+new Date().getTime()+" "+ltX+","+ltY);
 				}else{
 					if(ltX < 0){
 						ltX = 0;
@@ -281,7 +284,9 @@ class DMercenary extends JFrame{
 					if(rbY > bH){
 						ltY = bH - r.height;
 					}
-					g.drawRect(4*ltX/4, 4*ltY/4, r.width, r.height);
+					this.paintImmediately(this.battlefield.getBounds());
+					g.drawRect(4*(ltX/4), 4*(ltY/4), r.width, r.height);
+//					System.out.println("draw2 "+new Date().getTime()+" "+ltX+","+ltY);
 				}
 				if(ltX == 0 && ltY == 0){
 					
@@ -292,8 +297,7 @@ class DMercenary extends JFrame{
 				}else if(ltX == bW - r.width && ltY == bH - r.height){
 					
 				}else if(ltX%4==0 || ltY%4==0){
-					this.repaint();
-					g.drawRect(4*ltX/4, 4*ltY/4, r.width, r.height);
+								
 				}
 			}
 		}
@@ -343,7 +347,7 @@ class DMercenary extends JFrame{
 		}
 	}
 	
-	class Square extends JButton implements ActionListener{
+	class Square extends JButton implements ActionListener, MouseInputListener{
 		private int zr;	//zoom_rate
 		private int mr;	//max_rate
 		private int x;
@@ -375,6 +379,8 @@ class DMercenary extends JFrame{
 //			this.setIcon(arg0); 
 			this.setBounds(x*zr, y*zr, w*zr, h*zr);
 			this.addActionListener(this);
+			this.addMouseListener(this);
+			this.addMouseMotionListener(this);
 			this.setContentAreaFilled(false);
 		}
 		
@@ -397,6 +403,29 @@ class DMercenary extends JFrame{
 //			((Square)e.getSource()).getParent().requestFocusInWindow();
 			
 		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {}
+
+		@Override
+		public void mousePressed(MouseEvent e) {}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			((SandBox)this.getParent().getParent()).repaint();
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {}
 	}
 	
 	class BeingSquareJson{
