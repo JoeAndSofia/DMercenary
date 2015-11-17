@@ -281,7 +281,7 @@ class DMercenary extends JFrame{
 					if(rbY > bH){
 						ltY = bH - r.height;
 					}
-					g.drawRect(ltX, ltY, r.width, r.height);
+					g.drawRect(4*ltX/4, 4*ltY/4, r.width, r.height);
 				}
 				if(ltX == 0 && ltY == 0){
 					
@@ -293,6 +293,7 @@ class DMercenary extends JFrame{
 					
 				}else if(ltX%4==0 || ltY%4==0){
 					this.repaint();
+					g.drawRect(4*ltX/4, 4*ltY/4, r.width, r.height);
 				}
 			}
 		}
