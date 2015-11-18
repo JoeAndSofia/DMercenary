@@ -20,11 +20,11 @@
 		iconUrl:"img/enemy/Asura.png"
 	},{
 		type:square,
-		x:4,
-		y:3,
+		x:8,
+		y:8,
 		w:2,
-		h:1,
-		zr:28,
+		h:2,
+		zr:10,
 		text:Castle,
 		iconUrl:""
 	},{
