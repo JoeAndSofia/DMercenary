@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.event.MouseInputListener;
 
+import study008_swing.dmercenary.unit.game.entity.things.Thing;
 import study008_swing.dmercenary.unit.game.interphase.C;
 import study008_swing.dmercenary.unit.game.interphase.SandBox;
 
@@ -19,6 +20,7 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 	private int w;
 	private int h;
 	private String iconUrl;
+	private Thing thing;
 	public Square(){
 		this(0,0,C.SSL,C.SSL,C.SSL,null,null);
 	}
@@ -69,6 +71,8 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 	public void H(int h) {this.h = h;}
 	public String IconUrl() {return this.iconUrl;}
 	public void IconUrl(String iconUrl) {this.iconUrl = iconUrl;}
+	public Thing Thing() {return this.thing;}
+	public void Thing(Thing thing) {this.thing = thing;}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {}
