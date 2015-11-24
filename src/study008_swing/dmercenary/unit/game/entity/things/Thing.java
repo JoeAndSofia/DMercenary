@@ -45,7 +45,8 @@ public class Thing extends GameObject {
 		if(amount<1 || amount>=this.stackAmount || this.stackSize ==1){
 			return null;
 		}else{
-			return this.stackAmount-amount;
+			this.stackAmount -= amount;
+			return amount;
 		}
 	}
 }
