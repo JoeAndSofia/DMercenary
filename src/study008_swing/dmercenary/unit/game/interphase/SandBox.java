@@ -32,7 +32,7 @@ public class SandBox extends JPanel implements
 	 */
 	private static final long serialVersionUID = -7205947267038923265L;
 	private JPanel battlefield = new JPanel(true);
-	private JButton activated = null;
+	private JPanel activated = null;
 	
 	public SandBox(){
 		init();
@@ -70,8 +70,8 @@ public class SandBox extends JPanel implements
 	}
 	
 	
-	public JButton Activated() {return this.activated;}
-	public void Activated(JButton activated) {
+	public JPanel Activated() {return this.activated;}
+	public void Activated(JPanel activated) {
 		if(this.activated!=null && this.activated != activated && activated instanceof Square){
 			this.activated.setBorder(null);
 		}
