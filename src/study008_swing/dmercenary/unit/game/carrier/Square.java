@@ -20,7 +20,7 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 	private int w;
 	private int h;
 	private String iconUrl;
-	private Thing entity;
+	private Thing thing;
 	public Square(){
 		this(0,0,C.SSL,C.SSL,C.SSL,null,null);
 	}
@@ -70,9 +70,9 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 	public int H() {return this.h;}
 	public void H(int h) {this.h = h;}
 	public String IconUrl() {return this.iconUrl;}
-	public void IconUrl(String iconUrl) {this.iconUrl = iconUrl;}	
-	public Thing Entity() {return this.entity;}
-	public void Entity(Thing entity) {this.entity = entity;}
+	public void IconUrl(String iconUrl) {this.iconUrl = iconUrl;}
+	public Thing Thing() {return this.thing;}
+	public void Thing(Thing thing) {this.thing = thing;}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {}
