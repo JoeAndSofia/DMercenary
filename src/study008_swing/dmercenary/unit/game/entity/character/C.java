@@ -26,10 +26,12 @@ public class C {
 	
 	//Property Set
 	public static final Integer[] RANK_0_CITIZEN = {1,1,1,1,1,1,0,0};
-	public static final Integer[] RANK_1_SOLDIER = {2,1,1,2,1,1,1,0};
-	public static final Integer[] RANK_1_SCOUT   = {2,1,1,1,1,2,1,0};
-	public static final Integer[] RANK_1_MEDIC   = {1,2,2,1,1,1,1,0};
-	public static final Integer[] RANK_1_WIZARD  = {1,2,1,1,2,1,1,0};
+	public static final Integer[] RANK_1_HUNTER  = {2,1,1,1,1,1,0,0};
+	public static final Integer[] RANK_1_WITCH   = {1,2,1,1,1,1,0,0};
+	public static final Integer[] RANK_2_WARRIOR = {2,1,1,2,1,1,1,0};
+	public static final Integer[] RANK_2_WATCHER = {2,1,1,1,1,2,1,0};
+	public static final Integer[] RANK_2_DOCTOR  = {1,2,2,1,1,1,1,0};
+	public static final Integer[] RANK_2_WIZARD  = {1,2,1,1,2,1,1,0};
 //	public static final Integer[] RANK_2_
 	
 }
