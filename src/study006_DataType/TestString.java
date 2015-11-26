@@ -50,6 +50,15 @@ public class TestString {
 		return param.trim();
 	}
 	
+	public static void testChar(String testStr){
+		for(int i=0; i<testStr.length(); i++){
+			char c = testStr.charAt(i);
+			boolean in = c>=48&&c<=54;
+			System.out.println(testStr.charAt(i)+0+", "+in);
+			
+		}
+	}
+	
 	public static void main(String[] args){
 		
 //		System.out.println(testTransferString());
@@ -59,11 +68,12 @@ public class TestString {
 //		testStringArr();
 //		testNullString();
 //		System.out.println(testEquals("a"));
-		System.out.println(testStringSplitAll("faef,felrkf,fER,,").length);
-		System.out.println(Arrays.toString(testStringSplitAll("faef,felrkf,fER,,")));
-		System.out.println(testStringSplitAll("faef,felrkf,fER,,")[4].length());
-		System.out.println("".equals(testStringSplitAll("faef,felrkf,fER,,")[3]));
-		System.out.println(testStringSplitLimit("faef,felrkf,fER,,").length);
-		System.out.println(Arrays.toString(testStringSplitLimit("faef,felrkf,fER,,")));
+//		System.out.println(testStringSplitAll("faef,felrkf,fER,,").length);
+//		System.out.println(Arrays.toString(testStringSplitAll("faef,felrkf,fER,,")));
+//		System.out.println(testStringSplitAll("faef,felrkf,fER,,")[4].length());
+//		System.out.println("".equals(testStringSplitAll("faef,felrkf,fER,,")[3]));
+//		System.out.println(testStringSplitLimit("faef,felrkf,fER,,").length);
+//		System.out.println(Arrays.toString(testStringSplitLimit("faef,felrkf,fER,,")));
+		testChar("abcdefghijklmnopqrstuvwxyz1234567890");
 	}
 }
