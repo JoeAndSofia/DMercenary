@@ -1,13 +1,18 @@
 package study008_swing.dmercenary.unit.game.carrier;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JProgressBar;
 import javax.swing.event.MouseInputListener;
 
+import study008_swing.dmercenary.unit.game.entity.character.Character;
 import study008_swing.dmercenary.unit.game.entity.things.Thing;
+import study008_swing.dmercenary.unit.game.entity.top.GameObject;
 import study008_swing.dmercenary.unit.game.interphase.C;
 import study008_swing.dmercenary.unit.game.interphase.SandBox;
 
@@ -19,8 +24,10 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 	private int y;
 	private int w;
 	private int h;
-	private String iconUrl;
-	private Thing thing;
+	private JProgressBar hp;
+	private JProgressBar mp;
+	
+	private GameObject thing;
 	public Square(){
 		this(0,0,C.SSL,C.SSL,C.SSL,null,null);
 	}
@@ -32,22 +39,24 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 		this.h = h;
 		this.mr = zr;
 		this.zr = zr;
-		this.iconUrl = iconUrl;
-		if(this.iconUrl==null || "".equals(this.iconUrl.trim())){
-			this.setText(tooltip==null?"":tooltip);	
-		}else{
-			this.setIcon(new ImageIcon(this.iconUrl));
-		}
 		this.setToolTipText(tooltip==null?"":tooltip);
-		this.setMargin(C.BEING_SQUARE_INSETS);
-//		this.setFont(new Font("Arial",Font.PLAIN,fontsize));
 		this.setBorder(null);
-//		this.setIcon(arg0); 
 		this.setBounds(x*zr, y*zr, w*zr, h*zr);
-		this.addActionListener(this);
+//		this.addActionListener(this);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-		this.setContentAreaFilled(false);
+		this.add(hp);
+		this.add(mp);
+	}
+	
+	private void init(){
+		if(this.thing!=null){
+			try{
+				((Character)this.thing).getAbility().get("ABILITY_HPT");
+			}catch(Exception e){
+				
+			}
+		}		
 	}
 	
 	public void zoom(int a){
@@ -69,9 +78,7 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 	public void W(int w) {this.w = w;}
 	public int H() {return this.h;}
 	public void H(int h) {this.h = h;}
-	public String IconUrl() {return this.iconUrl;}
-	public void IconUrl(String iconUrl) {this.iconUrl = iconUrl;}
-	public Thing Thing() {return this.thing;}
+	public GameObject Thing() {return this.thing;}
 	public void Thing(Thing thing) {this.thing = thing;}
 
 	@Override

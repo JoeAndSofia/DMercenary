@@ -21,26 +21,29 @@ public class Character extends GameObject {
 	
 	protected Map<String, Integer> property = new HashMap<String, Integer>();
 	
+	protected Map<String, Integer> ability = new HashMap<String, Integer>();
 	
 	public Character(){
 		
 	}
 	
-	public Character(String name, Icon image, Integer[] propertySet){
+	public Character(String name, Icon image){
 		this.name = name;
 		this.image = image;
-		initProperty(propertySet);
+		initProperty();
 	}
 	
-	private void initProperty(Integer[] propertySet){
-		this.property.put(C.PROPERTY_STA, propertySet[0]);
-		this.property.put(C.PROPERTY_MEN, propertySet[1]);
-		this.property.put(C.PROPERTY_AGI, propertySet[2]);
-		this.property.put(C.PROPERTY_STR, propertySet[3]);
-		this.property.put(C.PROPERTY_SAV, propertySet[4]);
-		this.property.put(C.PROPERTY_TAL, propertySet[5]);
-		this.property.put(C.PROPERTY_LUC, propertySet[6]);
-		this.property.put(C.PROPERTY_LUC, propertySet[7]);
+	private void initProperty(){
+		this.property.put(C.PROPERTY_STA, 1);
+		this.property.put(C.PROPERTY_TAL, 1);
+		this.property.put(C.PROPERTY_MEN, 1);
+		this.property.put(C.PROPERTY_STR, 1);
+		this.property.put(C.PROPERTY_SAV, 1);
+		this.property.put(C.PROPERTY_AGI, 1);
+		this.property.put(C.PROPERTY_LUC, 0);
+		this.property.put(C.PROPERTY_LUC, 0);
+		
+		this.ability.put(C.ABILITY_HPT, 0);
 	}
 
 	public Map<String, Role> getRoles() {
@@ -49,20 +52,22 @@ public class Character extends GameObject {
 	public Map<String, Equipment> getEquipments() {
 		return equipments;
 	}
-	public Map<Integer, Pack> getThings() {
+	public Map<Integer, Pack> getPacks() {
 		return packs;
 	}
 	public Map<String, Integer> getProperty() {
 		return property;
+	}	
+	public Map<String, Integer> getAbility() {
+		return ability;
 	}
 
-	
-	
-	
+
 	public void setRoles(Map<String, Role> roles) {this.roles = roles;}
 	public void setEquipments(Map<String, Equipment> equipments) {this.equipments = equipments;}
-	public void setThings(Map<Integer, Pack> packs) {this.packs = packs;}
-	public void setProperty(Map<String, Integer> property) {this.property = property;}	
+	public void setPacks(Map<Integer, Pack> packs) {this.packs = packs;}
+	public void setProperty(Map<String, Integer> property) {this.property = property;}
+	public void setAbility(Map<String, Integer> ability) {this.ability = ability;}
 }
 
 
