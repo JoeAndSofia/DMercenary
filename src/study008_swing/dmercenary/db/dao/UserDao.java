@@ -62,6 +62,7 @@ public class UserDao extends Dao {
 				return null;
 			}
 		}catch(Exception e){
+			log(e,this.getClass().getName());
 			return null;
 		}finally{
 			try{
@@ -97,16 +98,32 @@ public class UserDao extends Dao {
 				return false;
 			}
 		}catch(Exception e){
+			log(e,this.getClass().getName());
 			return false;
 		}finally{
 			
 		}
 	}
 	
+	public boolean delete(int id){
+		try{
+			Integer result = dbUtil.delete("delete from User where id = "+id);
+			return result==0?false:true;
+		}catch(Exception e){
+			log(e,this.getClass().getName());
+			return false;
+		}finally{
+			
+		}
+	}
+	
+	
 	public static void main(String[] args){
-		User user1 = new User("joey","password","hint");
-		User user2 = new User("joy1","adfa","faefaef");
-		System.out.println(user2.save(true));
+//		User user1 = new User("joey","password","hint");
+//		User user2 = new User("joy1","adfa","faefaef");
+//		System.out.println(user2.save(true));
+//		UserDao d = new UserDao();
+//		d.delete(7);
 		User.close();
 		
 //		User user = get(1);

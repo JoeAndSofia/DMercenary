@@ -1,5 +1,6 @@
 package study008_swing.dmercenary.db.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import study008_swing.dmercenary.utils.DBUtil;
@@ -8,10 +9,12 @@ public class Dao {
 	private static final String DATABASE_NAME = "general";
 	public static DBUtil dbUtil = new DBUtil(DATABASE_NAME);
 	
+	private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
 	public void log(Exception e, String className){
 		try{
 			if(e!=null && className!=null){
-				int time = (int)new Date().getTime()/1000;
+				String time = SDF.format(new Date());
 				String message = e.getMessage();
 				Integer result = dbUtil.updateAndInsert(
 					"insert into log(time, in_class, exception values("+
@@ -26,6 +29,7 @@ public class Dao {
 				throw new Exception();
 			}			
 		}catch(Exception this_e){
+			this_e.printStackTrace();
 			log(this_e, this.getClass().getName());
 		}
 	}

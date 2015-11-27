@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.management.RuntimeErrorException;
+
 import org.sqlite.jdbc3.JDBC3Connection;
 
 public class DBUtil {
@@ -66,6 +68,26 @@ public class DBUtil {
 	}
 	
 	public Integer updateAndInsert(String query){
+		try{
+			if(this.databaseName!=null){
+				con();
+			}else{
+				throw new RuntimeException("No database name specified.");
+			}
+			stmt = con.createStatement();
+			if(query==null || "".equals(query)){
+				return null;
+			}else{
+				return stmt.executeUpdate(query);
+			}
+		}catch(Exception e){
+			throw new RuntimeException("DBUtil: " + e.getMessage());
+		}finally{
+			
+		}
+	}
+	
+	public Integer delete(String query){
 		try{
 			if(this.databaseName!=null){
 				con();

@@ -42,6 +42,10 @@ public class User {
 		return dao.save(this, insert);
 	}
 	
+	public boolean delete(int id){
+		return dao.delete(id);
+	}
+	
 	public int Id() {
 		return id;
 	}
