@@ -5,19 +5,36 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.management.RuntimeErrorException;
 
 import org.sqlite.jdbc3.JDBC3Connection;
 
-public class DBUtil {
+public final class DBUtil {
 	private String databaseName = null;
 	private Connection con = null;
 	private Statement stmt = null;
 	
-	public DBUtil(String databaseName){
+	public static int instanceCount = 0;
+	
+	private static Map<String, DBUtil> utils = new HashMap<String, DBUtil>();
+	
+	private DBUtil(String databaseName){
 		this.databaseName = databaseName;
 		con();
+		instanceCount++;
+	}
+	
+	public static DBUtil getInstance(String databaseName){
+		if(utils.get(databaseName)!=null){
+			return utils.get(databaseName);
+		}else{
+			DBUtil util = new DBUtil(databaseName);
+			utils.put(databaseName, util);
+			return util;
+		}
 	}
 	
 	private void con(){
@@ -25,6 +42,7 @@ public class DBUtil {
 			if(con==null || !(con instanceof Connection)){
 				Class.forName("org.sqlite.JDBC");
 				con = DriverManager.getConnection("jdbc:sqlite:./db/" + this.databaseName + ".db");
+				System.out.println(this.databaseName+" connected");
 			}			
 		}catch(Exception e){
 			throw new RuntimeException("DBUtil: " + e.getMessage());

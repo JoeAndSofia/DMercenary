@@ -4,10 +4,12 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
-import study008_swing.dmercenary.db.dao.Dao;
+import study008_swing.dmercenary.db.dao.GeneralDao;
 import study008_swing.dmercenary.db.entity.PropertySet;
 
-public class C extends Dao{
+public final class C extends GeneralDao{
+	
+	public static int count = 0;
 	
 	//Property Name
 	public static final String PROPERTY_STA = "Stamina";
@@ -29,29 +31,17 @@ public class C extends Dao{
 	public static final String ABILITY_MDF = "MagicDefence";
 	
 	//Property Set
-	public PropertySet VILLAGER;
-	public PropertySet MILITIA;
-	public PropertySet WITCH;
-	public PropertySet WARRIOR;
-	public PropertySet WATCHER;
-	public PropertySet DOCTOR;
-	public PropertySet WIZARD;
-//	public static final Integer[] RANK_2_
-	public C(){
+	public static Map<String, PropertySet> PS = new HashMap<String, PropertySet>();
+
+	private C(){
 		try{
-			ResultSet rs = dbUtil.select("select * from property_set");
+			ResultSet rs = dbUtil.select("select * from property_set order by id");
 			while(rs.next()){
-				switch (rs.getString("set_name")) {
-				case "villager"	:VILLAGER	= PropertySet.assign(rs);continue;
-				case "militia"	:MILITIA	= PropertySet.assign(rs);continue;
-				case "witch"	:WITCH		= PropertySet.assign(rs);continue;
-				case "warrior"	:WARRIOR	= PropertySet.assign(rs);continue;
-				case "watcher"	:WATCHER	= PropertySet.assign(rs);continue;
-				case "doctor"	:DOCTOR		= PropertySet.assign(rs);continue;
-				case "wizard"	:WIZARD		= PropertySet.assign(rs);continue;
-				default 		:continue;
-				}
-			}	
+				PS.put(rs.getString("set_name"), PropertySet.fromDb(rs));
+			}
+			
+//			rs = 
+			count++;
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -104,4 +94,8 @@ public class C extends Dao{
 		
 		
 	}
+	
+	private static final C c = new C();
+	
+	public static C getC(){return c;}
 }

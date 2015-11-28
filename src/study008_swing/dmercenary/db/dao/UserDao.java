@@ -8,7 +8,7 @@ import java.util.Map;
 import study008_swing.dmercenary.db.entity.User;
 import study008_swing.dmercenary.utils.DBUtil;
 
-public class UserDao extends Dao {
+public class UserDao extends GeneralDao {
 	private static final String DATABASE_NAME = "general";
 	
 	public User get(int id){

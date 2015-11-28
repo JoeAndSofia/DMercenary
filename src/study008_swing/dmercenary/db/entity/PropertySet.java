@@ -37,19 +37,39 @@ public class PropertySet {
 	public int LUC() {return LUC;}
 	public void LUC(int LUC) {this.LUC = LUC;}
 	
-	public static PropertySet assign(ResultSet rs) throws Exception{
-		PropertySet ps = new PropertySet();
-		ps.Id(rs.getInt("id"));
-		ps.SetName(rs.getString("set_name"));
-		ps.Rank(rs.getInt("rank"));
-		ps.STA(rs.getInt("STA"));
-		ps.TAL(rs.getInt("TAL"));
-		ps.MEN(rs.getInt("MEN"));
-		ps.STR(rs.getInt("STR"));
-		ps.SAV(rs.getInt("SAV"));
-		ps.AGI(rs.getInt("AGI"));
-		ps.POT(rs.getInt("POT"));
-		ps.LUC(rs.getInt("LUC"));		
-		return ps;
+	public static PropertySet fromDb(ResultSet rs) throws Exception{
+		if(rs!=null){
+			PropertySet ps = new PropertySet();
+			ps.Id(rs.getInt("id"));
+			ps.SetName(rs.getString("set_name"));
+			ps.Rank(rs.getInt("rank"));
+			ps.STA(rs.getInt("STA"));
+			ps.TAL(rs.getInt("TAL"));
+			ps.MEN(rs.getInt("MEN"));
+			ps.STR(rs.getInt("STR"));
+			ps.SAV(rs.getInt("SAV"));
+			ps.AGI(rs.getInt("AGI"));
+			ps.POT(rs.getInt("POT"));
+			ps.LUC(rs.getInt("LUC"));		
+			return ps;
+		}else{
+			return null;
+		}
+	}
+	
+	public String toString(){
+		return 
+			"("+id+
+			", "+setName+
+			", "+rank+
+			", "+STA+
+			", "+TAL+
+			", "+MEN+
+			", "+STR+
+			", "+SAV+
+			", "+AGI+
+			", "+POT+
+			", "+LUC+
+			");";
 	}
 }

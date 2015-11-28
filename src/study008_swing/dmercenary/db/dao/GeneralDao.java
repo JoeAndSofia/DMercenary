@@ -5,9 +5,9 @@ import java.util.Date;
 
 import study008_swing.dmercenary.utils.DBUtil;
 
-public class Dao {
+public class GeneralDao {
 	private static final String DATABASE_NAME = "general";
-	public static DBUtil dbUtil = new DBUtil(DATABASE_NAME);
+	public static DBUtil dbUtil = DBUtil.getInstance(DATABASE_NAME);
 	
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
