@@ -24,8 +24,8 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 	private int y;
 	private int w;
 	private int h;
-	private JProgressBar hp;
-	private JProgressBar mp;
+//	private JProgressBar hp;
+//	private JProgressBar mp;
 	
 	private GameObject thing;
 	public Square(){
@@ -42,11 +42,11 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 		this.setToolTipText(tooltip==null?"":tooltip);
 		this.setBorder(null);
 		this.setBounds(x*zr, y*zr, w*zr, h*zr);
-//		this.addActionListener(this);
+		this.addActionListener(this);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-		this.add(hp);
-		this.add(mp);
+//		this.add(hp);
+//		this.add(mp);
 	}
 	
 	private void init(){

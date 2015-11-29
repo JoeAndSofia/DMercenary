@@ -18,7 +18,7 @@ public class TestDb {
 	
 	public static void test01(){
 		C c = C.getC();
-		Map m = c.PS;
+		Map m = c.ps();
 		Set<Entry<String, PropertySet>> s = m.entrySet();
 		for(Entry e : s){
 			System.out.println(e.getKey()+", "+e.getValue());
@@ -27,7 +27,7 @@ public class TestDb {
 	
 	public static void test02(){
 		C c = C.getC();
-		Map m = c.PS;
+		Map m = c.ps();
 		Set<Entry<String, PropertySet>> s = m.entrySet();
 		for(Entry e : s){
 			System.out.println(e.getKey()+", "+e.getValue());

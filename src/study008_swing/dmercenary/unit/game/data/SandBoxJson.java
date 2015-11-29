@@ -1,5 +1,7 @@
 package study008_swing.dmercenary.unit.game.data;
 
+import java.awt.Component;
+
 import study008_swing.dmercenary.unit.game.data.SquareJson;
 import study008_swing.dmercenary.unit.game.interphase.SandBox;
 import study008_swing.dmercenary.unit.game.carrier.Square;
@@ -23,8 +25,9 @@ public class SandBoxJson {
 		SandBox sb = new SandBox();
 		for(SquareJson cj : unit){
 			switch (cj.Type())
-			{
+			{			
 				case "square":{
+					
 					sb.Battlefield().add(new Square(cj.X(),cj.Y(),cj.W(),cj.H(),cj.Zr(),cj.Text(),cj.IconUrl()));
 				}
 			}

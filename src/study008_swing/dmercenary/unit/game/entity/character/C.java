@@ -17,7 +17,7 @@ public final class C extends GeneralDao{
 	public static final String PROPERTY_MEN = "Mentality";
 	public static final String PROPERTY_STR = "Strength";
 	public static final String PROPERTY_SAV = "Savvy";
-	public static final String PROPERTY_AGI = "Agility";	
+	public static final String PROPERTY_AGI = "Agility";
 	public static final String PROPERTY_POT = "Potential";
 	public static final String PROPERTY_LUC = "Luck";
 	
@@ -31,7 +31,7 @@ public final class C extends GeneralDao{
 	public static final String ABILITY_MDF = "MagicDefence";
 	
 	//Property Set
-	public static Map<String, PropertySet> PS = new HashMap<String, PropertySet>();
+	private static Map<String, PropertySet> PS = new HashMap<String, PropertySet>();
 
 	private C(){
 		try{
@@ -40,59 +40,21 @@ public final class C extends GeneralDao{
 				PS.put(rs.getString("set_name"), PropertySet.fromDb(rs));
 			}
 			
-//			rs = 
+//			rs = dbUtil.select(""); 
 			count++;
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	}
+	
+	public static Map ps(){return PS;}
+	
+	public static PropertySet ps(String setName){
+		if(PS!=null && PS.containsKey(setName)){
+			return PS.get(setName);
+		}else{
+			return null;
+		}
 	}
 	
 	private static final C c = new C();

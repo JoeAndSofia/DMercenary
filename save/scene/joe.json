@@ -20,8 +20,8 @@
 		iconUrl:"img/enemy/Asura.png"
 	},{
 		type:square,
-		x:8,
-		y:8,
+		x:9,
+		y:9,
 		w:2,
 		h:2,
 		zr:10,
@@ -33,7 +33,7 @@
 		y:8,
 		w:2,
 		h:2,
-		zr:30,
+		zr:10,
 		text:Capital,
 		iconUrl:"img/enemy/Asura.png"
 	}]
