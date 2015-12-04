@@ -13,23 +13,12 @@ public class CurrentTime {
 			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			System.out.println(convertToDate(1448784000000l));
 			System.out.println(convertToDate(1448790638589l));
-			System.out.println(sdf.parse("2015-10-01").getTime());	//1443628800000
-			System.out.println(sdf.parse("2015-10-04").getTime());	//1443888000000
-			System.out.println(sdf.parse("2015-10-07").getTime());	//1444147200000
-			System.out.println(sdf.parse("2015-10-10").getTime());	//1444406400000
-			System.out.println(sdf.parse("2015-10-13").getTime());	//1444665600000
-			System.out.println(sdf.parse("2015-10-16").getTime());	//1444924800000
-			System.out.println(sdf.parse("2015-10-19").getTime());	//1445184000000
-			System.out.println(sdf.parse("2015-10-22").getTime());	//1445443200000
-			System.out.println(sdf.parse("2015-10-25").getTime());	//1445702400000
-			System.out.println(sdf.parse("2015-10-28").getTime());	//1445961600000
-			System.out.println(sdf.parse("2015-11-01").getTime());	//1446307200000
+			
 			System.out.println(sdf2.parse("2015-12-03 23:59:59").getTime());
 			System.out.println(sdf2.parse("2015-12-03 22:59:59").getTime());
+			System.out.println(sdf.parse("2015-11-01").getTime());	//1446307200000
 			sdf2.setTimeZone(TimeZone.getTimeZone("GMT+7"));
-			System.out.println(sdf2.parse("2015-12-03 23:59:59").getTime());
-			System.out.println(sdf2.parse("2015-12-01 00:00:00").getTime());
-			System.out.println(sdf2.parse("2015-12-02 23:59:59").getTime());
+			System.out.println(sdf2.parse("2015-11-01 00:00:00").getTime());
 			
 			System.out.println("*****************");	//1446307200000
 			//		System.out.println(convertToDate(1431459375000l));	//85543 : Wed Jul 15 01:10:45 CST 2015
