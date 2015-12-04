@@ -1,5 +1,6 @@
 package study007_DateAndTime;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -7,15 +8,19 @@ import java.util.TimeZone;
 
 public class SimpleDateFormatTest {
 	public static void main(String[] args){
-		
-		test01();
-//		test011();
-		
-		
-		
-//		test02();
-//		test03();
-		
+		try{
+//			test01();
+//			test011();
+			test012();
+//			test013();
+			
+			
+			
+//			test02();
+//			test03();	
+		}catch(Exception e){
+			e.printStackTrace();
+		}	
 	}
 	
 	public static void test01(){
@@ -62,6 +67,8 @@ public class SimpleDateFormatTest {
 		}
 	}
 	
+
+	
 	public static void test011(){
 		try{
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -88,6 +95,42 @@ public class SimpleDateFormatTest {
 		}finally{
 			
 		}
+	}
+	
+	public static void test012() throws Exception{
+		SimpleDateFormat sdfFull = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		sdfFull.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+		sdfDate.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+		sdfTime.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+		String str01 = "1970-01-01 00:00:00";
+		String str02 = "2015-11-27";
+		String str03 = "00:30";
+		String str04 = "01:30";
+		System.out.println(sdf.format(sdfFull.parse(str01)));
+		System.out.println(sdfDate.parse(str02));
+		System.out.println(sdfTime.parse(str03));
+		System.out.println(sdfTime.parse(str04));
+	}
+	
+	public static void test013() throws Exception{
+		DateFormat sdfFull = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat sdfTime = new SimpleDateFormat("HH:mm");
+		
+		sdfFull.setTimeZone(null);
+		sdfDate.setTimeZone(null);
+		sdfTime.setTimeZone(null);
+		String str01 = "1970-01-01 00:00:00";
+		String str02 = "2015-11-27";
+		String str03 = "00:30";
+		String str04 = "01:30";
+		System.out.println(sdfFull.parse(str01));
+		System.out.println(sdfDate.parse(str02));
+		System.out.println(sdfTime.parse(str03));
+		System.out.println(sdfTime.parse(str04));
 	}
 	
 	public static void test02(){

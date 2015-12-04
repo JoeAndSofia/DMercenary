@@ -7,16 +7,18 @@ import java.util.TimeZone;
 public class CalendarTest {
 	public static void main(String[] args){
 		CalendarTest ct = new CalendarTest();
-		Date d = new Date();
-		System.out.println(new Date(ct.ms(d)));
-		
-		ct.gmt();
-		ct.gmt8();
-		
-		Date d2 = new Date(0l);
-		ct.d = d2;
-		ct.gmt();
-		ct.gmt8();
+//		Date d = new Date();
+//		System.out.println(new Date(ct.ms(d)));
+//		
+//		ct.gmt();
+//		ct.gmt8();
+//		
+//		Date d2 = new Date(0l);
+//		ct.d = d2;
+//		ct.gmt();
+//		ct.gmt8()
+		System.out.println(ct.c.getTimeZone());
+		ct.date();
 	}
 	
 	Date d = new Date();
@@ -55,6 +57,14 @@ public class CalendarTest {
 		String gmtStr = year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
 		System.out.println(gmtStr);
 		return gmtStr;
+	}
+	
+	String date(){
+		Date d = new Date(1448553600000l+34200000l);
+		c.setTime(d);
+		String wd = c.get(Calendar.DAY_OF_WEEK)+"";
+		System.out.println(wd);
+		return "";
 	}
 	
 }
