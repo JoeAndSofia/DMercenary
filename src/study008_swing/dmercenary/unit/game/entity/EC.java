@@ -1,4 +1,4 @@
-package study008_swing.dmercenary.unit.game.entity.character;
+package study008_swing.dmercenary.unit.game.entity;
 
 import java.sql.ResultSet;
 import java.util.HashMap;
@@ -7,7 +7,12 @@ import java.util.Map;
 import study008_swing.dmercenary.db.dao.GeneralDao;
 import study008_swing.dmercenary.db.entity.PropertySet;
 
-public final class C extends GeneralDao{
+/**
+ * entity constant
+ * @author Lenovo
+ *
+ */
+public final class EC extends GeneralDao{
 	
 	public static int count = 0;
 	
@@ -33,7 +38,7 @@ public final class C extends GeneralDao{
 	//Property Set
 	private static Map<String, PropertySet> PS = new HashMap<String, PropertySet>();
 
-	private C(){
+	private EC(){
 		try{
 			ResultSet rs = dbUtil.select("select * from property_set order by id");
 			while(rs.next()){
@@ -57,7 +62,7 @@ public final class C extends GeneralDao{
 		}
 	}
 	
-	private static final C c = new C();
+	private static final EC c = new EC();
 	
-	public static C getC(){return c;}
+	public static EC getC(){return c;}
 }

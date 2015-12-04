@@ -13,6 +13,7 @@ import java.awt.event.MouseWheelListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
@@ -51,7 +52,7 @@ public class SandBox extends JPanel implements
 
 	private void initMain(){
 		this.battlefield.setLayout(null);
-		this.battlefield.setBounds(C.LTX+C.BT,C.LTY+C.BT,C.MAIN_PANEL_WIDTH,C.MAIN_PANEL_HEIGHT);
+		this.battlefield.setBounds(IC.LTX+IC.BT,IC.LTY+IC.BT,IC.MAIN_PANEL_WIDTH,IC.MAIN_PANEL_HEIGHT);
 		this.battlefield.setBorder(new LineBorder(Color.GRAY, 1));
 		this.battlefield.setFocusable(true);
 		this.battlefield.addMouseWheelListener(this);
@@ -62,7 +63,7 @@ public class SandBox extends JPanel implements
 	
 	private void init(){	
 		this.setLayout(null);
-		this.setBounds(0, 0,C.MAIN_PANEL_WIDTH+C.BT*2+C.LTX*2, C.MAIN_PANEL_HEIGHT+C.BT*2+C.LTY*2);
+		this.setBounds(0, 0,IC.MAIN_PANEL_WIDTH+IC.BT*2+IC.LTX*2, IC.MAIN_PANEL_HEIGHT+IC.BT*2+IC.LTY*2);
 		this.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.GRAY));
 		
 		initMain();
@@ -77,6 +78,15 @@ public class SandBox extends JPanel implements
 		}
 		this.activated = activated;
 		this.activated.setBorder(BorderFactory.createLineBorder(Color.ORANGE,1));
+		DMercenary dm = (DMercenary)this.getParent().getParent().getParent().getParent();
+		switch (((Square)this.activated).Thing().getType()){
+		case 1:
+			break;
+		}
+		DataPrivy dp = (DataPrivy)dm.getDataPrivy();
+		
+		
+		boolean a = true;
 	}
 	public JPanel Battlefield() {return this.battlefield;}
 	public void Battlefield(JPanel battlefield) {this.battlefield = battlefield;}
@@ -158,7 +168,7 @@ public class SandBox extends JPanel implements
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		if(C.CANZOOM){
+		if(IC.CANZOOM){
 			int a = -(int)e.getPreciseWheelRotation();
 			Component[] cs = ((JPanel)e.getComponent()).getComponents();
 			for(Component c: cs){

@@ -13,7 +13,7 @@ import javax.swing.event.MouseInputListener;
 import study008_swing.dmercenary.unit.game.entity.character.Character;
 import study008_swing.dmercenary.unit.game.entity.things.Thing;
 import study008_swing.dmercenary.unit.game.entity.top.GameObject;
-import study008_swing.dmercenary.unit.game.interphase.C;
+import study008_swing.dmercenary.unit.game.interphase.IC;
 import study008_swing.dmercenary.unit.game.interphase.SandBox;
 
 public class Square extends UIObject implements ActionListener, MouseInputListener{
@@ -29,7 +29,7 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 	
 	private GameObject thing;
 	public Square(){
-		this(0,0,C.SSL,C.SSL,C.SSL,null,null);
+		this(0,0,IC.SSL,IC.SSL,IC.SSL,null,null);
 	}
 	
 	public Square(int x, int y, int w, int h, int zr, String tooltip, String iconUrl){

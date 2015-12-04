@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.swing.Icon;
 
+import study008_swing.dmercenary.unit.game.entity.EC;
 import study008_swing.dmercenary.unit.game.entity.description.Role;
 import study008_swing.dmercenary.unit.game.entity.things.Equipment;
 import study008_swing.dmercenary.unit.game.entity.things.Pack;
@@ -34,16 +35,16 @@ public class Character extends GameObject {
 	}
 	
 	private void initProperty(){
-		this.property.put(C.PROPERTY_STA, 1);
-		this.property.put(C.PROPERTY_TAL, 1);
-		this.property.put(C.PROPERTY_MEN, 1);
-		this.property.put(C.PROPERTY_STR, 1);
-		this.property.put(C.PROPERTY_SAV, 1);
-		this.property.put(C.PROPERTY_AGI, 1);
-		this.property.put(C.PROPERTY_LUC, 0);
-		this.property.put(C.PROPERTY_LUC, 0);
+		this.property.put(EC.PROPERTY_STA, 1);
+		this.property.put(EC.PROPERTY_TAL, 1);
+		this.property.put(EC.PROPERTY_MEN, 1);
+		this.property.put(EC.PROPERTY_STR, 1);
+		this.property.put(EC.PROPERTY_SAV, 1);
+		this.property.put(EC.PROPERTY_AGI, 1);
+		this.property.put(EC.PROPERTY_LUC, 0);
+		this.property.put(EC.PROPERTY_LUC, 0);
 		
-		this.ability.put(C.ABILITY_HPT, 0);
+		this.ability.put(EC.ABILITY_HPT, 0);
 	}
 
 	public Map<String, Role> getRoles() {

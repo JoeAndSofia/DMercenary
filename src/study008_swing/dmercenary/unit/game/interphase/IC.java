@@ -3,7 +3,12 @@ package study008_swing.dmercenary.unit.game.interphase;
 import java.awt.Font;
 import java.awt.Insets;
 
-public class C {
+/**
+ * interface constant
+ * @author Lenovo
+ *
+ */
+public class IC {
 	public static final int LTX = 10;		//LEFT_TOP_X
 	public static final int LTY = 10;		//LEFT_TOP_Y
 	public static final int BT = 2;		//BORDER_THICKNESS

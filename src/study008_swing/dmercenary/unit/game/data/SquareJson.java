@@ -6,7 +6,7 @@ public class SquareJson {
 	private int y;
 	private int w;
 	private int h;
-	private int zr;
+	private int zr;	//zoom rate
 	private String text;
 	private String iconUrl;
 	public String getType() {

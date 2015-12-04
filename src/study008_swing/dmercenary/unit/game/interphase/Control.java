@@ -28,23 +28,23 @@ public class Control extends JPanel implements ActionListener{
 	
 	private void init(int x, int y, int width, int height){
 		
-		this.next.setBounds(C.LTX*4, C.LTY*4, DBW, DBH);
+		this.next.setBounds(IC.LTX*4, IC.LTY*4, DBW, DBH);
 		this.next.setText("Next Round");
 		this.next.setToolTipText("Give up the rest moves and enter into next Round");
-		this.next.setMargin(C.CONTROL_INSETS);
-		this.next.setFont(C.CONTROL_FONT);
+		this.next.setMargin(IC.CONTROL_INSETS);
+		this.next.setFont(IC.CONTROL_FONT);
 		
-		this.locate.setBounds(C.LTX*6+DBW, C.LTY*4, DBW, DBH);
+		this.locate.setBounds(IC.LTX*6+DBW, IC.LTY*4, DBW, DBH);
 		this.locate.setText("Locate");
 		this.locate.setToolTipText("Locate current unit on the map");
-		this.locate.setMargin(C.CONTROL_INSETS);
-		this.locate.setFont(C.CONTROL_FONT);
+		this.locate.setMargin(IC.CONTROL_INSETS);
+		this.locate.setFont(IC.CONTROL_FONT);
 		
 		JButton jb1 = new JButton();
-		jb1.setBounds(C.LTX*4, C.LTY*4+DBW/2, DBW, DBH);
+		jb1.setBounds(IC.LTX*4, IC.LTY*4+DBW/2, DBW, DBH);
 		jb1.setText("Test");
-		jb1.setMargin(C.CONTROL_INSETS);
-		jb1.setFont(C.CONTROL_FONT);
+		jb1.setMargin(IC.CONTROL_INSETS);
+		jb1.setFont(IC.CONTROL_FONT);
 		jb1.addActionListener(this);
 		
 //		dm.update(dm.getGraphics());
