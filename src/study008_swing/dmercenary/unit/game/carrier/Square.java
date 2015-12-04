@@ -46,7 +46,7 @@ public class Square extends UIObject implements ActionListener, MouseInputListen
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 //		this.setBorderPainted(false);
-		this.setContentAreaFilled(false);
+//		this.setContentAreaFilled(false);
 //		this.add(hp);
 //		this.add(mp);
 	}
