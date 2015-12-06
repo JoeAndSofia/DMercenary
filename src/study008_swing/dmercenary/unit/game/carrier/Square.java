@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JProgressBar;
 import javax.swing.event.MouseInputListener;
 
-import study008_swing.dmercenary.unit.game.entity.character.Character;
+import study008_swing.dmercenary.unit.game.entity.living.Character;
 import study008_swing.dmercenary.unit.game.entity.things.Thing;
 import study008_swing.dmercenary.unit.game.entity.top.GameObject;
 import study008_swing.dmercenary.unit.game.interphase.IC;

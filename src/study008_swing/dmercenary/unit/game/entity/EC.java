@@ -16,6 +16,33 @@ public final class EC extends GeneralDao{
 	
 	public static int count = 0;
 	
+	//Thing type 
+	public static final int MATE = 1;
+	
+	public static final int ALLY = 10;
+	public static final int ALLY01 = 11;
+	public static final int ALLY02 = 12;
+	public static final int ALLY03 = 13;
+	public static final int ALLY04 = 14;
+	public static final int ALLY05 = 15;
+	public static final int ALLY06 = 16;
+	public static final int ALLY07 = 17;
+	public static final int ALLY08 = 18;
+	
+	public static final int ENEMY = 20;
+	public static final int ENEMY01 = 21;
+	public static final int ENEMY02 = 22;
+	public static final int ENEMY03 = 23;
+	public static final int ENEMY04 = 24;
+	public static final int ENEMY05 = 25;
+	public static final int ENEMY06 = 26;
+	public static final int ENEMY07 = 27;
+	public static final int ENEMY08 = 28;
+	
+	
+	
+	
+	
 	//Property Name
 	public static final String PROPERTY_STA = "Stamina";
 	public static final String PROPERTY_TAL = "Talent";

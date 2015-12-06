@@ -1,4 +1,4 @@
-package study008_swing.dmercenary.unit.game.entity.character;
+package study008_swing.dmercenary.unit.game.entity.living;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,6 @@ import study008_swing.dmercenary.unit.game.entity.EC;
 import study008_swing.dmercenary.unit.game.entity.description.Role;
 import study008_swing.dmercenary.unit.game.entity.things.Equipment;
 import study008_swing.dmercenary.unit.game.entity.things.Pack;
-import study008_swing.dmercenary.unit.game.entity.things.Thing;
 import study008_swing.dmercenary.unit.game.entity.top.GameObject;
 
 public class Character extends GameObject {
@@ -28,8 +27,9 @@ public class Character extends GameObject {
 		
 	}
 	
-	public Character(String name, Icon image){
+	public Character(String name, Icon image, int type){
 		this.name = name;
+		this.type = type;	//
 		this.image = image;
 		initProperty();
 	}
