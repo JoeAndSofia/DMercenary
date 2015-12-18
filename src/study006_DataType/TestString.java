@@ -46,6 +46,10 @@ public class TestString {
 		return param.split(",",-1);
 	}
 	
+	public static String testSubstring(String param){
+		return param.substring(0, 1).toUpperCase() + param.substring(1, param.length()).toLowerCase();				
+	}
+	
 	public static String testTrim(String param){
 		return param.trim();
 	}
@@ -74,6 +78,7 @@ public class TestString {
 //		System.out.println("".equals(testStringSplitAll("faef,felrkf,fER,,")[3]));
 //		System.out.println(testStringSplitLimit("faef,felrkf,fER,,").length);
 //		System.out.println(Arrays.toString(testStringSplitLimit("faef,felrkf,fER,,")));
-		testChar("abcdefghijklmnopqrstuvwxyz1234567890");
+//		testChar("abcdefghijklmnopqrstuvwxyz1234567890");
+		System.out.println(testSubstring("feeraGEFSAFfe"));
 	}
 }
