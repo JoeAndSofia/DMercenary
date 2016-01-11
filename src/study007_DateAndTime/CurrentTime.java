@@ -11,7 +11,7 @@ public class CurrentTime {
 		try{
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			System.out.println(convertToDate(1448784000000l));
+			System.out.println(convertToDate(1447064555904l));
 			System.out.println(convertToDate(1448790638589l));
 			
 			System.out.println(sdf2.parse("2015-12-03 23:59:59").getTime());
