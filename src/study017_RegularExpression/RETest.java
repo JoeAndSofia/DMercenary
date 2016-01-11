@@ -39,6 +39,8 @@ public class RETest {
 		p(t08("av2faewrfa"));
 		p(t08("23"));
 		p(t08(""));
+		p("***********");
+		p(t09("The US population is 2719827398444215 which is growing."));
 	}
 	
 	
@@ -80,6 +82,12 @@ public class RETest {
 	static boolean t08(String p){
 		String regex=".*.{3}";
 		return p.matches(regex);
+	}
+	
+	static String t09(String p){
+//		String regex="(?<=\\d{1,3})(?=(?:\\d\\d\\d)+)";
+		String regex="(?<=\\d)(?=(?:\\d\\d\\d)+)";
+		return p.replaceAll(regex,",");
 	}
 	
 	static void p(Object o){
