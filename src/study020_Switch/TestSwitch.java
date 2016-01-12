@@ -12,6 +12,15 @@ public class TestSwitch {
 		System.out.println(test01(pa[6]));
 		System.out.println(test01(""));
 		
+		System.out.println(test02("png"));
+		System.out.println(test02("jpg"));
+		System.out.println(test02("jpeg"));
+		System.out.println(test02("gif"));
+		System.out.println(test02("bmp"));
+		System.out.println(test02("rmvb"));
+		System.out.println(test02("avi"));
+		System.out.println(test02("mp4"));
+		
 	}
 	
 	public static String test01(String param){
@@ -38,5 +47,17 @@ public class TestSwitch {
 		orderingStr = defaultOrdering;
 		}
 		return orderingStr + "," + param;
+	}
+	
+	public static String test02(String param){
+		String type = ""; 
+		if(param.matches("png|jpg|jpeg|bmp|gif")){
+			type = "image/"+param;
+		}else if(param.matches("pdf")){
+			type = "application/"+param;
+		}else{
+			type = "";
+		}
+		return type;
 	}
 }
