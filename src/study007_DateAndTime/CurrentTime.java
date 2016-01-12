@@ -11,10 +11,10 @@ public class CurrentTime {
 		try{
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			System.out.println(convertToDate(1447064555904l));
-			System.out.println(convertToDate(1448790638589l));
+			System.out.println(convertToDate(1451840400000l+64800000l));
+			System.out.println(convertToDate(1374664307385l));
 			
-			System.out.println(sdf2.parse("2015-12-03 23:59:59").getTime());
+			System.out.println(sdf2.parse("2015-12-31 10:44:59").getTime());
 			System.out.println(sdf2.parse("2015-12-03 22:59:59").getTime());
 			System.out.println(sdf.parse("2015-11-01").getTime());	//1446307200000
 			sdf2.setTimeZone(TimeZone.getTimeZone("GMT+7"));
