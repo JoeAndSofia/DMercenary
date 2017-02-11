@@ -1,4 +1,4 @@
-package study008_swing.dmercenary.game.basic;
+package study008_swing.dmercenary.example.shaped.button;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -14,9 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
-public class Matter extends JButton{
+public class RoundButton extends JButton{
 	private Shape shape = null;// 用于保存按钮的形状,有助于侦听单击按钮事件
-	public Matter(String label) {
+	public RoundButton(String label) {
 		super(label);
 		this.addMouseListener(new MouseAdapter(){
 			/**
@@ -45,6 +45,7 @@ public class Matter extends JButton{
 			// getmodel方法返回鼠标的模型buttonmodel
 			// 如果鼠标按下按钮，则buttonmodel的armed属性为真
 			g.setColor(Color.LIGHT_GRAY);
+//			g.setColor(getBackground());
 		} else {
 			// 其他事件用默认的背景色显示按钮
 			g.setColor(getBackground());
@@ -72,7 +73,9 @@ public class Matter extends JButton{
 		return shape.contains(x, y);
 	}
 	public static void main(String[] args) {
-		JButton button = new Matter("click me");// 产生一个圆形按钮
+		JButton button = new RoundButton("click me");// 产生一个圆形按钮
+		button.setToolTipText("Main City");
+//		button.set
 		//button.setbackground(color.green);// 设置背景色为绿色
 		// 产生一个框架显示这个按钮
 		JFrame frame = new JFrame("图形按钮");
