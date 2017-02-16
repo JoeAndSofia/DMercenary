@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="study008_swing/dmercenary/example/" kind="src" path="backup/src"/>
+	<classpathentry kind="src" path="backup/src/study008_swing/dmercenary/example"/>
+	<classpathentry excluding="study008_swing/dmercenary/example/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/study008_swing/dmercenary/example"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache standard jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_flexjson-2.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_genson-0.97"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_gson-2.3.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_jackson-2.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_json-io-4.1.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_json-lib-2.4-jdk15"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/data_json_jsonij-0.3.0-SNAPSHOT"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/sqlite-jdbc-3.8.7"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
