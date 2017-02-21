@@ -11,13 +11,14 @@ public class SimpleDateFormatTest {
 		try{
 //			test01();
 //			test011();
-			test012();
+//			test012();
 //			test013();
 			
 			
 			
 //			test02();
-//			test03();	
+			test03();
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}	
@@ -66,8 +67,6 @@ public class SimpleDateFormatTest {
 			
 		}
 	}
-	
-
 	
 	public static void test011(){
 		try{
@@ -168,15 +167,17 @@ public class SimpleDateFormatTest {
 	 */
 	public static void test03(){
 		try{
-			SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm:ss Z");
+			SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE, d MMMM yyyy'T'HH:mm:ss Z");
 			SimpleDateFormat sdf2 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 			SimpleDateFormat sdf3 = new SimpleDateFormat("EE, d MM yyyy HH:mm:ss Z");
 			SimpleDateFormat sdf4 = new SimpleDateFormat("E, d M yyyy HH:mm:ss Z");
+			SimpleDateFormat sdf5 = new SimpleDateFormat("EEE, d MMMMM yyyy, H:mm a");
 			Date d = new Date(1486004175238l);
 			System.out.println(sdf1.format(d));
 			System.out.println(sdf2.format(d));
 			System.out.println(sdf3.format(d));
 			System.out.println(sdf4.format(d));
+			System.out.println(sdf5.format(d));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
