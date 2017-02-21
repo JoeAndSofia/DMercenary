@@ -1,5 +1,7 @@
 package study021_Http;
 
-public class HttpRequestTest{
-	
+import Basic;
+
+public class HttpRequestTest extends Basic {
+
 }
