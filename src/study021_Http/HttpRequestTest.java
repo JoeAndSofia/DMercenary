@@ -1,7 +1,7 @@
 package study021_Http;
 
-import Basic;
+import basic.Basic;
 
 public class HttpRequestTest extends Basic {
-
+	
 }

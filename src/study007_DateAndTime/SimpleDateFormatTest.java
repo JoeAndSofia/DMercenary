@@ -167,17 +167,23 @@ public class SimpleDateFormatTest {
 	 */
 	public static void test03(){
 		try{
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd:HHmmss");
+			Date d = new Date(1486004175238l);
+			d = sdf.parse("20170222:130404");
+			
 			SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE, d MMMM yyyy'T'HH:mm:ss Z");
 			SimpleDateFormat sdf2 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 			SimpleDateFormat sdf3 = new SimpleDateFormat("EE, d MM yyyy HH:mm:ss Z");
 			SimpleDateFormat sdf4 = new SimpleDateFormat("E, d M yyyy HH:mm:ss Z");
 			SimpleDateFormat sdf5 = new SimpleDateFormat("EEE, d MMMMM yyyy, H:mm a");
-			Date d = new Date(1486004175238l);
+			SimpleDateFormat sdf6 = new SimpleDateFormat("EEE, d MMMMM yyyy, h:mm a");
+			
 			System.out.println(sdf1.format(d));
 			System.out.println(sdf2.format(d));
 			System.out.println(sdf3.format(d));
 			System.out.println(sdf4.format(d));
 			System.out.println(sdf5.format(d));
+			System.out.println(sdf6.format(d));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
