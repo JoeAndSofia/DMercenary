@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 import org.apache.commons.lang.StringUtils;
 
-public class TestString {
+import basic.Basic;
+
+public class TestString extends Basic{
 	public static String testTransferString(){
 		Scanner s = new Scanner(System.in);
 		System.out.println("input string");
@@ -63,6 +65,10 @@ public class TestString {
 		}
 	}
 	
+	public static void testCompare(String testStr, String testStr2){
+		pl(testStr.compareTo(testStr2));
+	}
+	
 	public static void main(String[] args){
 		
 //		System.out.println(testTransferString());
@@ -79,6 +85,14 @@ public class TestString {
 //		System.out.println(testStringSplitLimit("faef,felrkf,fER,,").length);
 //		System.out.println(Arrays.toString(testStringSplitLimit("faef,felrkf,fER,,")));
 //		testChar("abcdefghijklmnopqrstuvwxyz1234567890");
-		System.out.println(testSubstring("feeraGEFSAFfe"));
+//		System.out.println(testSubstring("feeraGEFSAFfe"));
+		testCompare("3.0.6","3.0.6.0");
+		testCompare("3.0.6.","3.0.6.0");
+		testCompare("3.0.7.","3.0.6.0");
+		testCompare("3.0.7.","3.0.6.9");
+		testCompare("3.0.7","3.0.7.0");
+		testCompare("3.0.7","3.0.7");
+		testCompare("3.0.7","3.0.6.0");
+		
 	}
 }
