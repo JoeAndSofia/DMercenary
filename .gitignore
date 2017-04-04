@@ -1,5 +1,6 @@
-/bin/
-/.classpath
-/img/
-/design_story/
+/bin/ /.classpath
+ /img/ /design_story/ /lib/ 
+/.gitignore
+ /.git/
 /lib/
+/bin/

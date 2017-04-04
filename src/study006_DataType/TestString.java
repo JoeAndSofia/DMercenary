@@ -69,6 +69,10 @@ public class TestString extends Basic{
 		}
 	}
 	
+	public static void testCompare(String testStr, String testStr2){
+		pl(testStr.compareTo(testStr2));
+	}
+	
 	public static void main(String[] args){
 		
 //		System.out.println(testTransferString());
@@ -87,5 +91,13 @@ public class TestString extends Basic{
 //		testChar("abcdefghijklmnopqrstuvwxyz1234567890");
 //		System.out.println(testSubstring("feeraGEFSAFfe"));
 		pl(testStringSplitLimit("大秦铁路,7.070,7.090,7.150,7.170,7.030,7.140,7.150,49446508,352277073.000,323300,7.140,362100,7.130,368600,7.120,61600,7.110,194200,7.100,69200,7.150,525000,7.160,1756823,7.170,1248200,7.180,1389803,7.190,2017-03-24,15:00:00,00"));
+//		testCompare("3.0.6","3.0.6.0");
+//		testCompare("3.0.6.","3.0.6.0");
+//		testCompare("3.0.7.","3.0.6.0");
+//		testCompare("3.0.7.","3.0.6.9");
+//		testCompare("3.0.7","3.0.7.0");
+//		testCompare("3.0.7","3.0.7");
+//		testCompare("3.0.7","3.0.6.0");
+		
 	}
 }
