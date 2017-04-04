@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 import org.apache.commons.lang.StringUtils;
 
-public class TestString {
+import basic.Basic;
+
+public class TestString extends Basic{
 	public static String testTransferString(){
 		Scanner s = new Scanner(System.in);
 		System.out.println("input string");
@@ -39,11 +41,15 @@ public class TestString {
 	}
 	
 	public static String[] testStringSplitLimit(String param){
-		return param.split(",");
+		String[] arr = param.split(",");
+		pl(arr.length);
+		return arr;
 	}
 	
 	public static String[] testStringSplitAll(String param){
-		return param.split(",",-1);
+		String[] arr = param.split(",",-1);
+		pl(arr.length);
+		return arr;
 	}
 	
 	public static String testSubstring(String param){
@@ -79,6 +85,7 @@ public class TestString {
 //		System.out.println(testStringSplitLimit("faef,felrkf,fER,,").length);
 //		System.out.println(Arrays.toString(testStringSplitLimit("faef,felrkf,fER,,")));
 //		testChar("abcdefghijklmnopqrstuvwxyz1234567890");
-		System.out.println(testSubstring("feeraGEFSAFfe"));
+//		System.out.println(testSubstring("feeraGEFSAFfe"));
+		pl(testStringSplitLimit("大秦铁路,7.070,7.090,7.150,7.170,7.030,7.140,7.150,49446508,352277073.000,323300,7.140,362100,7.130,368600,7.120,61600,7.110,194200,7.100,69200,7.150,525000,7.160,1756823,7.170,1248200,7.180,1389803,7.190,2017-03-24,15:00:00,00"));
 	}
 }
