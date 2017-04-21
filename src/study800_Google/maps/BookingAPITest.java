@@ -15,8 +15,8 @@ import com.google.api.services.mapsbooking.v1alpha.model.Booking;
 public class BookingAPITest {
 
 //	private static String JSON_CREDS = "/home/imaginato/Desktop/Work/qraved/Topic/GoogleReservation/GoogleAccountJoeTest/My Project-c2f79ef6ac4b.json";
-	private static String JSON_CREDS = "/home/imaginato/Desktop/Work/qraved/Topic/GoogleReservation/GoogleAccountQravedTest/Qraved-id/Qraved-dc8629e377cd.json";
-	
+//	private static String JSON_CREDS = "/home/imaginato/Desktop/Work/qraved/Topic/GoogleReservation/GoogleAccountQravedTest/Qraved-id/Qraved-dc8629e377cd.json";
+	private static String JSON_CREDS = "C:\\Users\\Administrator\\Desktop\\Qraved-dc8629e377cd.json";
 //	private static String APPLICATION_NAME = "TestApp";
 	private static String APPLICATION_NAME = "Qraved";
 	

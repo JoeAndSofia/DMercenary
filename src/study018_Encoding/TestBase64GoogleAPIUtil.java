@@ -1,10 +1,11 @@
 package study018_Encoding;
 
-import java.util.Base64;
+
+import com.google.api.client.util.Base64;
 
 import basic.Basic;
 
-public class TestBase64 extends Basic{
+public class TestBase64GoogleAPIUtil extends Basic{
 	
 	public static void main(String[] args){
 		try{
@@ -17,12 +18,10 @@ public class TestBase64 extends Basic{
 	}
 	
 	public static void test001(String... params){
-		Base64.Encoder b64 = Base64.getEncoder();
 		for(String param :params){
-			String result = b64.encodeToString(param.getBytes());
+			String result = Base64.encodeBase64String(param.getBytes());
 			pl(result);			
 		}
 
 	}
-	
 }

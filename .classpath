@@ -15,5 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-standard-jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache_standard"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/google_mapsbooking"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/bouncy-castle"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
