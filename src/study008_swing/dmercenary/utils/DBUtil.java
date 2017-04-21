@@ -37,6 +37,17 @@ public final class DBUtil {
 		}
 	}
 	
+	public static DBUtil getInstance(String databaseName, boolean createIfNotExisted){
+		if(utils.get(databaseName)!=null){
+			return utils.get(databaseName);
+		}else{
+			DBUtil util = new DBUtil(databaseName);
+			utils.put(databaseName, util);
+			return util;
+		}
+	
+	}
+	
 	private void con(){
 		try{
 			if(con==null || !(con instanceof Connection)){
@@ -49,6 +60,10 @@ public final class DBUtil {
 		}finally{
 			
 		}
+	}
+	
+	private void con(boolean createIfNotExisted){
+		
 	}
 	
 	public void dis(){
