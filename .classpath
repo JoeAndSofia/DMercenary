@@ -12,9 +12,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/sqlite-jdbc-3.8.7"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache_poi"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-standard"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/google_mapsbooking"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/other"/>
-
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache_standard"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
