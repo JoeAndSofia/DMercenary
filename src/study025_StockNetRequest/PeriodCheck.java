@@ -1,4 +1,4 @@
-package study024_StockNetRequest;
+package study025_StockNetRequest;
 
 import java.util.Timer;
 import java.util.TimerTask;

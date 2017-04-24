@@ -1,4 +1,4 @@
-package study024_StockNetRequest;
+package study025_StockNetRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;

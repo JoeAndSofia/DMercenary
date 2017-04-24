@@ -1,4 +1,4 @@
-package study023_System;
+package study024_System;
 
 import java.util.Properties;
 import java.util.Set;
