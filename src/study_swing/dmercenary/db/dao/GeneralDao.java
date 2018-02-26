@@ -27,7 +27,7 @@ public class GeneralDao {
 				}
 			}else{
 				throw new Exception();
-			}			
+			}
 		}catch(Exception this_e){
 			this_e.printStackTrace();
 			log(this_e, this.getClass().getName());
