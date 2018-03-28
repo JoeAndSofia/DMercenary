@@ -3,7 +3,7 @@ package study_DataType;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import basic.Basic;
 
@@ -33,7 +33,8 @@ public class TestString extends Basic{
 	
 	public static void testStringUtils(String param){
 		String x = param.trim();
-		StringUtils.trim(param);
+		pl(x);
+		pl(StringUtils.trim(param));
 	}
 	
 	public static double testEquals(String param){
@@ -74,7 +75,7 @@ public class TestString extends Basic{
 	}
 	
 	public static void main(String[] args){
-		
+		testStringUtils("faejfla afawf");
 //		System.out.println(testTransferString());
 //		System.out.println(testTransferString());
 //		System.out.println(testTransferString());
@@ -100,7 +101,7 @@ public class TestString extends Basic{
 //		testCompare("3.0.7","3.0.6.0");
 		
 		
-		stringNull();
+//		stringNull();
 	}
 	
 	public static void stringNull(){

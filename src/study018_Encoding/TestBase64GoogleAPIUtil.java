@@ -19,7 +19,8 @@ public class TestBase64GoogleAPIUtil extends Basic{
 	
 	public static void test001(String... params){
 		for(String param :params){
-			String result = Base64.encodeBase64String(param.getBytes());
+//			String result = Base64.encodeBase64String(param.getBytes());
+			byte[] result = Base64.encode(param.getBytes());
 			pl(result);			
 		}
 
