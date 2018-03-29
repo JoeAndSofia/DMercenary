@@ -3,13 +3,22 @@ package study_DateAndTime;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
-public class DateTest {
+import basic.Basic;
+
+public class DateTest extends Basic{
 	private static final String[] MONTH_STR = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 			
 	public static void main(String[] args){
 //		test001(new Date());
-		test002(new Date());
+//		test002(new Date());
+		
+		try{
+			testDateTimeForGoogleMapsBooking(1522330200000l);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	public static void test001(Date date){
@@ -44,5 +53,22 @@ public class DateTest {
 			str = str.substring(0,17) + "am";
 		}
 		System.out.println(str);
+	}
+	
+	public static void testDateTimeForGoogleMapsBooking(long startTime) throws Exception{
+		String timeZone = "GMT+0";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
+		Date whichDay = sdf.parse(sdf.format(new Date(startTime)));
+		long bookDate = whichDay.getTime();
+		
+		SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
+		sdf1.setTimeZone(TimeZone.getTimeZone(timeZone));
+		long bookTime = passTime(sdf1.format(new Date(startTime)));
+		
+		pl(bookDate);
+		pl(bookTime);
+		pl(bookDate + bookTime);
+		pl(bookDate + bookTime - startTime);
 	}
 }

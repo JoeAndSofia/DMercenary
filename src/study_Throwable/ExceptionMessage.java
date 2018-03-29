@@ -1,4 +1,4 @@
-package study_throwable;
+package study_Throwable;
 
 import basic.Basic;
 
@@ -13,13 +13,14 @@ public class ExceptionMessage extends Basic{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
 		pl("________________________________________");
 		
 		try{
 			Long x = Long.parseLong("s");	
 		}catch(Exception e){
 			pl(e);
+			pl(e.getClass().getName());
+			pl(e.getMessage());
 		}
 		
 		pl("________________________________________");

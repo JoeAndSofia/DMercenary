@@ -22,7 +22,9 @@ public class CalendarTest extends Basic{
 //		System.out.println(ct.c.getTimeZone());
 //		ct.date();
 		
-		checkMilliSecond();
+//		checkMilliSecond();
+		
+		ct.weekDay();
 	}
 	
 	Date d = new Date();
@@ -69,6 +71,14 @@ public class CalendarTest extends Basic{
 		String wd = c.get(Calendar.DAY_OF_WEEK)+"";
 		System.out.println(wd);
 		return "";
+	}
+	
+	void weekDay(){
+		Calendar cal = Calendar.getInstance();
+		Date d = new Date();
+		pl(cal.getTimeInMillis() - d.getTime());
+		
+		pl(cal.get(Calendar.DAY_OF_WEEK));
 	}
 	
 	public static void checkMilliSecond(){

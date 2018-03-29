@@ -57,42 +57,42 @@ public class BookingAPITest extends Basic{
 	}
 	
 	public static void notifyBookingChange01() throws Exception{
-		GoogleCredential credential;
-		try{
-			credential = GoogleCredential
-					.fromStream(new FileInputStream(JSON_CREDS))
-					.createScoped(Collections.singleton(BOOKING_SCOPE));
-		}catch(FileNotFoundException e){
-			System.out.println(String.format("Could not locate credentials [%s] : $s", JSON_CREDS, e.getMessage()));
-			return;
-		}catch(IOException e){
-			System.out.println(String.format("Could not read credentials [%s] : %s", JSON_CREDS, e.getMessage()));
-			return;
-		}
-		
-		GoogleMapsBookingAPI stub;
-		try {
-	    	stub = new GoogleMapsBookingAPI.Builder(GoogleNetHttpTransport.newTrustedTransport(), new JacksonFactory(), credential)
-	    	.setApplicationName(APPLICATION_NAME)
-	    	.build();
-		} catch (GeneralSecurityException | IOException e) {
-			System.out.println("Error: " + e.getMessage());
-			return;
-		}
-		Booking booking = new Booking();
-		try {
-			// Example call
-			Booking b = stub.notification()
-			.partners()
-			.bookings()
-			.patch("partners/123456/bookings/123456", booking)
-			.execute();
-			
-			pl(b);
-		}catch (IOException e) {
-			System.out.println("RPC error: " + e.getMessage());
-			return;
-		}
+//		GoogleCredential credential;
+//		try{
+//			credential = GoogleCredential
+//					.fromStream(new FileInputStream(JSON_CREDS))
+//					.createScoped(Collections.singleton(BOOKING_SCOPE));
+//		}catch(FileNotFoundException e){
+//			System.out.println(String.format("Could not locate credentials [%s] : $s", JSON_CREDS, e.getMessage()));
+//			return;
+//		}catch(IOException e){
+//			System.out.println(String.format("Could not read credentials [%s] : %s", JSON_CREDS, e.getMessage()));
+//			return;
+//		}
+//		
+//		GoogleMapsBookingAPI stub;
+//		try {
+//	    	stub = new GoogleMapsBookingAPI.Builder(GoogleNetHttpTransport.newTrustedTransport(), new JacksonFactory(), credential)
+//	    	.setApplicationName(APPLICATION_NAME)
+//	    	.build();
+//		} catch (GeneralSecurityException | IOException e) {
+//			System.out.println("Error: " + e.getMessage());
+//			return;
+//		}
+//		Booking booking = new Booking();
+//		try {
+//			// Example call
+//			Booking b = stub.notification()
+//			.partners()
+//			.bookings()
+//			.patch("partners/123456/bookings/123456", booking)
+//			.execute();
+//			
+//			pl(b);
+//		}catch (IOException e) {
+//			System.out.println("RPC error: " + e.getMessage());
+//			return;
+//		}
 	}
 	
 	public static void notifyBookingChange02(String bookingId, Map<String, String> updateMask) throws Exception{
@@ -101,35 +101,35 @@ public class BookingAPITest extends Basic{
 //		String apiPath = "https://mapsbooking.googleapis.com";
 		
 		if(updateMask.size()>0){
-			StringBuffer requestUrl = new StringBuffer()
-			.append(apiPath)
-			.append("/partners/")
-			.append(partnerId)
-			.append("/bookings/")
-			.append(bookingId)
-			.append("?updateMask=");
-			for(Map.Entry<String, String> property : updateMask.entrySet()){
-				requestUrl.append(property.getKey()+",");
-			}
-			requestUrl.setLength(requestUrl.length()-1);
-			
-			HttpURLConnection con = getHttpURLConnection(requestUrl.toString(), "POST", true, true);
-			con.setRequestProperty("x-http-method-override", "PATCH");
-			con.setRequestProperty("Content-Type",  "application/json");
-			String updateMaskStr = JSONObject.fromObject(updateMask).toString();
-			pl(updateMaskStr);
-			con.setRequestProperty("Content-Length", updateMaskStr.getBytes().length+"");
-			con.setRequestProperty("connection", "Keep-Alive");
-			con.connect();
-			
-			
-			OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
-			osw.write(updateMaskStr);
-			osw.flush();
-			osw.close();
-			
-			JSON result = receiveDataInJson(con);
-			pl(result.toString());
+//			StringBuffer requestUrl = new StringBuffer()
+//			.append(apiPath)
+//			.append("/partners/")
+//			.append(partnerId)
+//			.append("/bookings/")
+//			.append(bookingId)
+//			.append("?updateMask=");
+//			for(Map.Entry<String, String> property : updateMask.entrySet()){
+//				requestUrl.append(property.getKey()+",");
+//			}
+//			requestUrl.setLength(requestUrl.length()-1);
+//			
+//			HttpURLConnection con = getHttpURLConnection(requestUrl.toString(), "POST", true, true);
+//			con.setRequestProperty("x-http-method-override", "PATCH");
+//			con.setRequestProperty("Content-Type",  "application/json");
+//			String updateMaskStr = JSONObject.fromObject(updateMask).toString();
+//			pl(updateMaskStr);
+//			con.setRequestProperty("Content-Length", updateMaskStr.getBytes().length+"");
+//			con.setRequestProperty("connection", "Keep-Alive");
+//			con.connect();
+//			
+//			
+//			OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
+//			osw.write(updateMaskStr);
+//			osw.flush();
+//			osw.close();
+//			
+//			JSON result = receiveDataInJson(con);
+//			pl(result.toString());
 		}
 
 		
@@ -152,17 +152,17 @@ public class BookingAPITest extends Basic{
 		return httpCon;
 	}
 	
-	public static JSON receiveDataInJson(HttpURLConnection con) throws Exception{
-		BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-		StringBuffer responseSb = new StringBuffer();
-		String line = null;
-		while((line = br.readLine())!=null){
-			responseSb.append(line);
-		}
-		JsonSlurper converter = new JsonSlurper();
-		String responseStr = responseSb.toString();
-		pl(responseStr);
-		JSON result = converter.parseText(responseStr);
-		return result;
-	}
+//	public static JSON receiveDataInJson(HttpURLConnection con) throws Exception{
+//		BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//		StringBuffer responseSb = new StringBuffer();
+//		String line = null;
+//		while((line = br.readLine())!=null){
+//			responseSb.append(line);
+//		}
+//		JsonSlurper converter = new JsonSlurper();
+//		String responseStr = responseSb.toString();
+//		pl(responseStr);
+//		JSON result = converter.parseText(responseStr);
+//		return result;
+//	}
 }

@@ -3,7 +3,7 @@ package study_DataType;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import org.apache.commons.lang.StringUtils;
+//import org.apache.commons.lang.StringUtils;
 
 import basic.Basic;
 
@@ -33,7 +33,7 @@ public class TestString extends Basic{
 	
 	public static void testStringUtils(String param){
 		String x = param.trim();
-		StringUtils.trim(param);
+//		StringUtils.trim(param);
 	}
 	
 	public static double testEquals(String param){
