@@ -14,17 +14,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.json.JSON;
-import net.sf.json.JSONObject;
-import net.sf.json.groovy.GJson;
-import net.sf.json.groovy.JsonSlurper;
 import basic.Basic;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.mapsbooking.v1alpha.GoogleMapsBookingAPI;
-import com.google.api.services.mapsbooking.v1alpha.model.Booking;
+//import net.sf.json.JSON;
+//import net.sf.json.JSONObject;
+//import net.sf.json.groovy.GJson;
+//import net.sf.json.groovy.JsonSlurper;
+//import basic.Basic;
+//
+//import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+//import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+//import com.google.api.client.json.jackson2.JacksonFactory;
+//import com.google.api.services.mapsbooking.v1alpha.GoogleMapsBookingAPI;
+//import com.google.api.services.mapsbooking.v1alpha.model.Booking;
 
 public class BookingAPITest extends Basic{
 
@@ -38,25 +40,25 @@ public class BookingAPITest extends Basic{
 	
 	private static String BOOKING_SCOPE = "https://www.googleapis.com/auth/mapsbooking";
 	
-	public static void main(String[] args){
-		try{
-//			notifyBookingChange01();
-			Map updateMask = new HashMap();
-			updateMask.put("status", BookingStatus.PENDING_CLIENT_CONFIRMATION);
-			notifyBookingChange02("123456",updateMask);
-//			testEnum();			
-		}catch(Exception e){
-//			StackTraceElement[] steArr = e.getStackTrace();
-//			for(StackTraceElement ste : steArr){
-//				pl(ste);
-//			}
-			e.printStackTrace();
-		}
-
-		
-	}
+//	public static void main(String[] args){
+//		try{
+////			notifyBookingChange01();
+//			Map updateMask = new HashMap();
+//			updateMask.put("status", BookingStatus.PENDING_CLIENT_CONFIRMATION);
+//			notifyBookingChange02("123456",updateMask);
+////			testEnum();			
+//		}catch(Exception e){
+////			StackTraceElement[] steArr = e.getStackTrace();
+////			for(StackTraceElement ste : steArr){
+////				pl(ste);
+////			}
+//			e.printStackTrace();
+//		}
+//
+//		
+//	}
 	
-	public static void notifyBookingChange01() throws Exception{
+//	public static void notifyBookingChange01() throws Exception{
 //		GoogleCredential credential;
 //		try{
 //			credential = GoogleCredential
@@ -93,14 +95,14 @@ public class BookingAPITest extends Basic{
 //			System.out.println("RPC error: " + e.getMessage());
 //			return;
 //		}
-	}
-	
-	public static void notifyBookingChange02(String bookingId, Map<String, String> updateMask) throws Exception{
-		String partnerId = "10000020";
-		String apiPath = "https://mapsbooking.googleapis.com/v1alpha/notification";
-//		String apiPath = "https://mapsbooking.googleapis.com";
-		
-		if(updateMask.size()>0){
+//	}
+//	
+//	public static void notifyBookingChange02(String bookingId, Map<String, String> updateMask) throws Exception{
+//		String partnerId = "10000020";
+//		String apiPath = "https://mapsbooking.googleapis.com/v1alpha/notification";
+////		String apiPath = "https://mapsbooking.googleapis.com";
+//		
+//		if(updateMask.size()>0){
 //			StringBuffer requestUrl = new StringBuffer()
 //			.append(apiPath)
 //			.append("/partners/")
@@ -130,28 +132,28 @@ public class BookingAPITest extends Basic{
 //			
 //			JSON result = receiveDataInJson(con);
 //			pl(result.toString());
-		}
-
-		
-		
-	}
-	
-	
-	public static void testEnum() throws Exception{
-		pl(BookingStatus.BOOKING_STATUS_UNSPECIFIED.toString());
-	}
-	
-	
-	public static HttpURLConnection getHttpURLConnection(String requestUrl, String requestMethod, boolean doOutput, boolean doInput) throws Exception{
-		pl(requestUrl);
-		URL httpUrl = new URL(requestUrl);
-		HttpURLConnection httpCon = (HttpURLConnection)httpUrl.openConnection();
-		httpCon.setRequestMethod(requestMethod);
-		httpCon.setDoOutput(doOutput);
-		httpCon.setDoInput(doInput);
-		return httpCon;
-	}
-	
+//		}
+//
+//		
+//		
+//	}
+//	
+//	
+//	public static void testEnum() throws Exception{
+//		pl(BookingStatus.BOOKING_STATUS_UNSPECIFIED.toString());
+//	}
+//	
+//	
+//	public static HttpURLConnection getHttpURLConnection(String requestUrl, String requestMethod, boolean doOutput, boolean doInput) throws Exception{
+//		pl(requestUrl);
+//		URL httpUrl = new URL(requestUrl);
+//		HttpURLConnection httpCon = (HttpURLConnection)httpUrl.openConnection();
+//		httpCon.setRequestMethod(requestMethod);
+//		httpCon.setDoOutput(doOutput);
+//		httpCon.setDoInput(doInput);
+//		return httpCon;
+//	}
+//	
 //	public static JSON receiveDataInJson(HttpURLConnection con) throws Exception{
 //		BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 //		StringBuffer responseSb = new StringBuffer();

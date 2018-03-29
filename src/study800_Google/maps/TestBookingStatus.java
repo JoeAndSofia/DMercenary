@@ -1,6 +1,7 @@
 package study800_Google.maps;
 
 import basic.Basic;
+import study_Google.maps.BookingStatus;
 
 public class TestBookingStatus extends Basic{
 	

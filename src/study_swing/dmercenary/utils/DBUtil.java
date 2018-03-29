@@ -10,7 +10,7 @@ import java.util.Map;
 
 import javax.management.RuntimeErrorException;
 
-import org.sqlite.jdbc3.JDBC3Connection;
+//import org.sqlite.jdbc3.JDBC3Connection;
 
 public final class DBUtil {
 	private String databaseName = null;
