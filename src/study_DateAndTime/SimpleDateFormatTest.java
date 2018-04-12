@@ -6,7 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class SimpleDateFormatTest {
+import basic.Basic;
+
+public class SimpleDateFormatTest extends Basic{
 	public static void main(String[] args){
 		try{
 //			test01();
@@ -17,8 +19,13 @@ public class SimpleDateFormatTest {
 			
 			
 //			test02();
-			test03();
+//			test03();
 			
+//			testRFC3339();
+			
+//			testDayMilliseconds();
+			
+			testGetHourMinute();
 		}catch(Exception e){
 			e.printStackTrace();
 		}	
@@ -188,4 +195,89 @@ public class SimpleDateFormatTest {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * RFC3339 UTC "Zulu"
+	 * 
+	 * 
+	 */
+	public static void testRFC3339(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.'000000000Z'");
+		long now = System.currentTimeMillis();
+		Date d = new Date(now);
+		
+		pl("2014-10-02T15:01:23.045123456Z");
+		pl(sdf.format(d));
+		pl(d);
+	}
+	
+	public static void testDayMilliseconds() throws Exception{
+		Calendar c = Calendar.getInstance();
+		Date now = new Date();
+		c.setTime(now);
+		c.add(Calendar.DATE, 1);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT+7"));
+		long l = sdf.parse(sdf.format(c.getTime())).getTime();
+		pl(l);
+		
+		String xStr = "2018-04-11,2018-04-11,2018-04-26,2018-04-11,2018-04-14,2018-04-12,2018-04-14,2018-04-11,2018-04-27,2018-04-11";
+		String yStr = "1523379600000,1523379600000,1524675600000,1523379600000,1523638800000,1523466000000,1523638800000,1523379600000,1524762000000,1523379600000";
+		String[] xArr = xStr.split(",");
+		String[] yArr = yStr.split(",");
+		for(int i=0;i<xArr.length; i++){
+			long lo = sdf.parse(xArr[i]).getTime();
+			pl(xArr[i] + "-" + yArr[i] + "-" +  (lo==Long.parseLong(yArr[i])));
+		}
+		
+//		1523379600000
+//		1523379600000
+	}
+	
+	public static void testGetHourMinute() throws Exception{
+		long start = 1523379600000l;
+		long end = 1523638800000l;
+		
+		String timeZone = "GMT+7";
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
+		
+		Calendar c = Calendar.getInstance();
+		c.setTimeZone(TimeZone.getTimeZone(timeZone));
+		for(long millis = start; millis <= end; millis += 1800000l){
+			c.setTimeInMillis(millis);
+			long dayPart = sdf.parse(sdf.format(new Date(millis))).getTime();
+			long restPart = c.get(Calendar.HOUR_OF_DAY) * 3600000l + c.get(Calendar.MINUTE) * 60000l;
+			
+			p(restPart);pl(millis == (dayPart + restPart));
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

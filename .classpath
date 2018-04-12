@@ -16,5 +16,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/google-api-services-mapsbooking-v1alpha-revsnapshot-1.22.0.jar"/>
+	<classpathentry kind="lib" path="lib/google-api-client-1.22.0.jar"/>
+	<classpathentry kind="lib" path="lib/google-http-client-1.22.0.jar"/>
+	<classpathentry kind="lib" path="lib/google-oauth-client-1.22.0.jar"/>
+	<classpathentry kind="lib" path="/home/imaginato/.grails/ivy-cache/com.google.http-client/google-http-client-jackson2/jars/google-http-client-jackson2-1.22.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
